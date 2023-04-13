@@ -29,7 +29,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    void testFindAll() {
+    void findAll() {
         List<Reservation> reservations = new ArrayList<>();
         reservations.add(new Reservation(1, LocalDate.now(), LocalDate.now(),1));
         reservations.add(new Reservation(2, LocalDate.now(), LocalDate.now(),1));
@@ -43,7 +43,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    void testFind() {
+    void find() {
         Reservation reservation = new Reservation(1, LocalDate.now(), LocalDate.now(),1);
         when(reservationDAO.find(anyInt())).thenReturn(reservation);
 
