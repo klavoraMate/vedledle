@@ -19,4 +19,8 @@ public class DogService {
     public List<DogDTO> findAll() {
         return dogDAO.findAll().stream().map(DogDTO::new).toList();
     }
+
+    public DogDTO find(Integer dogId){
+        return new DogDTO(dogDAO.find(dogId));
+    }
 }
