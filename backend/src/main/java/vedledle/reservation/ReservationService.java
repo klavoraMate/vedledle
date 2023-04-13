@@ -18,4 +18,8 @@ public class ReservationService {
     public List<ReservationDTO> findAll() {
         return reservationDAO.findAll().stream().map(ReservationDTO::new).toList();
     }
+
+    public ReservationDTO find(Integer reservationId) {
+        return new ReservationDTO(reservationDAO.find(reservationId));
+    }
 }
