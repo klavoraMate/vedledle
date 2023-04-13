@@ -41,10 +41,11 @@ class DogServiceTest {
 
     @Test
     void find() {
-        Dog dog = new Dog(1, "Liza", "German Shepherd", 6);
+        int id = 1;
+        Dog dog = new Dog(id, "Liza", "German Shepherd", 6);
         when(dogDAO.find(anyInt())).thenReturn(dog);
 
-        DogDTO dogDTO = dogService.find(1);
+        DogDTO dogDTO = dogService.find(id);
 
         assertEquals(new DogDTO(dog), dogDTO);
     }

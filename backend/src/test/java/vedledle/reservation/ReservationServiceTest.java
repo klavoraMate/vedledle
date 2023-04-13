@@ -44,10 +44,11 @@ public class ReservationServiceTest {
 
     @Test
     void find() {
-        Reservation reservation = new Reservation(1, LocalDate.now(), LocalDate.now(),1);
+        int id = 1;
+        Reservation reservation = new Reservation(id, LocalDate.now(), LocalDate.now(),1);
         when(reservationDAO.find(anyInt())).thenReturn(reservation);
 
-        ReservationDTO reservationDTO = reservationService.find(1);
+        ReservationDTO reservationDTO = reservationService.find(id);
 
         assertEquals(new ReservationDTO(reservation), reservationDTO);
     }
