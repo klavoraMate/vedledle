@@ -3,6 +3,7 @@ package vedledle.dog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import vedledle.exception.NotFoundException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -30,7 +31,6 @@ public class DogDAOJdbc implements DogDAO {
         if (dog.isPresent()){
             return dog.get();
         }
-        //TODO: create costume Exception
-        else throw new NoSuchElementException();
+        else throw new NotFoundException("There is no dog found with the given id");
     }
 }
