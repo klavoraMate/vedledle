@@ -27,7 +27,7 @@ public class DogDAOJdbc implements DogDAO {
     @Override
     public Dog find(Integer dogId) {
         String sql = "SELECT id,name,breed,age FROM dog WHERE id = ?";
-        Optional<Dog> dog = this.jdbcTemplate.query(sql, new DogRowMapper(),dogId).stream().findFirst();
+        Optional<Dog> dog = this.jdbcTemplate.query(sql, new DogRowMapper(),dogId).stream().findAny();
         if (dog.isPresent()){
             return dog.get();
         }
