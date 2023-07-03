@@ -30,9 +30,9 @@ CREATE TABLE reservation
 
 -- Insert 3 records into dog table
 INSERT INTO dog (name, breed, age)
-VALUES ('Buddy', 'Labrador', 3),
+VALUES ('Liza', 'German Shepherd', 7),
+       ('Vadóc', 'German Shepherd', 9),
        ('Daisy', 'Golden Retriever', 2),
-       ('Max', 'German Shepherd', 5);
 
 -- Insert 3 records into user table
 INSERT INTO client(name, dog_id)

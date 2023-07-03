@@ -1,9 +1,7 @@
 package vedledle.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vedledle.client.dto.ClientDTO;
 
 import java.util.List;
@@ -20,6 +18,11 @@ public class ClientController {
 
     @GetMapping("all")
     public List<ClientDTO> findAll(){
-        return clientService.findAll();
+        return this.clientService.findAll();
+    }
+
+    @GetMapping("/{clientId}")
+    public ClientDTO find(@PathVariable Integer clientId){
+        return this.clientService.find(clientId);
     }
 }

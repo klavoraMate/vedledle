@@ -21,4 +21,9 @@ public class ReservationController {
     public List<ReservationDTO> findAll(){
         return reservationService.findAll();
     }
+
+    @GetMapping("/{reservationId}")
+    public ReservationDTO find(@PathVariable Integer reservationId){
+        return reservationService.find(reservationId);
+    }
 }

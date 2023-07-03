@@ -16,4 +16,8 @@ public class ClientService {
     public List<ClientDTO> findAll() {
         return clientDAO.findAll().stream().map(ClientDTO::new).toList();
     }
+
+    public ClientDTO find(Integer clientId) {
+        return new ClientDTO(clientDAO.find(clientId));
+    }
 }
