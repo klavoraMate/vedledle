@@ -27,6 +27,8 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: List files in the backend directory
+      run: ls backend
     - name: Build with Maven
       working-directory: backend
       run: mvn -B package --file pom.xml
