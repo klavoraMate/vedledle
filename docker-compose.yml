@@ -1,40 +1,20 @@
 version: '3'
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: 011323159004.dkr.ecr.eu-north-1.amazonaws.com/vedledle-frontend:latest
     ports:
       - "3000:3000"
     networks:
       - vedledle_network
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: 011323159004.dkr.ecr.eu-north-1.amazonaws.com/vedledle-backend:latest
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/vedledle_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://vedledle.cluster-ro-cvaygozdccix.eu-north-1.rds.amazonaws.com:5432/vedledle_db
       - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-    depends_on:
-      - db
-    networks:
-      - vedledle_network
-
-  db:
-    image: postgres:latest
-    environment:
-      - POSTGRES_DB=vedledle_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./backend/src/main/resources/dbinit.sql:/docker-entrypoint-initdb.d/init.sql
+      - SPRING_DATASOURCE_PASSWORD=postgresvedledle
     networks:
       - vedledle_network
 
