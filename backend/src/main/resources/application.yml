@@ -1,9 +1,14 @@
 spring:
   datasource:
-    url: jdbc:postgresql://db:5432/vedledle
+    url: jdbc:postgresql://localhost:5432/vedledle
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
 
   jpa:
     hibernate:
@@ -15,3 +20,6 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+
+server:
+  port: 8081
