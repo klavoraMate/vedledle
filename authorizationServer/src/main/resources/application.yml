@@ -1,0 +1,12 @@
+spring:
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          client-1:
+            registration:
+              client-id: "admin-client"
+              client-secret: "{bcrypt}$2a$10$G/skobdAaAK0zXC/tOXduepOrYyVm1SQqnUcg8kPGS7pV3e/SkMpO"
+              client-authentication-methods: "client_secret_basic"
+              authorization-grant-types: "client_credentials"
+              scopes: "user.read,user.write"
