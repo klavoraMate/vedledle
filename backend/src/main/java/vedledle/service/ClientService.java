@@ -11,7 +11,6 @@ import vedledle.dao.repository.ClientRepository;
 public class ClientService {
     private final ClientRepository repository;
 
-    @PreAuthorize("hasAuthority('SCOPE_user.read')")
     public Client get(Long id){
         return repository.getReferenceById(id);
     };
