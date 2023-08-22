@@ -6,7 +6,13 @@ spring:
           client-1:
             registration:
               client-id: "admin-client"
-              client-secret: "{bcrypt}$2a$10$G/skobdAaAK0zXC/tOXduepOrYyVm1SQqnUcg8kPGS7pV3e/SkMpO"
+              client-secret: "{bcrypt}$2a$10$3TdRriHKCU0uZNC9rRsbf.cDkcQshwa5vcgl.Hs3nGlFBbYF0xFqK"
               client-authentication-methods: "client_secret_basic"
               authorization-grant-types: "client_credentials"
               scopes: "user.read,user.write"
+logging:
+  level:
+    org.springframwork.security: "trace"
+
+server:
+  port: "9000"
