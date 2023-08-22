@@ -5,14 +5,17 @@ spring:
         client:
           client-1:
             registration:
-              client-id: "admin-client"
-              client-secret: "{bcrypt}$2a$10$3TdRriHKCU0uZNC9rRsbf.cDkcQshwa5vcgl.Hs3nGlFBbYF0xFqK"
-              client-authentication-methods: "client_secret_basic"
-              authorization-grant-types: "client_credentials"
-              scopes: "user.read,user.write"
+              client-id: client
+              client-secret: '{bcrypt}$2a$10$jdJGhzsiIqYFpjJiYWMl/eKDOd8vdyQis2aynmFN0dgJ53XvpzzwC'
+              client-authentication-methods: client_secret_basic
+              authorization-grant-types: client_credentials,authorization_code,refresh_token
+              redirect-uris: http://localhost:8090/login/oauth2/code/spring
+              scopes: user.read,user.write,openid
+
 logging:
   level:
-    org.springframwork.security: "trace"
+    org.springframework.security: trace
 
 server:
-  port: "9000"
+  port:
+    9000
