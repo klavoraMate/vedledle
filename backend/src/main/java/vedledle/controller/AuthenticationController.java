@@ -20,7 +20,8 @@ public class AuthenticationController {
     @GetMapping("/")
     public String root(){
         var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return jwt.getIssuer() + service.get(1L).getName();
+
+        return jwt.getSubject() + service.get(1L).getName() + "1";
     }
 
 }

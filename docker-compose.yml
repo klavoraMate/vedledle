@@ -24,6 +24,15 @@ services:
     networks:
       - vedledle_network
 
+  auth-server:
+    build:
+      context: ./authorizationServer
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    networks:
+      - vedledle_network
+
   db:
     image: postgres:latest
     environment:
