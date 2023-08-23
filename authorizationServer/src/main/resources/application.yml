@@ -5,11 +5,10 @@ spring:
         client:
           client-1:
             registration:
-              client-id: client
+              client-id: admin-client
               client-secret: '{bcrypt}$2a$10$jdJGhzsiIqYFpjJiYWMl/eKDOd8vdyQis2aynmFN0dgJ53XvpzzwC'
               client-authentication-methods: client_secret_basic
-              authorization-grant-types: client_credentials,authorization_code,refresh_token
-              redirect-uris: http://localhost:8090/login/oauth2/code/spring
+              authorization-grant-types: client_credentials
               scopes: user.read,user.write,openid
 
 logging:
