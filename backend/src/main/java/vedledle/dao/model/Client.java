@@ -12,13 +12,10 @@ public class Client {
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
-
     private String email;
-
-    private int dogId;
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+    private int dogId;
+
 }
