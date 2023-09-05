@@ -21,6 +21,7 @@ public class SecurityConfiguration {
                 .addFilterBefore(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .requestMatchers("/login").permitAll()
+                .requestMatchers("/user").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin(Customizer.withDefaults());

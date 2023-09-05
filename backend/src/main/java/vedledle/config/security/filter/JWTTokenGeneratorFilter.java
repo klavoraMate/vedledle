@@ -8,12 +8,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Date;
 
 public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
@@ -25,6 +27,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
             String jwt = Jwts.builder()
                     .setIssuer("Vedledle")
                     .claim("username",authentication.getName())
+                    .claim("role",populateRole(authentication.getAuthorities()))
                     .setIssuedAt(new Date())
                     .setExpiration(new Date((new Date()).getTime() + 30000000))
                     .signWith(key).compact();
@@ -32,5 +35,13 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request,response);
+    }
+
+    private String populateRole(Collection<? extends GrantedAuthority> authorities){
+        String role = "";
+        for (GrantedAuthority authority: authorities) {
+            role  = authority.getAuthority();
+        }
+        return role;
     }
 }

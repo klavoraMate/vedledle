@@ -14,6 +14,8 @@ public class Client {
     private Long id;
     private String name;
     private String email;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String role;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private int dogId;

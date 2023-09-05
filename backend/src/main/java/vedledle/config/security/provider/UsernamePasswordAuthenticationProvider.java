@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import vedledle.dao.model.Client;
 import vedledle.dao.repository.ClientRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -27,14 +28,14 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
             return null;
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
-        List<Client> customer = clientRepository.findByEmail(username);
-        if (customer.size() > 0) {
-            if (passwordEncoder.matches(pwd, customer.get(0).getPassword())) {
-                return new UsernamePasswordAuthenticationToken(username, pwd,List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        List<Client> client = clientRepository.findByEmail(username);
+        if (client.size() > 0) {
+            if (passwordEncoder.matches(pwd, client.get(0).getPassword())) {
+                return new UsernamePasswordAuthenticationToken(username, pwd, Collections.singleton(extractRole(client.get(0))));
             } else {
                 throw new BadCredentialsException("Invalid password!");
             }
-        }else {
+        } else {
             throw new BadCredentialsException("No user registered with this details!");
         }
     }
@@ -42,5 +43,9 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
     @Override
     public boolean supports(Class<?> authentication) {
         return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
+    }
+
+    private SimpleGrantedAuthority extractRole(Client client) {
+        return new SimpleGrantedAuthority("ROLE_" + client.getRole());
     }
 }
