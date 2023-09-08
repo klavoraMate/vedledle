@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import vedledle.config.security.filter.JWTTokenGeneratorFilter;
+import vedledle.config.security.filter.JWTTokenValidatorFilter;
 
 @Configuration
 public class SecurityConfiguration {
@@ -19,8 +20,9 @@ public class SecurityConfiguration {
         http
                 .csrf().disable()
                 .addFilterBefore(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/login","/register").permitAll()
                 .requestMatchers("/user").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()

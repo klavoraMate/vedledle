@@ -16,9 +16,7 @@ CREATE TABLE client
     name   VARCHAR(255) NOT NULL,
     email  VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(255) not NULL,
-    dog_id INTEGER      NOT NULL,
-    FOREIGN KEY (dog_id) REFERENCES dog (id)
+    role VARCHAR(255) not NULL
 );
 -- Create reservation table
 CREATE TABLE reservation
@@ -38,10 +36,10 @@ VALUES ('Liza', 'German Shepherd', 7),
        ('Daisy', 'Golden Retriever', 2);
 
 -- Insert 3 records into user table
-INSERT INTO client(name,email,password,role, dog_id)
-VALUES ('John','john@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER', 1),
-       ('Jane', 'jane@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','ADMIN',2),
-       ('Mark', 'mark@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER',3);
+INSERT INTO client(name,email,password,role)
+VALUES ('John','john@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER'),
+       ('Jane', 'jane@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','ADMIN'),
+       ('Mark', 'mark@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER');
 
 -- Insert 3 records into reservation table
 INSERT INTO reservation (start_date, end_date, client_id)
