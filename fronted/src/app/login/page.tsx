@@ -1,7 +1,7 @@
 'use client'
 
 import AppBar from "@/_components/AppBar";
-import {FormControl, InputLabel} from "@mui/material";
+import {Checkbox, FormControl, InputLabel, TextField} from "@mui/material";
 import React from "react";
 
 export default function Login() {
@@ -9,8 +9,9 @@ export default function Login() {
         <div>
             <AppBar>
             </AppBar>
-            <FormControl>
-            </FormControl>
+            <h1>Title</h1>
+            <TextField label="Email address" variant="outlined"/>
+            <Checkbox  defaultChecked />
         </div>
     )
 }
