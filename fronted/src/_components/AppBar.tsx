@@ -32,10 +32,9 @@ function ResponsiveAppBar() {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = (setting) => {
+    const handleCloseUserMenu = (setting:string) => {
         setAnchorElUser(null);
-        if (typeof setting == 'string')
-            router.push('/'+setting.toString().toLowerCase())
+        router.push('/'+setting.toLowerCase())
     };
 
     return (
