@@ -23,7 +23,7 @@ export const role = (): String | null => {
 
 export const token = (): String | null => {
     try {
-        return localStorage.getItem('token');
+        return localStorage.getItem('jwt');
     } catch (error) {
         return null;
     }
