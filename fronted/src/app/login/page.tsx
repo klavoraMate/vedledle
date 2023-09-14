@@ -16,21 +16,21 @@ export default function Login() {
 
     const handleLogin = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("password", password);
 
         try {
             setLoading(true);
             setError("");
 
             const response =
-                await fetch('/login', {
+                await fetch('/api/login', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/json'
                     },
-                    body: formData,
+                    body: JSON.stringify({
+                        "username":email,
+                        "password": password
+                    }),
                 });
 
             setLoading(false);

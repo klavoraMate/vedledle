@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class AuthenticationController {
     private final PasswordEncoder passwordEncoder;
     private final ClientService service;
