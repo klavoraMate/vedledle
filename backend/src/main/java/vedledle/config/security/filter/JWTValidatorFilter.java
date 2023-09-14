@@ -27,7 +27,7 @@ public class JWTValidatorFilter extends OncePerRequestFilter {
         if (jwt != null) {
             try {
                 SecretKey key = Keys.hmacShaKeyFor(System.getenv("JWT_KEY").getBytes(StandardCharsets.UTF_8));
-                jwt = jwt.substring(6);
+                jwt = jwt.substring(7);
                 Claims claims = Jwts.parserBuilder()
                         .setSigningKey(key)
                         .build()
