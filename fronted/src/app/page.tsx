@@ -1,6 +1,6 @@
 'use client'
 
-import AppBar from "@/_components/AppBar";
+import AppBar from "@/compnents/AppBar";
 export default function Home() {
     return (
         <div>

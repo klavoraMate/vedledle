@@ -1,9 +1,9 @@
 'use client'
 
-import AppBar from "@/_components/AppBar";
+import AppBar from "@/compnents/AppBar";
 import {Container, Typography, Card, CardContent, Box, Grid} from "@mui/material";
 import {makeStyles} from "@material-ui/core/styles";
-import {token} from "@/_util/JWTDecoder";
+import {token} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
 
 

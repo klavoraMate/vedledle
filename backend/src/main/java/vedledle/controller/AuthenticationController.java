@@ -26,7 +26,7 @@ public class AuthenticationController {
     private final ClientService service;
     private final UsernamePasswordAuthenticationProvider authenticationProvider;
 
-
+assd
     @RequestMapping("/user")
     public Client getUserDetailsAfterLogin(Authentication authentication) {
         Optional<Client> client = service.findByEmail(authentication.getName());

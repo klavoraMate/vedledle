@@ -1,6 +1,6 @@
 'use client'
 
-import AppBar from "@/_components/AppBar";
+import AppBar from "@/compnents/AppBar";
 import {Checkbox, FormControl,  TextField} from "@mui/material";
 import React, {FormEvent, useState} from "react";
 import Container from "@mui/material/Container";
