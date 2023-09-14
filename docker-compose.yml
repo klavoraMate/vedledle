@@ -1,14 +1,5 @@
 version: '3'
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    networks:
-      - vedledle_network
-
   backend:
     build:
       context: ./backend
