@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
-public class JWTValidatorFilter extends OncePerRequestFilter {
+public class JWTTokenValidatorFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -27,14 +27,14 @@ public class JWTValidatorFilter extends OncePerRequestFilter {
         if (jwt != null) {
             try {
                 SecretKey key = Keys.hmacShaKeyFor(System.getenv("JWT_KEY").getBytes(StandardCharsets.UTF_8));
-                jwt = jwt.substring(6);
+
                 Claims claims = Jwts.parserBuilder()
                         .setSigningKey(key)
                         .build()
                         .parseClaimsJws(jwt)
                         .getBody();
                 String username = String.valueOf(claims.get("username"));
-                String role = String.valueOf(claims.get("role"));
+                String role = "ROLE_" + claims.get("role");
                 Authentication auth = new UsernamePasswordAuthenticationToken(username, null, Collections.singleton(new SimpleGrantedAuthority(role)));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (Exception e) {
@@ -44,6 +44,9 @@ public class JWTValidatorFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return request.getServletPath().equals("/user");
+    }
 
 }
