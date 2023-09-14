@@ -1,7 +1,7 @@
 import {useState, useEffect, SetStateAction} from 'react';
 
 export default function useFetch(url: string,
-                                 method = 'GET',
+                                 method:string = 'GET',
                                  headers: { [key: string]: string } = {'Content-Type':'application/json'},
                                  body: { [key: string]: string } = {}) {
     const [data, setData] = useState(null);

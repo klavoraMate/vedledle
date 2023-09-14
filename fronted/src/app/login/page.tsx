@@ -1,11 +1,12 @@
 'use client'
 
 import AppBar from "@/_components/AppBar";
-import {Checkbox, FormControl, Input, InputLabel, TextField} from "@mui/material";
+import {Checkbox, FormControl,  TextField} from "@mui/material";
 import React, {FormEvent, useState} from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import {useRouter} from "next/navigation"
 
 
 export default function Login() {
@@ -13,6 +14,8 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
+
 
     const handleLogin = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -37,6 +40,9 @@ export default function Login() {
 
             if (response.status === 200) {
                 console.log("Login successful");
+                const data = await response.json();
+                localStorage.setItem("jwt",data.token)
+                await router.push("/user")
             } else {
                 setError("Login failed. Please check your credentials.");
             }
