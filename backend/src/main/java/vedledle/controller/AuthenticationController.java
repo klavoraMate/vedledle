@@ -22,11 +22,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class AuthenticationController {
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
     private final PasswordEncoder passwordEncoder;
     private final ClientService service;
     private final UsernamePasswordAuthenticationProvider authenticationProvider;
 
-assd
     @RequestMapping("/user")
     public Client getUserDetailsAfterLogin(Authentication authentication) {
         Optional<Client> client = service.findByEmail(authentication.getName());
