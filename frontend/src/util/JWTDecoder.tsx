@@ -3,8 +3,7 @@ import jwt_decode from 'jwt-decode'
 export const email = (): String | null => {
     try {
         const token = localStorage.getItem('token');
-        const decodedJWT = jwt_decode(token);
-        return decodedJWT.sub;
+        return token ? (jwt_decode(token) as { sub: string }).sub : null;
     } catch (error) {
         return null;
     }
@@ -13,8 +12,7 @@ export const email = (): String | null => {
 export const role = (): String | null => {
     try {
         const token = localStorage.getItem('token');
-        const decodedJWT = jwt_decode(token);
-        return decodedJWT.role;
+        return token ? (jwt_decode(token) as { role: string }).role : null;
     } catch (error) {
         return null;
     }

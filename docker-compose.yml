@@ -1,5 +1,14 @@
 version: '3'
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - vedledle_network
+
   backend:
     build:
       context: ./backend
@@ -15,15 +24,6 @@ services:
     networks:
       - vedledle_network
 
-  auth-server:
-    build:
-      context: ./authorizationServer
-      dockerfile: Dockerfile
-    ports:
-      - "9000:9000"
-    networks:
-      - vedledle_network
-
   db:
     image: postgres:latest
     environment:
@@ -31,7 +31,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./backend/src/main/resources/dbinit.sql:/docker-entrypoint-initdb.d/init.sql

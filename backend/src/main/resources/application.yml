@@ -1,15 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/vedledle
+    url: jdbc:postgresql://db:5433/vedledle
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:9000
-
   jpa:
     hibernate:
       ddl-auto: update

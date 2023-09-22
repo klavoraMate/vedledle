@@ -6,33 +6,14 @@ import {makeStyles} from "@material-ui/core/styles";
 import {token} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
 
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4),
-    },
-    card: {
-        minWidth: 275,
-        marginBottom: theme.spacing(2)
-    },
-    title: {
-        fontSize: 20,
-    },
-    dogCard: {
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-    },
-    dogsOwnedTitle: {
-        marginBottom: theme.spacing(2),
-        textAlign: "center",
-    },
-}));
-
+type UserData = {
+    name: string,
+    email: string
+}
 export default function User() {
     const jwt = token();
     const classes = useStyles();
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState<UserData | null>(null);
 
 
     const dogs = [
@@ -51,7 +32,7 @@ export default function User() {
             });
 
             if (response.ok) {
-                const userData = await response.json();
+                const userData: UserData = await response.json();
                 setUserData(userData);
             }
         } catch (error) {
@@ -123,3 +104,25 @@ export default function User() {
         </>
     )
 }
+
+const useStyles = makeStyles((theme) => ({
+    container: {
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(4),
+    },
+    card: {
+        minWidth: 275,
+        marginBottom: theme.spacing(2)
+    },
+    title: {
+        fontSize: 20,
+    },
+    dogCard: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    },
+    dogsOwnedTitle: {
+        marginBottom: theme.spacing(2),
+        textAlign: "center",
+    },
+}));
