@@ -1,5 +1,6 @@
 package vedledle.config.security.provider;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,17 +11,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import vedledle.dao.model.Client;
-import vedledle.dao.repository.ClientRepository;
+import vedledle.service.ClientService;
 
 import java.util.Collections;
-import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private ClientRepository clientRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final ClientService service;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -28,15 +27,11 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
             return null;
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
-        List<Client> client = clientRepository.findByEmail(username);
-        if (client.size() > 0) {
-            if (passwordEncoder.matches(pwd, client.get(0).getPassword())) {
-                return new UsernamePasswordAuthenticationToken(username, pwd, Collections.singleton(extractRole(client.get(0))));
-            } else {
-                throw new BadCredentialsException("Invalid password!");
-            }
+        Client client = service.findByEmail(username);
+        if (passwordEncoder.matches(pwd, client.getPassword())) {
+            return new UsernamePasswordAuthenticationToken(username, pwd, Collections.singleton(extractRole(client)));
         } else {
-            throw new BadCredentialsException("No user registered with this details!");
+            throw new BadCredentialsException("Invalid password!");
         }
     }
 
