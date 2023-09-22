@@ -15,8 +15,12 @@ public class Dog {
     private Long id;
     private String name;
 
+    private String breed;
+    private int age;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private Client owner;
 
 

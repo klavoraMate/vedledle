@@ -19,7 +19,7 @@ public class SecurityConfiguration {
                 .addFilterAfter(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .requestMatchers("/api/login","/api/register").permitAll()
-                .requestMatchers("/api/user").hasRole("USER")
+                .requestMatchers("/api/dog/**,/api/client/**").hasRole("USER")
                 .anyRequest().authenticated();
         return http.build();
     }
