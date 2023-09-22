@@ -14,8 +14,9 @@ CREATE TABLE client
 (
     id     SERIAL PRIMARY KEY,
     name   VARCHAR(255) NOT NULL,
-    dog_id INTEGER      NOT NULL,
-    FOREIGN KEY (dog_id) REFERENCES dog (id)
+    email  VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) not NULL
 );
 -- Create reservation table
 CREATE TABLE reservation
@@ -32,13 +33,13 @@ CREATE TABLE reservation
 INSERT INTO dog (name, breed, age)
 VALUES ('Liza', 'German Shepherd', 7),
        ('Vadóc', 'German Shepherd', 9),
-       ('Daisy', 'Golden Retriever', 2),
+       ('Daisy', 'Golden Retriever', 2);
 
 -- Insert 3 records into user table
-INSERT INTO client(name, dog_id)
-VALUES ('John', 1),
-       ('Jane', 2),
-       ('Mark', 3);
+INSERT INTO client(name,email,password,role)
+VALUES ('John','john@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER'),
+       ('Jane', 'jane@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','ADMIN'),
+       ('Mark', 'mark@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER');
 
 -- Insert 3 records into reservation table
 INSERT INTO reservation (start_date, end_date, client_id)

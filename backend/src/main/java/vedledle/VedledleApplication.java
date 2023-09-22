@@ -3,7 +3,9 @@ package vedledle;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
+@EnableMethodSecurity
 @SpringBootApplication
 public class VedledleApplication {
     public static void main(String[] args) {
