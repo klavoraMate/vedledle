@@ -20,13 +20,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/",
                         "/_next/**",
-                        "/*.ico",
-                        "/*.json",
-                        "/*.png",
-                        "/*.css",
-                        "/*.js",
                         "/*.html",
-                        "/index.html",
+                        "/*.ico",
+                        "/*.css",
+                        "/*.png",
+                        "/login",
                         "/api/login",
                         "/api/register").permitAll()
                 .requestMatchers("/api/dog/**,/api/client/**").hasRole("USER")
