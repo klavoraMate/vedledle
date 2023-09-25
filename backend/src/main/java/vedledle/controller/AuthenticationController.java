@@ -31,12 +31,7 @@ public class AuthenticationController {
     private final ClientService service;
     private final UsernamePasswordAuthenticationProvider authenticationProvider;
 
-    @RequestMapping("/user")
-    public Client getUserDetailsAfterLogin(Authentication authentication) {
-        Optional<Client> client = service.findByEmail(authentication.getName());
-        return client.orElse(null);
 
-    }
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody Client clientRequest) {
