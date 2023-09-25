@@ -1,27 +1,24 @@
 package vedledle.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vedledle.dao.model.Client;
+import vedledle.dao.model.User;
 import vedledle.dao.model.Dog;
-import vedledle.exception.UserNotFoundException;
-import vedledle.service.ClientService;
+import vedledle.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/client")
-public class ClientController {
-    private final ClientService service;
+@RequestMapping("/api/user")
+public class UserController {
+    private final UserService service;
 
     @GetMapping("/info/{email}")
-    public Client info(@PathVariable String email) {
+    public User info(@PathVariable String email) {
         return service.findByEmail(email);
     }
 

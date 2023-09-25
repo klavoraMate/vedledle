@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Client {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
