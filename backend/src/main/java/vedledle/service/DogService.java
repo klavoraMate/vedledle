@@ -1,10 +1,8 @@
 package vedledle.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import vedledle.dao.model.Client;
+import vedledle.dao.model.User;
 import vedledle.dao.model.Dog;
 import vedledle.dao.repository.DogRepository;
 import vedledle.exception.DogNotFoundException;
@@ -25,7 +23,7 @@ public class DogService {
             throw new DogNotFoundException(name);
     }
 
-    public List<Dog> findByOwner(Client client) {
-        return repository.findByOwner(client);
+    public List<Dog> findByOwner(User user) {
+        return repository.findByOwner(user);
     }
 }
