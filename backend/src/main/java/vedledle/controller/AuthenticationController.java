@@ -44,7 +44,7 @@ public class AuthenticationController {
             service.save(newUser);
             response = ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("Client created");
+                    .body("User created");
         } catch (Exception e) {
             response = ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)

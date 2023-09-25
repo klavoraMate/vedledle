@@ -1,8 +1,8 @@
 -- Drop tables if they exist
-DROP TABLE IF EXISTS reservation,user,dog CASCADE;
+DROP TABLE IF EXISTS reservation,"user",dog CASCADE;
 
 -- Create user table
-CREATE TABLE user
+CREATE TABLE "user"
 (
     id     SERIAL PRIMARY KEY,
     name   VARCHAR(255) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE dog
     breed VARCHAR(255) NOT NULL,
     age   INTEGER      NOT NULL,
     user_id INTEGER NOT NULL ,
-    FOREIGN KEY (user_id) REFERENCES user (id)
+    FOREIGN KEY (user_id) REFERENCES "user" (id)
 );
 -- Create reservation table
 CREATE TABLE reservation
@@ -27,13 +27,13 @@ CREATE TABLE reservation
     start_date DATE    NOT NULL,
     end_date   DATE    NOT NULL,
     client_id  INTEGER NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES user (id)
+    FOREIGN KEY (client_id) REFERENCES "user" (id)
 );
 
 
 
 -- Insert 3 records into user table
-INSERT INTO user(name,email,password,role)
+INSERT INTO "user"(name,email,password,role)
 VALUES ('John','john@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER'),
        ('Jane', 'jane@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','ADMIN'),
        ('Mark', 'mark@email.com','$2y$10$SgQeaBY2ZkU5LPkuvyxJd.mhNQ3y7z5SMEWhLfEsGl36H0UmSpNIS','USER');
