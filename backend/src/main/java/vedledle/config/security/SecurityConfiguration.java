@@ -19,12 +19,14 @@ public class SecurityConfiguration {
                 .addFilterAfter(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .requestMatchers("/",
-                        "/frontend/**",
+                        "/_next/**",
                         "/*.ico",
                         "/*.json",
                         "/*.png",
                         "/*.css",
                         "/*.js",
+                        "/*.html",
+                        "/index.html",
                         "/api/login",
                         "/api/register").permitAll()
                 .requestMatchers("/api/dog/**,/api/client/**").hasRole("USER")
