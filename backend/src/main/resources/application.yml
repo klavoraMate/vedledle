@@ -12,7 +12,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   web:
     resources:
-      static-locations: classpath:/templates/
+      static-locations: classpath:/frontend/
 logging:
   level:
     org.hibernate.SQL: debug

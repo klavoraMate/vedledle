@@ -19,7 +19,7 @@ public class SecurityConfiguration {
                 .addFilterAfter(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .requestMatchers("/",
-                        "/templates/**",
+                        "/frontend/**",
                         "/*.ico",
                         "/*.json",
                         "/*.png",
