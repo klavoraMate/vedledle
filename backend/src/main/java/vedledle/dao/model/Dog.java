@@ -21,7 +21,7 @@ public class Dog {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private Client owner;
+    private User owner;
 
 
 }
