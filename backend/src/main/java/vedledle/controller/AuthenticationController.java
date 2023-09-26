@@ -12,10 +12,8 @@ import vedledle.config.security.JWTGenerator;
 import vedledle.config.security.provider.UsernamePasswordAuthenticationProvider;
 import vedledle.controller.dto.LoginRequest;
 import vedledle.controller.dto.LoginResponse;
-import vedledle.dao.model.Client;
-import vedledle.service.ClientService;
-
-import java.util.Optional;
+import vedledle.dao.model.User;
+import vedledle.service.UserService;
 
 
 @RestController
@@ -28,25 +26,25 @@ public class AuthenticationController {
     }
 
     private final PasswordEncoder passwordEncoder;
-    private final ClientService service;
+    private final UserService service;
     private final UsernamePasswordAuthenticationProvider authenticationProvider;
 
 
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody Client clientRequest) {
+    public ResponseEntity<String> register(@RequestBody User userRequest) {
         ResponseEntity<String> response;
         try {
-            Client newClient = Client.builder()
-                    .email(clientRequest.getEmail())
-                    .name(clientRequest.getName())
-                    .password(passwordEncoder.encode(clientRequest.getPassword()))
+            User newUser = User.builder()
+                    .email(userRequest.getEmail())
+                    .name(userRequest.getName())
+                    .password(passwordEncoder.encode(userRequest.getPassword()))
                     .role("USER")
                     .build();
-            service.save(newClient);
+            service.save(newUser);
             response = ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("Client created");
+                    .body("User created");
         } catch (Exception e) {
             response = ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)

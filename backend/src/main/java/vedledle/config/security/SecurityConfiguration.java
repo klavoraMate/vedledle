@@ -18,7 +18,16 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .addFilterAfter(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .requestMatchers("/api/login","/api/register").permitAll()
+                .requestMatchers("/",
+                        "/_next/**",
+                        "/*.html",
+                        "/*.ico",
+                        "/*.css",
+                        "/*.png",
+                        "/login",
+                        "/user",
+                        "/api/login",
+                        "/api/register").permitAll()
                 .requestMatchers("/api/dog/**,/api/client/**").hasRole("USER")
                 .anyRequest().authenticated();
         return http.build();

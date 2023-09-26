@@ -1,7 +1,6 @@
 package vedledle.config.security.provider;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,8 +9,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import vedledle.dao.model.Client;
-import vedledle.service.ClientService;
+import vedledle.dao.model.User;
+import vedledle.service.UserService;
 
 import java.util.Collections;
 
@@ -19,7 +18,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
     private final PasswordEncoder passwordEncoder;
-    private final ClientService service;
+    private final UserService service;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -27,9 +26,9 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
             return null;
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
-        Client client = service.findByEmail(username);
-        if (passwordEncoder.matches(pwd, client.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(username, pwd, Collections.singleton(extractRole(client)));
+        User user = service.findByEmail(username);
+        if (passwordEncoder.matches(pwd, user.getPassword())) {
+            return new UsernamePasswordAuthenticationToken(username, pwd, Collections.singleton(extractRole(user)));
         } else {
             throw new BadCredentialsException("Invalid password!");
         }
@@ -40,7 +39,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
 
-    private SimpleGrantedAuthority extractRole(Client client) {
-        return new SimpleGrantedAuthority("ROLE_" + client.getRole());
+    private SimpleGrantedAuthority extractRole(User user) {
+        return new SimpleGrantedAuthority("ROLE_" + user.getRole());
     }
 }
