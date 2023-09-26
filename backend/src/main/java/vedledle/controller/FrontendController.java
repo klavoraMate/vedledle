@@ -9,4 +9,12 @@ public class FrontendController {
     public String index(){
         return "index.html";
     }
+    @GetMapping("/login")
+    public String login(){
+        return "login.html";
+    }
+    @GetMapping("/user")
+    public String user(){
+        return "user.html";
+    }
 }
