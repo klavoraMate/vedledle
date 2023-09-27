@@ -19,19 +19,30 @@ backend relies on Java Spring Boot, coupled with a PostgreSql database for data 
 [![Docker][Docker.js]][Docker-url]
 [![PostgreSQL][PostgreSQL.js]][PostgreSql-url]
 
+
+## Prerequisites
+
+Before you begin, ensure you have the following prerequisites installed on your system:
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
 ## Installation
 
-#### Linux:
+1. After cloning the project on your local system navigate to the root directory
+2. Use the following command to run the containers.
 
+### Linux/macOS
 ```shell
-./start.sh
+docker compose up 
+```
+### Windows 
+```shell
+docker-compose up --build
 ```
 
-#### Windows:
-
-```shell
-start.bat
-```
+### Authentication issue
+I am currently facing an issue with the authentication when running the application in docker.
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 
