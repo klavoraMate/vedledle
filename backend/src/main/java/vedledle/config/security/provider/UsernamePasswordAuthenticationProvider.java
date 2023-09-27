@@ -28,6 +28,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         String pwd = authentication.getCredentials().toString();
         User user = service.findByEmail(username);
         if (passwordEncoder.matches(pwd, user.getPassword())) {
+            System.out.println("Authentication added" + " " + username + " " + pwd);
             return new UsernamePasswordAuthenticationToken(username, pwd, Collections.singleton(extractRole(user)));
         } else {
             throw new BadCredentialsException("Invalid password!");
