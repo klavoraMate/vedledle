@@ -28,7 +28,7 @@ public class SecurityConfiguration {
                         "/user",
                         "/api/login",
                         "/api/register").permitAll()
-                .requestMatchers("/api/dog/**,/api/client/**").hasRole("USER")
+                .requestMatchers("/api/dog/**,/api/user/**").hasRole("USER")
                 .anyRequest().authenticated();
         return http.build();
     }

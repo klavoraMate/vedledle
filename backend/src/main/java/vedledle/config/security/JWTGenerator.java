@@ -17,7 +17,7 @@ public class JWTGenerator {
         SecretKey key = Keys.hmacShaKeyFor(System.getenv("JWT_KEY").getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()
                 .setIssuer("Vedledle")
-                .claim("username",authentication.getName())
+                .claim("email",authentication.getName())
                 .claim("role",populateRole(authentication.getAuthorities()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + 30000000))
