@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useRouter} from 'next/navigation';
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import "../app/globals.css"
 
 const pages = ['Gallery', 'Calendar'];
@@ -47,7 +47,7 @@ function ResponsiveAppBar() {
 
     const handleCloseUserMenu = (setting:string) => {
         setAnchorElUser(null);
-        router.push('/'+setting.toLowerCase())
+        if(setting) router.push('/'+setting.toLowerCase())
     };
 
     return (
