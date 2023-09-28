@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {useRouter} from 'next/navigation';
 
 const pages = ['Gallery', 'Calendar'];
-const settings = ['Profile', 'Login', 'Logout'];
+const settings = ['Profile', 'Login', 'Logout','Register'];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);

@@ -1,56 +1,51 @@
 'use client'
-
 import AppBar from "@/compnents/AppBar";
-import {Checkbox, FormControl,  TextField} from "@mui/material";
-import React, {FormEvent, useState} from "react";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import {FormControl, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
-import {useRouter} from "next/navigation"
+import Container from "@mui/material/Container";
+import React, {FormEvent, useState} from "react";
+import {useRouter} from "next/navigation";
 
-
-export default function Login() {
+export default function Register() {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const router = useRouter();
 
-
-    const handleLogin = async (e:FormEvent<HTMLFormElement>) => {
+    const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
         try {
             setLoading(true);
-            setError("");
-
             const response =
-                await fetch('/api/login', {
+                await fetch('/api/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        "email":email,
+                        "username": firstName + lastName,
+                        "email": email,
                         "password": password
                     }),
                 });
-
             setLoading(false);
-
             if (response.status === 200) {
-                const data = await response.json();
-                localStorage.setItem("jwt",data.token)
-                await router.push("/profile")
+                await router.push("/login")
             } else {
-                setError("Login failed. Please check your credentials.");
+                setError("Register failed.")
             }
-        } catch (error) {
+        } catch (error){
             setLoading(false);
-            setError("An error occurred during login. Please try again.");
+            setError("An error occurred during register. Please try again.");
             console.error(error);
         }
-    };
+    }
+
 
     return (
         <>
@@ -64,7 +59,27 @@ export default function Login() {
                     minHeight="70vh"
                 >
                     <div>
-                        <form onSubmit={handleLogin}>
+                        <form onSubmit={handleRegister}>
+                            <FormControl fullWidth margin="normal">
+                                <TextField
+                                    label="First name"
+                                    variant="outlined"
+                                    type="text"
+                                    required
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                />
+                            </FormControl>
+                            <FormControl fullWidth margin="normal">
+                                <TextField
+                                    label="Second name"
+                                    variant="outlined"
+                                    type="text"
+                                    required
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </FormControl>
                             <FormControl fullWidth margin="normal">
                                 <TextField
                                     label="Email"
@@ -75,7 +90,6 @@ export default function Login() {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </FormControl>
-
                             <FormControl fullWidth margin="normal">
                                 <TextField
                                     label="Password"
@@ -86,7 +100,16 @@ export default function Login() {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </FormControl>
-
+                            <FormControl fullWidth margin="normal">
+                                <TextField
+                                    label="Confirm password"
+                                    variant="outlined"
+                                    type="password"
+                                    required
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                />
+                            </FormControl>
                             <FormControl fullWidth margin="normal">
                                 <Button
                                     variant="contained"
@@ -94,7 +117,7 @@ export default function Login() {
                                     type="submit"
                                     disabled={loading}
                                 >
-                                    {loading ? "Logging in..." : "Login"}
+                                    {loading ? "Sending registration form.." : "Register"}
                                 </Button>
                             </FormControl>
                         </form>
@@ -104,5 +127,5 @@ export default function Login() {
                 </Box>
             </Container>
         </>
-    );
+    )
 }
