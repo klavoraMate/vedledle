@@ -56,8 +56,9 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
-            String jwt = JWTGenerator.generate(authentication);
+            Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
+            User user = service.findByName(authentication.getName());
+            String jwt = JWTGenerator.generate(authentication,user.getEmail());
             return ResponseEntity.ok(new LoginResponse(jwt));
         } catch (Exception e) {
             throw new BadCredentialsException(e.getMessage());

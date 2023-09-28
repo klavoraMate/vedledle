@@ -1,30 +1,31 @@
 'use client'
 
 import AppBar from "@/compnents/AppBar";
-import {Container, Typography, Card, CardContent, Box, Grid} from "@mui/material";
+import {Box, Card, CardContent, Container, Grid, Typography} from "@mui/material";
 import {makeStyles} from "@material-ui/core/styles";
-import {token} from "@/util/JWTDecoder";
+import {getEmail, getJWT} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
 
+type DogData = {
+    name: string,
+    breed: string,
+    age: number
+}
 type UserData = {
     name: string,
-    email: string
+    email: string,
+    dogs: DogData[]
 }
-export default function User() {
-    const jwt = token();
+
+export default function Profile() {
+    const jwt = getJWT();
+    const email = getEmail();
     const classes = useStyles();
     const [userData, setUserData] = useState<UserData | null>(null);
 
-
-    const dogs = [
-        {name: "Fido", breed: "Golden Retriever", age: 3},
-        {name: "Buddy", breed: "Labrador", age: 2},
-        {name: "Max", breed: "German Shepherd", age: 4},
-    ];
-
     const fetchUserData = async () => {
         try {
-            const response = await fetch("/api/user", {
+            const response = await fetch("/api/user/info/" + email, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${jwt}`,
@@ -74,7 +75,7 @@ export default function User() {
                             </Typography>
                         </Box>
                         <Grid container justifyContent="center">
-                            {dogs.map((dog, index) => (
+                            {userData.dogs.map((dog, index) => (
                                 <Grid item xs={12} sm={6} key={index}>
                                     <Card className={classes.dogCard}>
                                         <CardContent>

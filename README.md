@@ -27,6 +27,8 @@ Before you begin, ensure you have the following prerequisites installed on your 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
+Make sure that port 8080 and 5433 are not in use
+
 ## Installation
 
 1. After cloning the project on your local system navigate to the root directory
@@ -34,15 +36,14 @@ Before you begin, ensure you have the following prerequisites installed on your 
 
 ### Linux/macOS
 ```shell
-docker compose up 
+docker compose up --build
 ```
 ### Windows 
 ```shell
 docker-compose up --build
 ```
 
-### Authentication issue
-I am currently facing an issue with the authentication when running the application in docker.
+When the container is composed you can access the application at http://localhost:8080/
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 

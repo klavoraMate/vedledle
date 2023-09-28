@@ -24,11 +24,11 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         if (!(authentication instanceof UsernamePasswordAuthenticationToken))
             return null;
-        String username = authentication.getName();
+        String email = authentication.getName();
         String pwd = authentication.getCredentials().toString();
-        User user = service.findByEmail(username);
+        User user = service.findByEmail(email);
         if (passwordEncoder.matches(pwd, user.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(username, pwd, Collections.singleton(extractRole(user)));
+            return new UsernamePasswordAuthenticationToken(user.getName(), pwd, Collections.singleton(extractRole(user)));
         } else {
             throw new BadCredentialsException("Invalid password!");
         }

@@ -2,6 +2,7 @@ package vedledle.config.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
@@ -12,12 +13,14 @@ import java.util.Collection;
 import java.util.Date;
 
 @Component
+@RequiredArgsConstructor
 public class JWTGenerator {
-    public static String generate(Authentication authentication){
+    public static String generate(Authentication authentication, String email){
         SecretKey key = Keys.hmacShaKeyFor(System.getenv("JWT_KEY").getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()
                 .setIssuer("Vedledle")
                 .claim("username",authentication.getName())
+                .claim("email",email)
                 .claim("role",populateRole(authentication.getAuthorities()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + 30000000))
