@@ -17,4 +17,9 @@ public class FrontendController {
     public String user(){
         return "profile.html";
     }
+
+    @GetMapping("/register")
+    public String register(){
+        return "register.html";
+    }
 }

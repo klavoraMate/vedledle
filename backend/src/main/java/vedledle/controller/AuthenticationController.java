@@ -20,11 +20,6 @@ import vedledle.service.UserService;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class AuthenticationController {
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
     private final PasswordEncoder passwordEncoder;
     private final UserService service;
     private final UsernamePasswordAuthenticationProvider authenticationProvider;
