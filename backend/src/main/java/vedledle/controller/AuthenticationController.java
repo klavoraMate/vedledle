@@ -56,7 +56,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
+            Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
             String jwt = JWTGenerator.generate(authentication);
             return ResponseEntity.ok(new LoginResponse(jwt));
         } catch (Exception e) {

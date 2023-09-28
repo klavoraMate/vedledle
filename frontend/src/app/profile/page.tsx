@@ -17,7 +17,7 @@ type UserData = {
     dogs: DogData[]
 }
 
-export default function User() {
+export default function Profile() {
     const jwt = getJWT();
     const email = getEmail();
     const classes = useStyles();
