@@ -35,7 +35,7 @@ export default function Register() {
                     }),
                 });
             setLoading(false);
-            if (response.status === 200) {
+            if (response.status === 201) {
                 await router.push("/login")
             } else {
                 setError("Register failed.")
