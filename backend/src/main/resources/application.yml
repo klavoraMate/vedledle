@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/vedledle
+    url: jdbc:postgresql://db:5432/vedledle_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

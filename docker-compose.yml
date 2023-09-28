@@ -10,6 +10,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/vedledle_db
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
+      - JWT_KEY=ghlEQeXHuPq8SdbyYFNkDNdudQ53YUn4
     depends_on:
       - db
     networks:
@@ -22,7 +23,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./backend/src/main/resources/dbinit.sql:/docker-entrypoint-initdb.d/init.sql
