@@ -19,19 +19,31 @@ backend relies on Java Spring Boot, coupled with a PostgreSql database for data 
 [![Docker][Docker.js]][Docker-url]
 [![PostgreSQL][PostgreSQL.js]][PostgreSql-url]
 
+
+## Prerequisites
+
+Before you begin, ensure you have the following prerequisites installed on your system:
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+Make sure that port 8080 and 5433 are not in use
+
 ## Installation
 
-#### Linux:
+1. After cloning the project on your local system navigate to the root directory
+2. Use the following command to run the containers.
 
+### Linux/macOS
 ```shell
-./start.sh
+docker compose up --build
+```
+### Windows 
+```shell
+docker-compose up --build
 ```
 
-#### Windows:
-
-```shell
-start.bat
-```
+When the container is composed you can access the application at http://localhost:8080/
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 

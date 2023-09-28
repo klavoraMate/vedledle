@@ -19,7 +19,7 @@ public class Dog {
     private int age;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "client_id")
     @JsonIgnore
     private User owner;
 

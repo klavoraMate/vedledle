@@ -51,10 +51,16 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
+<<<<<<< HEAD
             System.out.println(service.findByEmail(loginRequest.username()).getName());
             Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
             String jwt = JWTGenerator.generate(authentication);
             System.out.println(jwt);
+=======
+            Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
+            User user = service.findByName(authentication.getName());
+            String jwt = JWTGenerator.generate(authentication,user.getEmail());
+>>>>>>> style
             return ResponseEntity.ok(new LoginResponse(jwt));
         } catch (Exception e) {
             throw new BadCredentialsException(e.getMessage());
