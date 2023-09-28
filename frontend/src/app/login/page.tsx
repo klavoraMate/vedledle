@@ -42,7 +42,7 @@ export default function Login() {
                 console.log("Login successful");
                 const data = await response.json();
                 localStorage.setItem("jwt",data.token)
-                await router.push("/user")
+                await router.push("/profile")
             } else {
                 setError("Login failed. Please check your credentials.");
             }

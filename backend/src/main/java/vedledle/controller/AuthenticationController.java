@@ -57,12 +57,8 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
-<<<<<<< HEAD
-=======
-            System.out.println("Authentication after provider: "+authentication);
->>>>>>> docker
-            String jwt = JWTGenerator.generate(authentication);
-            System.out.println("jwt: "+jwt);
+            User user = service.findByName(authentication.getName());
+            String jwt = JWTGenerator.generate(authentication,user.getEmail());
             return ResponseEntity.ok(new LoginResponse(jwt));
         } catch (Exception e) {
             throw new BadCredentialsException(e.getMessage());

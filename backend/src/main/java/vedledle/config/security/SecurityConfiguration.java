@@ -25,7 +25,7 @@ public class SecurityConfiguration {
                         "/*.css",
                         "/*.png",
                         "/login",
-                        "/user",
+                        "/profile",
                         "/api/login",
                         "/api/register").permitAll()
                 .requestMatchers("/api/dog/**","/api/user/**").hasRole("USER")

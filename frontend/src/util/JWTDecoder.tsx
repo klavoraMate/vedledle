@@ -8,7 +8,14 @@ export const getEmail = (): String | null => {
         return null;
     }
 }
-
+export const getName = (): String | null => {
+    try {
+        const token = localStorage.getItem('jwt');
+        return token ? (jwt_decode(token) as { username: string }).username: null;
+    } catch (error) {
+        return null;
+    }
+}
 export const getRole = (): String | null => {
     try {
         const token = localStorage.getItem('jwt');

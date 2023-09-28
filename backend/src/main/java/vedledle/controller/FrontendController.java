@@ -13,8 +13,8 @@ public class FrontendController {
     public String login(){
         return "login.html";
     }
-    @GetMapping("/user")
+    @GetMapping("/profile")
     public String user(){
-        return "user.html";
+        return "profile.html";
     }
 }
