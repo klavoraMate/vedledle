@@ -7,6 +7,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {useRouter} from "next/navigation"
+import "../globals.css"
 
 
 export default function Login() {

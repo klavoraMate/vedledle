@@ -5,6 +5,7 @@ import {Box, Card, CardContent, Container, Grid, Typography} from "@mui/material
 import {makeStyles} from "@material-ui/core/styles";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
+import "../globals.css"
 
 type DogData = {
     name: string,

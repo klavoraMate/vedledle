@@ -20,7 +20,7 @@ const settings = ['Profile', 'Login', 'Logout','Register'];
 
 const useStyle = makeStyles(()=>({
     appBarRoot:{
-        backgroundColor:"var(--background-alternative)",
+        backgroundColor:"var(--secondary)",
         color:"var(--text)",
         borderRadius:"80px",
         border: 'solid var(--text) 2px'
