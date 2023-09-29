@@ -51,7 +51,7 @@ export default function Profile() {
 
     return (
         <>
-            <AppBar/>
+            <AppBar></AppBar>
             {jwt && userData ? (<Container className={classes.container} maxWidth="md">
                         <Grid container justifyContent="center">
                             <Grid item xs={12} sm={6}>
