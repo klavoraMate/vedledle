@@ -5,7 +5,7 @@ import "./globals.css"
 export default function Home() {
     return (
         <div>
-            <AppBar></AppBar>
+            <AppBar/>
         </div>
     )
 }

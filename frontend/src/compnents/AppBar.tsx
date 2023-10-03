@@ -12,27 +12,17 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useRouter} from 'next/navigation';
-import {makeStyles} from "@material-ui/core/styles";
 import "../app/globals.css"
+import { useState} from "react";
 
 const pages = ['Gallery', 'Calendar'];
-const settings = ['Profile', 'Login', 'Logout','Register'];
+const settings = ['Profile', 'Login', 'Logout', 'Register'];
 
-const useStyle = makeStyles(()=>({
-    appBarRoot:{
-        backgroundColor:"var(--secondary)",
-        color:"var(--text)",
-        borderRadius:"80px",
-        border: 'solid var(--text) 2px'
-
-    }
-}))
 
 function ResponsiveAppBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const router = useRouter();
-    const classes = useStyle();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -45,14 +35,20 @@ function ResponsiveAppBar() {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = (setting:string) => {
+    const handleCloseUserMenu = (setting: string | object) => {
         setAnchorElUser(null);
-        if(typeof setting === 'string') router.push('/'+setting.toLowerCase())
+        if (typeof setting === 'string') router.push('/' + setting.toLowerCase())
     };
+
 
     return (
         <AppBar position="static"
-        classes={{root: classes.appBarRoot}}>
+                style={{
+                    backgroundColor: "var(--secondary)",
+                    color: "var(--text)",
+                    borderRadius: "80px",
+                    border: 'solid var(--text) 2px',
+                }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Avatar
@@ -170,7 +166,7 @@ function ResponsiveAppBar() {
                             onClose={handleCloseUserMenu}
                         >
                             {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={()=>handleCloseUserMenu(setting)}>
+                                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
