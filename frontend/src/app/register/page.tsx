@@ -1,5 +1,5 @@
 'use client'
-import AppBar from "@/compnents/AppBar";
+import AppBar from "@/components/AppBar";
 import Box from "@mui/material/Box";
 import {FormControl, TextField} from "@mui/material";
 import Button from "@mui/material/Button";

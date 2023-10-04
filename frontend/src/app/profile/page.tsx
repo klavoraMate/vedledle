@@ -1,11 +1,12 @@
 'use client'
 
-import AppBar from "@/compnents/AppBar";
+import AppBar from "@/components/AppBar";
 import {Box, Card, CardContent, Container, Grid, Typography} from "@mui/material";
 import {makeStyles} from "@material-ui/core/styles";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
 import "../globals.css"
+import FloatingShapes from "@/components/FloatingShapes";
 
 type DogData = {
     name: string,
@@ -51,6 +52,7 @@ export default function Profile() {
 
     return (
         <>
+            <FloatingShapes/>
             <AppBar/>
             {jwt && userData ? (<Container className={classes.container} maxWidth="md">
                         <Grid container justifyContent="center">
