@@ -27,8 +27,9 @@ const styles: Record<string, React.CSSProperties>= {
         padding: '2rem',
     },
     borderedImage: {
-        border: '2px solid var(--text)',
-        borderRadius: '10px',
+        position: 'relative',
+        border: '0.4rem solid var(--text-light)',
+        borderRadius: '3rem',
     },
 };
 
@@ -43,7 +44,7 @@ export default function Home() {
                 </Typography>
                 <Box style={styles.imageContainer}>
                     <img
-                        src="/logo.jpeg"
+                        src="/logo-transparent.png"
                         alt="Vedledle Logo"
                         width="200"
                     />
@@ -55,20 +56,18 @@ export default function Home() {
                     hobby grooming, and standard grooming. Your pets deserve the best care, and we&apos;re here to provide it!
                 </Typography>
                 <Box style={styles.imageContainer}>
-                    <Paper elevation={3} style={styles.borderedImage}>
                         <img
+                            style={styles.borderedImage}
                             src="/dog1.jpg"
                             alt="Grooming Image 1"
                             width="300"
                         />
-                    </Paper>
-                    <Paper elevation={3} style={styles.borderedImage}>
                         <img
+                            style={styles.borderedImage}
                             src="/dog2.jpg"
                             alt="Grooming Image 2"
                             width="300"
                         />
-                    </Paper>
                 </Box>
             </Container>
         </div>
