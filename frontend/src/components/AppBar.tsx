@@ -42,12 +42,12 @@ function ResponsiveAppBar() {
 
 
     return (
-        <AppBar position="static"
+        <AppBar position="fixed"
                 style={{
                     backgroundColor: "var(--secondary)",
-                    color: "var(--text)",
+                    color: "var(--text-light)",
                     borderRadius: "80px",
-                    border: 'solid var(--text) 2px',
+                    border: 'solid var(--text-light) 2px',
                 }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>

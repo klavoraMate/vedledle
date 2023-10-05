@@ -52,7 +52,6 @@ export default function Profile() {
 
     return (
         <>
-            <FloatingShapes/>
             <AppBar/>
             {jwt && userData ? (<Container className={classes.container} maxWidth="md">
                         <Grid container justifyContent="center">

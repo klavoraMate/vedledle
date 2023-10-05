@@ -5,14 +5,15 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import FloatingShapes from "@/components/FloatingShapes";
 
-const styles = {
+const styles: Record<string, React.CSSProperties>= {
     title: {
         textAlign: 'center',
         marginTop: '2rem',
         marginBottom: '1rem',
         fontFamily: 'monospace',
-        fontWeight: 700,
+        fontWeight: 'bold',
         letterSpacing: '0.3rem',
     },
     introText: {
@@ -26,14 +27,15 @@ const styles = {
         padding: '2rem',
     },
     borderedImage: {
-        border: '2px solid var(--text)', // Add your border style here
-        borderRadius: '10px', // Adjust border radius as needed
+        border: '2px solid var(--text)',
+        borderRadius: '10px',
     },
 };
 
 export default function Home() {
     return (
         <div>
+            <FloatingShapes/>
             <AppBar />
             <Container maxWidth="xl">
                 <Typography variant="h4" component="h1" style={styles.title}>
@@ -41,30 +43,30 @@ export default function Home() {
                 </Typography>
                 <Box style={styles.imageContainer}>
                     <img
-                        src="/logo.jpeg" // Replace with the path to your logo
+                        src="/logo.jpeg"
                         alt="Vedledle Logo"
-                        width="200" // Adjust the logo width as needed
+                        width="200"
                     />
                 </Box>
                 <Typography variant="body1" style={styles.introText}>
                     Welcome to Vedledle - Your Trusted Pet Grooming Salon
                     <br />
                     We specialize in grooming services for all kinds of dogs and cats, including trimming, washing,
-                    hobby grooming, and standard grooming. Your pets deserve the best care, and we're here to provide it!
+                    hobby grooming, and standard grooming. Your pets deserve the best care, and we&apos;re here to provide it!
                 </Typography>
                 <Box style={styles.imageContainer}>
                     <Paper elevation={3} style={styles.borderedImage}>
                         <img
-                            src="/dog1.jpg" // Replace with the path to your image
+                            src="/dog1.jpg"
                             alt="Grooming Image 1"
-                            width="300" // Adjust the image width as needed
+                            width="300"
                         />
                     </Paper>
                     <Paper elevation={3} style={styles.borderedImage}>
                         <img
-                            src="/dog2.jpg" // Replace with the path to your image
+                            src="/dog2.jpg"
                             alt="Grooming Image 2"
-                            width="300" // Adjust the image width as needed
+                            width="300"
                         />
                     </Paper>
                 </Box>
