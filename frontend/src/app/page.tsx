@@ -3,19 +3,18 @@ import React from 'react';
 import AppBar from '@/components/AppBar';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import FloatingShapes from "@/components/FloatingShapes";
+import FloatingShapes from "@/components/design/FloatingShapes";
 import "./globals.css";
 import Logo from "@/components/Logo";
 import {Grid} from "@mui/material";
+import Layout from "@/components/design/Layout";
 
 export default function Home() {
     return (
-        <div>
-            <FloatingShapes/>
-            <AppBar/>
+        <Layout>
             <Container maxWidth="xl">
                 <Logo/>
-                <Grid container  spacing={2}>
+                <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={6}>
                         <div className="centerVertically">
                             <Typography variant="body1" className="introText">
@@ -41,6 +40,6 @@ export default function Home() {
                     </Grid>
                 </Grid>
             </Container>
-        </div>
+        </Layout>
     );
 }
