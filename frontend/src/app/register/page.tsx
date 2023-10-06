@@ -6,8 +6,8 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import React, {FormEvent, useState} from "react";
 import {useRouter} from "next/navigation";
-import FormContainer from "@/components/form/formContainer";
-import RegisterForm from "@/components/form/registerForm";
+import FormContainer from "@/components/form/FormContainer";
+import RegisterForm from "@/components/form/RegisterForm";
 import FloatingShapes from "@/components/FloatingShapes";
 
 export default function Register() {

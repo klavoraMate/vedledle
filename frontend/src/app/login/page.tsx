@@ -8,8 +8,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {useRouter} from "next/navigation"
 import "../globals.css"
-import LoginForm from "@/components/form/loginForm";
-import FormContainer from "@/components/form/formContainer";
+import LoginForm from "@/components/form/LoginForm";
+import FormContainer from "@/components/form/FormContainer";
 import FloatingShapes from "@/components/FloatingShapes";
 
 

@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import FloatingShapes from "@/components/FloatingShapes";
 import "./globals.css";
-import Logo from "@/components/logo";
+import Logo from "@/components/Logo";
 import {Grid} from "@mui/material";
 
 export default function Home() {
