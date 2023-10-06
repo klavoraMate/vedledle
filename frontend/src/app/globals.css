@@ -54,11 +54,14 @@ body {
     color: var(--secondary);
 }
 
-@media (max-width: 768px) {
-    .imageAndTextContainer {
-        flex-direction: column;
-        text-align: center;
-    }
+.formButton{
+    background: var(--secondary);
+    color: var(--text-light);
+}
+
+.formButton:hover{
+    background: var(--primary);
+    color: var(--text-dark);
 }
 
 @-webkit-keyframes paws-fall {

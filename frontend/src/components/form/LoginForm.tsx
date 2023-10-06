@@ -1,5 +1,6 @@
 import React, {FormEvent} from "react";
 import {FormControl, TextField, Button} from "@mui/material";
+import "../../app/globals.css";
 
 interface LoginFormProps {
     email: string;
@@ -48,7 +49,7 @@ export default function LoginForm({
                 <FormControl fullWidth margin="normal">
                     <Button
                         variant="contained"
-                        color="primary"
+                        className="formButton"
                         type="submit"
                         disabled={loading}
                     >

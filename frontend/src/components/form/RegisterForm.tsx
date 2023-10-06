@@ -1,6 +1,7 @@
 import React, {FormEvent} from "react";
 import {FormControl, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import "../../app/globals.css";
 
 interface RegisterFormProps {
     firstName: string,
@@ -89,8 +90,8 @@ export default function RegisterForm({
                 <FormControl fullWidth margin="normal">
                     <Button
                         variant="contained"
-                        color="primary"
                         type="submit"
+                        className="formButton"
                         disabled={loading}
                     >
                         {loading ? "Sending registration form.." : "Register"}
