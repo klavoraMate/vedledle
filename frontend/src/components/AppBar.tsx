@@ -13,33 +13,45 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useRouter} from 'next/navigation';
 import "../app/globals.css"
-import { useState} from "react";
-
-const pages = ['Gallery', 'Calendar'];
-const settings = ['Profile', 'Login', 'Logout', 'Register'];
+import {useState} from "react";
+import {getName} from "@/util/JWTDecoder";
 
 
 function ResponsiveAppBar() {
+
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const router = useRouter();
+    let username = getName();
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const pages = ['Gallery', 'Calendar'];
+    const settings = username ? ['Profile', 'Logout'] : ['Login', 'Register'];
+
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>): void => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (): void => {
         setAnchorElNav(null);
     };
 
     const handleCloseUserMenu = (setting: string | object) => {
         setAnchorElUser(null);
-        if (typeof setting === 'string') router.push('/' + setting.toLowerCase())
+        if (typeof setting === 'string') {
+            if (setting === 'Logout') {
+                handleLogout();
+                router.push('/');
+            } else
+                router.push('/' + setting.toLowerCase());
+        }
     };
 
+    const handleLogout = (): void => {
+        localStorage.removeItem("jwt");
+    };
 
     return (
         <AppBar position="fixed"
@@ -146,7 +158,10 @@ function ResponsiveAppBar() {
                     <Box sx={{flexGrow: 0}}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                                {username ?
+                                    <Typography variant="title" className="settingText">{username}</Typography> :
+                                    <Typography variant="title" className="settingText">Account</Typography>}
+
                             </IconButton>
                         </Tooltip>
                         <Menu

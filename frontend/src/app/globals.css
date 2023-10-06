@@ -47,6 +47,13 @@ body {
     flex-direction: column;
 }
 
+.settingText{
+    border-radius: 2rem;
+    background: var(--text-light);
+    padding: 0.6rem;
+    color: var(--secondary);
+}
+
 @media (max-width: 768px) {
     .imageAndTextContainer {
         flex-direction: column;
