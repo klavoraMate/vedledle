@@ -8,6 +8,7 @@ import React, {FormEvent, useState} from "react";
 import {useRouter} from "next/navigation";
 import FormContainer from "@/components/form/formContainer";
 import RegisterForm from "@/components/form/registerForm";
+import FloatingShapes from "@/components/FloatingShapes";
 
 export default function Register() {
     const [firstName, setFirstName] = useState("");
@@ -53,6 +54,7 @@ export default function Register() {
     return (
         <>
             <AppBar/>
+            <FloatingShapes/>
             <FormContainer>
                 <RegisterForm firstName={firstName} lastName={lastName} email={email} password={password}
                               confirmPassword={confirmPassword} loading={loading} error={error}

@@ -10,6 +10,7 @@ import {useRouter} from "next/navigation"
 import "../globals.css"
 import LoginForm from "@/components/form/loginForm";
 import FormContainer from "@/components/form/formContainer";
+import FloatingShapes from "@/components/FloatingShapes";
 
 
 export default function Login() {
@@ -58,6 +59,7 @@ export default function Login() {
     return (
         <>
             <AppBar/>
+            <FloatingShapes/>
             <FormContainer>
                 <LoginForm
                     email={email}
