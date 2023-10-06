@@ -9,7 +9,6 @@ export default function Logo () {
             <Box style={{
                 display:"flex",
                 justifyContent:"space-around",
-                marginTop:"5rem"
             }}>
                 <img
                     src="/logo-transparent.png"
