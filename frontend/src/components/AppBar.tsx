@@ -159,8 +159,8 @@ function ResponsiveAppBar() {
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                 {username ?
-                                    <Typography variant="title" className="settingText">{username}</Typography> :
-                                    <Typography variant="title" className="settingText">Account</Typography>}
+                                    <Typography variant="h5" className="settingText">{username}</Typography> :
+                                    <Typography variant="h5" className="settingText">Account</Typography>}
 
                             </IconButton>
                         </Tooltip>
