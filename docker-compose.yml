@@ -19,7 +19,7 @@ services:
   db:
     image: postgres:latest
     environment:
-      - POSTGRES_DB=vedledle_db
+      - POSTGRES_DB=vedledle
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:

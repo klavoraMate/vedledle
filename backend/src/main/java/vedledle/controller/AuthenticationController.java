@@ -20,11 +20,6 @@ import vedledle.service.UserService;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class AuthenticationController {
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
     private final PasswordEncoder passwordEncoder;
     private final UserService service;
     private final UsernamePasswordAuthenticationProvider authenticationProvider;
@@ -57,9 +52,8 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
-            System.out.println("Authentication after provider: "+authentication);
-            String jwt = JWTGenerator.generate(authentication);
-            System.out.println("jwt: "+jwt);
+            User user = service.findByName(authentication.getName());
+            String jwt = JWTGenerator.generate(authentication,user.getEmail());
             return ResponseEntity.ok(new LoginResponse(jwt));
         } catch (Exception e) {
             throw new BadCredentialsException(e.getMessage());

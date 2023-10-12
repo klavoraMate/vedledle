@@ -1,10 +1,13 @@
 'use client'
 
-import AppBar from "@/compnents/AppBar";
+import AppBar from "@/components/AppBar";
 import {Box, Card, CardContent, Container, Grid, Typography} from "@mui/material";
 import {makeStyles} from "@material-ui/core/styles";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
+import "../globals.css"
+import FloatingShapes from "@/components/design/FloatingShapes";
+import Layout from "@/components/design/Layout";
 
 type DogData = {
     name: string,
@@ -17,7 +20,7 @@ type UserData = {
     dogs: DogData[]
 }
 
-export default function User() {
+export default function Profile() {
     const jwt = getJWT();
     const email = getEmail();
     const classes = useStyles();
@@ -49,8 +52,7 @@ export default function User() {
 
 
     return (
-        <>
-            <AppBar/>
+        <Layout>
             {jwt && userData ? (<Container className={classes.container} maxWidth="md">
                         <Grid container justifyContent="center">
                             <Grid item xs={12} sm={6}>
@@ -101,8 +103,7 @@ export default function User() {
                     </Grid>
                 )
             }
-
-        </>
+        </Layout>
     )
 }
 

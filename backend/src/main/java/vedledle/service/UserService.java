@@ -22,6 +22,14 @@ public class UserService {
         else
             throw new UserNotFoundException(email);
     }
+    public User findByName(String name){
+        Optional<User> user = repository.findByName(name);
+        if (user.isPresent())
+            return user.get();
+        else
+            throw new UserNotFoundException(name);
+    }
+
     public void save(User user){
         repository.save(user);
     }
