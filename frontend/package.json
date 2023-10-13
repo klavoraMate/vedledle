@@ -30,12 +30,10 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "express": "^4.18.2",
-    "http-proxy-middleware": "^2.0.6"
+    "express": "^4.18.2"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
-  },
-  "proxy": "http://127.0.0.1:8080"
+  }
 }
