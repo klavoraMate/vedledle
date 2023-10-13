@@ -8,6 +8,7 @@ import "./globals.css";
 import Logo from "@/components/Logo";
 import {Grid} from "@mui/material";
 import Layout from "@/components/design/Layout";
+import Image from "next/image";
 
 export default function Home() {
     return (
@@ -30,12 +31,13 @@ export default function Home() {
                     </Grid>
                     <Grid item xs={12} sm={12} md={6}>
                         <div className="centerVertically">
-                            <img
+                            <Image
                                 className="borderedImage"
                                 src="/dog1.jpg"
                                 alt="Grooming Image 1"
-                                width="70%"
-                            />
+                                width={400}
+                                height={400}
+                            unoptimized/>
                         </div>
                     </Grid>
                 </Grid>
