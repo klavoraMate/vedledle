@@ -7,4 +7,4 @@ RUN mvn clean install
 FROM openjdk:17-jdk-slim
 COPY --from=build /project/target/*SNAPSHOT.jar vedledle.jar
 EXPOSE 8080
-CMD ["java", "-jar", "vedledle.jar"]
+CMD ["java","-jar", "vedledle.jar"]

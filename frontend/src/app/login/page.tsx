@@ -1,12 +1,17 @@
 'use client'
 
-import AppBar from "@/compnents/AppBar";
+import AppBar from "@/components/AppBar";
 import {Checkbox, FormControl,  TextField} from "@mui/material";
 import React, {FormEvent, useState} from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {useRouter} from "next/navigation"
+import "../globals.css"
+import LoginForm from "@/components/form/LoginForm";
+import FormContainer from "@/components/form/FormContainer";
+import FloatingShapes from "@/components/design/FloatingShapes";
+import Layout from "@/components/design/Layout";
 
 
 export default function Login() {
@@ -53,56 +58,18 @@ export default function Login() {
     };
 
     return (
-        <>
-            <AppBar/>
-            <Container maxWidth="sm">
-                <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    justifyContent="center"
-                    minHeight="70vh"
-                >
-                    <div>
-                        <form onSubmit={handleLogin}>
-                            <FormControl fullWidth margin="normal">
-                                <TextField
-                                    label="Email"
-                                    variant="outlined"
-                                    type="email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </FormControl>
-
-                            <FormControl fullWidth margin="normal">
-                                <TextField
-                                    label="Password"
-                                    variant="outlined"
-                                    type="password"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </FormControl>
-
-                            <FormControl fullWidth margin="normal">
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    type="submit"
-                                    disabled={loading}
-                                >
-                                    {loading ? "Logging in..." : "Login"}
-                                </Button>
-                            </FormControl>
-                        </form>
-
-                        {error && <p>{error}</p>}
-                    </div>
-                </Box>
-            </Container>
-        </>
+        <Layout>
+            <FormContainer>
+                <LoginForm
+                    email={email}
+                    password={password}
+                    loading={loading}
+                    error={error}
+                    setEmail={setEmail}
+                    setPassword={setPassword}
+                    handleSubmit={handleLogin}
+                />
+            </FormContainer>
+        </Layout>
     );
 }
