@@ -29,7 +29,10 @@ public class SecurityConfiguration {
                         "/profile",
                         "/api/login",
                         "/api/register").permitAll()
-                .requestMatchers("/api/dog/**","/api/user/**").hasRole("USER")
+                .requestMatchers("/api/dog/search/**",
+                        "/api/user/**",
+                        "/api/image/search/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/api/image/upload").hasRole("ADMIN")
                 .anyRequest().authenticated();
         return http.build();
     }

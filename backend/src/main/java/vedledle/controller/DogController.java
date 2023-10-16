@@ -10,7 +10,7 @@ import vedledle.service.DogService;
 @RequestMapping("/api/dog")
 public class DogController {
     private final DogService service;
-    @GetMapping("/{name}")
+    @GetMapping("/search/{name}")
     public Dog get(@PathVariable String name){
         return service.get(name);
     }

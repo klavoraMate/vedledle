@@ -29,6 +29,7 @@ CREATE TABLE image
 (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(255),
+    content_type VARCHAR(255),
     data bytea
 );
 
