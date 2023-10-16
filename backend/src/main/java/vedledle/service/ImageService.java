@@ -10,6 +10,7 @@ import vedledle.dao.model.Image;
 import vedledle.dao.repository.ImageRepository;
 import vedledle.exception.ImageNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,20 +31,18 @@ public class ImageService {
 
     public ResponseEntity<String> upload(ImageUploadRequest request) {
         try {
-            MultipartFile imageFile = request.image();
-            if (imageFile.isEmpty()) {
+            List<Image> images = request.images();
+            if (images.isEmpty()) {
                 return ResponseEntity.badRequest().body("Image file is empty");
             }
-            String contentType = imageFile.getContentType();
-            if (contentType == null || (!contentType.equals("image/png") && !contentType.equals("image/jpeg"))) {
-                return ResponseEntity.badRequest().body("Unsupported image format.");
+            for (Image image : images) {
+                String contentType = image.getContentType();
+                if (contentType == null || (!contentType.equals("image/png") && !contentType.equals("image/jpeg"))) {
+                    return ResponseEntity.badRequest().body("Unsupported image format.");
+                }
+                repository.save(image);
             }
-            Image image = new Image();
-            image.setName(request.name());
-            image.setContentType(contentType);
-            image.setData(imageFile.getBytes());
-            repository.save(image);
-            return ResponseEntity.ok("Image uploaded successfully");
+            return ResponseEntity.ok("Images uploaded successfully");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Image upload failed: " + e.getMessage());
         }

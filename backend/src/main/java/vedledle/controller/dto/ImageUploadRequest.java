@@ -1,6 +1,9 @@
 package vedledle.controller.dto;
 
 import org.springframework.web.multipart.MultipartFile;
+import vedledle.dao.model.Image;
 
-public record ImageUploadRequest(String name, MultipartFile image) {
+import java.util.List;
+
+public record ImageUploadRequest(List<Image> images) {
 }
