@@ -1,9 +1,9 @@
 'use client'
-import React, { useState, useCallback } from "react";
+import React, {useState, useCallback} from "react";
 import Layout from "@/components/design/Layout";
-import { Button, Paper } from "@mui/material";
+import {Button, Paper} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useDropzone } from "react-dropzone";
+import {useDropzone} from "react-dropzone";
 
 export default function GalleryUpload() {
     const [selectedPictures, setSelectedPictures] = useState<File[]>([]);
@@ -12,53 +12,62 @@ export default function GalleryUpload() {
         setSelectedPictures([...selectedPictures, ...acceptedFiles]);
     }, [selectedPictures]);
 
-    const { getRootProps, getInputProps } = useDropzone({
+    const {getRootProps, getInputProps} = useDropzone({
         onDrop,
-        accept: {'image/*':['.png','.jpeg']},
+        accept: {'image/*': ['.png', '.jpeg']},
     });
 
     const handleUpload = async () => {
-        const formData = new FormData();
-
-        selectedPictures.forEach((file) => {
-            formData.append("image", file);
+        const imageObjects = selectedPictures.map((file) => {
+            return {
+                name: file.name,
+                contentType: file.type,
+                data: file,
+            };
         });
+
+        const requestData = {
+            images: imageObjects,
+        };
 
         try {
             const response = await fetch("/api/image/upload", {
                 method: "POST",
-                body: formData,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
             });
 
             if (response.ok) {
-                //todo: success
+                // Handle successful upload
                 console.log("Images uploaded successfully");
             } else {
-                //todo: error
+                // Handle upload failure
                 console.error("Image upload failed");
             }
         } catch (error) {
-            //todo: error
+            // Handle network or other errors
             console.error("Image upload error:", error);
         }
     };
 
     return (
         <Layout>
-            <Paper elevation={3} style={{ padding: "20px" }}>
-                <div {...getRootProps()} style={{ cursor: "pointer" }}>
+            <Paper elevation={3} style={{padding: "20px"}}>
+                <div {...getRootProps()} style={{cursor: "pointer"}}>
                     <input {...getInputProps()} />
-                    <CloudUploadIcon fontSize="large" />
-                    <p>Drag 'n' drop some images here, or click to select images</p>
+                    <CloudUploadIcon fontSize="large"/>
+                    <p>Drag &apos;n&apos; drop some images here, or click to select images</p>
                 </div>
 
                 {selectedPictures.length > 0 && (
                     <div>
                         <h2>Selected Images:</h2>
                         <ul>
-                            {selectedPictures.map((file, index) => (
+                            {selectedPictures.map((file, index) =>
                                 <li key={index}>{file.name}</li>
-                            ))}
+                            )}
                         </ul>
                         <Button
                             variant="contained"
