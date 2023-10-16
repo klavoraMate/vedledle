@@ -18,5 +18,6 @@ public class Image {
     private Long id;
 
     private String name;
+    private String contentType;
     private byte[] data;
 }
