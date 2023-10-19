@@ -24,9 +24,11 @@ public class SecurityConfiguration {
                         "/*.ico",
                         "/*.css",
                         "/*.png",
+                        "/*.jpg",
                         "/login",
                         "/register",
                         "/profile",
+                        "/upload",
                         "/api/login",
                         "/api/register",
                         "/api/image/search/**").permitAll()

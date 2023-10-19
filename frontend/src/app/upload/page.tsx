@@ -4,9 +4,11 @@ import Layout from "@/components/design/Layout";
 import {Button, Paper} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {useDropzone} from "react-dropzone";
+import {getJWT} from "@/util/JWTDecoder";
 
 export default function GalleryUpload() {
     const [selectedPictures, setSelectedPictures] = useState<File[]>([]);
+    const jwt = getJWT();
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         setSelectedPictures([...selectedPictures, ...acceptedFiles]);
@@ -34,6 +36,7 @@ export default function GalleryUpload() {
             const response = await fetch("/api/image/upload", {
                 method: "POST",
                 headers: {
+                    'Authorization': 'Bearer: ' + jwt,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(requestData),
