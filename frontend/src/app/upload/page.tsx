@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import React, {useState, useCallback} from "react";
 import Layout from "@/components/design/Layout";
 import {Button, Paper} from "@mui/material";
@@ -20,26 +20,21 @@ export default function GalleryUpload() {
     });
 
     const handleUpload = async () => {
-        const imageObjects = selectedPictures.map((file) => {
-            return {
-                name: file.name,
-                contentType: file.type,
-                data: file,
-            };
-        });
+        const formData = new FormData();
 
-        const requestData = {
-            images: imageObjects,
-        };
+        selectedPictures.forEach((file, index) => {
+            formData.append(`images[${index}].name`, file.name);
+            formData.append(`images[${index}].data`, file);
+            formData.append(`images[${index}].contentType`,file.type)
+        });
 
         try {
             const response = await fetch("/api/image/upload", {
                 method: "POST",
                 headers: {
-                    'Authorization': 'Bearer: ' + jwt,
-                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwt}`,
                 },
-                body: JSON.stringify(requestData),
+                body: formData,
             });
 
             if (response.ok) {
@@ -68,15 +63,9 @@ export default function GalleryUpload() {
                     <div>
                         <h2>Selected Images:</h2>
                         <ul>
-                            {selectedPictures.map((file, index) =>
-                                <li key={index}>{file.name}</li>
-                            )}
+                            {selectedPictures.map((file, index) => <li key={index}>{file.name}</li>)}
                         </ul>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleUpload}
-                        >
+                        <Button variant="contained" color="primary" onClick={handleUpload}>
                             Upload
                         </Button>
                     </div>

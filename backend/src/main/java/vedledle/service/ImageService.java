@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import vedledle.controller.dto.ImageUploadRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 import vedledle.dao.model.Image;
 import vedledle.dao.repository.ImageRepository;
 import vedledle.exception.ImageNotFoundException;
@@ -29,12 +28,8 @@ public class ImageService {
         }
     }
 
-    public ResponseEntity<String> upload(ImageUploadRequest request) {
+    public ResponseEntity<String> upload(@RequestParam("images") Image[] images) {
         try {
-            List<Image> images = request.images();
-            if (images.isEmpty()) {
-                return ResponseEntity.badRequest().body("Image file is empty");
-            }
             for (Image image : images) {
                 String contentType = image.getContentType();
                 if (contentType == null || (!contentType.equals("image/png") && !contentType.equals("image/jpeg"))) {

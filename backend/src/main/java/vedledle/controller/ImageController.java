@@ -3,7 +3,7 @@ package vedledle.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vedledle.controller.dto.ImageUploadRequest;
+import vedledle.dao.model.Image;
 import vedledle.service.ImageService;
 
 @RestController
@@ -18,7 +18,7 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> upload(ImageUploadRequest request){
-        return service.upload(request);
+    public ResponseEntity<String> upload(Image[] images){
+        return service.upload(images);
     }
 }
