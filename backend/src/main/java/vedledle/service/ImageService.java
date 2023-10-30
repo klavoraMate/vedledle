@@ -19,6 +19,10 @@ import java.util.Optional;
 public class ImageService {
     private final ImageRepository repository;
 
+    public List<String> getAllImageNames(){
+        return repository.findNameBy();
+    }
+
     public ResponseEntity<byte[]> getByName(String name) {
         Optional<Image> image = repository.findByName(name);
         if (image.isPresent()) {
