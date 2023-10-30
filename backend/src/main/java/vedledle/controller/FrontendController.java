@@ -26,4 +26,8 @@ public class FrontendController {
     public String galleryUpload(){
         return "upload.html";
     }
+    @GetMapping("/gallery")
+    public String gallery(){
+        return "gallery.html";
+    }
 }

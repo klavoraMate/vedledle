@@ -29,6 +29,7 @@ public class SecurityConfiguration {
                         "/register",
                         "/profile",
                         "/upload",
+                        "/gallery",
                         "/api/login",
                         "/api/register",
                         "/api/image/search/**",

@@ -1,8 +1,28 @@
+'use client'
 import Layout from "@/components/design/Layout";
 import Box from "@mui/material/Box";
 import {ImageList, ImageListItem} from "@mui/material";
+import {useEffect, useState} from "react";
 
 export default function Gallery(){
+    const [imageNames,setImageNames] = useState<string[]>([]);
+    async function fetchNames() {
+        try {
+            const response = await fetch('/api/image/names',{
+                method:"GET"
+            })
+            if (response.ok){
+                const names : string[] = await  response.json();
+                setImageNames(names)
+            }
+        }catch (e) {
+            console.error("Error during fetching image names: ",e)
+        }
+    }
+
+    useEffect(()=>{
+        fetchNames();
+    },[]);
     return(
         <Layout>
             <Box sx={{overflowY:'scroll'}}>
