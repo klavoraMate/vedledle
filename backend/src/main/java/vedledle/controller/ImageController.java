@@ -7,11 +7,17 @@ import org.springframework.web.multipart.MultipartFile;
 import vedledle.dao.model.Image;
 import vedledle.service.ImageService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/image")
 public class ImageController {
     private final ImageService service;
+    @GetMapping("/names")
+    public List<String> getAllImageNames(){
+        return service.getAllImageNames();
+    }
 
     @GetMapping("/search/{name}")
     public ResponseEntity<byte[]> getImageByName(@PathVariable String name){

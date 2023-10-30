@@ -31,7 +31,8 @@ public class SecurityConfiguration {
                         "/upload",
                         "/api/login",
                         "/api/register",
-                        "/api/image/search/**").permitAll()
+                        "/api/image/search/**",
+                        "/api/image/names").permitAll()
                 .requestMatchers("/api/dog/search/**", "/api/user/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/api/image/upload").hasRole("ADMIN")
                 .anyRequest().authenticated();

@@ -28,7 +28,7 @@ CREATE TABLE reservation
 CREATE TABLE image
 (
     id   SERIAL PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255) UNIQUE,
     content_type VARCHAR(255),
     data bytea
 );
