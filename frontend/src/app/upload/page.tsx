@@ -22,10 +22,8 @@ export default function GalleryUpload() {
     const handleUpload = async () => {
         const formData = new FormData();
 
-        selectedPictures.forEach((file, index) => {
-            formData.append(`images[${index}].name`, file.name);
-            formData.append(`images[${index}].data`, file);
-            formData.append(`images[${index}].contentType`,file.type)
+        selectedPictures.forEach((file) => {
+            formData.append(`images`, file);
         });
 
         try {
@@ -38,14 +36,12 @@ export default function GalleryUpload() {
             });
 
             if (response.ok) {
-                // Handle successful upload
                 console.log("Images uploaded successfully");
             } else {
-                // Handle upload failure
                 console.error("Image upload failed");
             }
+            setSelectedPictures([]);
         } catch (error) {
-            // Handle network or other errors
             console.error("Image upload error:", error);
         }
     };

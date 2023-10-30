@@ -5,11 +5,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import vedledle.dao.model.Image;
 import vedledle.dao.repository.ImageRepository;
 import vedledle.exception.ImageNotFoundException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -28,14 +30,19 @@ public class ImageService {
         }
     }
 
-    public ResponseEntity<String> upload(@RequestParam("images") Image[] images) {
+    public ResponseEntity<String> upload(@RequestParam("images") MultipartFile[] images  ) {
+
         try {
-            for (Image image : images) {
+            for (MultipartFile image : images) {
                 String contentType = image.getContentType();
                 if (contentType == null || (!contentType.equals("image/png") && !contentType.equals("image/jpeg"))) {
                     return ResponseEntity.badRequest().body("Unsupported image format.");
                 }
-                repository.save(image);
+                Image imageEntity = new Image();
+                imageEntity.setContentType(contentType);
+                imageEntity.setName(Objects.requireNonNull(image.getOriginalFilename()).split("\\.")[0]);
+                imageEntity.setData(image.getBytes());
+                repository.save(imageEntity);
             }
             return ResponseEntity.ok("Images uploaded successfully");
         } catch (Exception e) {
