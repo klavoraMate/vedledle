@@ -6,7 +6,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {useDropzone} from "react-dropzone";
 import {getJWT} from "@/util/JWTDecoder";
 
-export default function GalleryUpload() {
+export default function GalleryUploadButton() {
     const [selectedPictures, setSelectedPictures] = useState<File[]>([]);
     const jwt = getJWT();
 
@@ -47,26 +47,9 @@ export default function GalleryUpload() {
     };
 
     return (
-        <Layout>
-            <Paper elevation={3} style={{padding: "20px"}}>
-                <div {...getRootProps()} style={{cursor: "pointer"}}>
-                    <input {...getInputProps()} />
-                    <CloudUploadIcon fontSize="large"/>
-                    <p>Drag &apos;n&apos; drop some images here, or click to select images</p>
-                </div>
-
-                {selectedPictures.length > 0 && (
-                    <div>
-                        <h2>Selected Images:</h2>
-                        <ul>
-                            {selectedPictures.map((file, index) => <li key={index}>{file.name}</li>)}
-                        </ul>
-                        <Button variant="contained" color="primary" onClick={handleUpload}>
-                            Upload
-                        </Button>
-                    </div>
-                )}
-            </Paper>
-        </Layout>
+        <div {...getRootProps()} style={{cursor: "pointer"}}>
+            <input {...getInputProps()} />
+            <CloudUploadIcon fontSize="large"/>
+        </div>
     );
 }

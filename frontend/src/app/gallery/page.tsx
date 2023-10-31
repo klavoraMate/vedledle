@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import {ImageList, ImageListItem} from "@mui/material";
 import {useEffect, useState} from "react";
 import GalleryImage from "@/app/gallery/GalleryImage";
+import GalleryUploadButton from "@/app/gallery/GalleryUploadButton";
 
 export default function Gallery(){
     const [imageNames,setImageNames] = useState<string[]>([]);
@@ -34,6 +35,7 @@ export default function Gallery(){
                         </ImageListItem>
                     ))}
                 </ImageList>
+                <GalleryUploadButton/>
             </Box>
         </Layout>
     )
