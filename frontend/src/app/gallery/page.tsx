@@ -3,6 +3,7 @@ import Layout from "@/components/design/Layout";
 import Box from "@mui/material/Box";
 import {ImageList, ImageListItem} from "@mui/material";
 import {useEffect, useState} from "react";
+import GalleryImage from "@/app/gallery/GalleryImage";
 
 export default function Gallery(){
     const [imageNames,setImageNames] = useState<string[]>([]);
@@ -27,14 +28,9 @@ export default function Gallery(){
         <Layout>
             <Box sx={{overflowY:'scroll'}}>
                 <ImageList variant="masonry" cols={3} gap={8}>
-                    {itemData.map((item) => (
-                        <ImageListItem key={item.img}>
-                            <img
-                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                src={`${item.img}?w=248&fit=crop&auto=format`}
-                                alt={item.title}
-                                loading="lazy"
-                            />
+                    {imageNames && imageNames.map((name,index) => (
+                        <ImageListItem key={index}>
+                            <GalleryImage imageName={name}/>
                         </ImageListItem>
                     ))}
                 </ImageList>
