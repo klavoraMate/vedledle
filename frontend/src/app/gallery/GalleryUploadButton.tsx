@@ -1,11 +1,8 @@
 "use client"
 import React, {useState, useCallback} from "react";
-import Layout from "@/components/design/Layout";
-import {Button, Paper} from "@mui/material";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {useDropzone} from "react-dropzone";
 import {getJWT} from "@/util/JWTDecoder";
-
+import {AddCircleOutline} from "@mui/icons-material";
 export default function GalleryUploadButton() {
     const [selectedPictures, setSelectedPictures] = useState<File[]>([]);
     const jwt = getJWT();
@@ -49,7 +46,7 @@ export default function GalleryUploadButton() {
     return (
         <div {...getRootProps()} style={{cursor: "pointer"}}>
             <input {...getInputProps()} />
-            <CloudUploadIcon fontSize="large"/>
+            <AddCircleOutline style={{fontSize: 48}}/>
         </div>
     );
 }
