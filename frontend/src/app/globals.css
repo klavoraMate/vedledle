@@ -64,6 +64,26 @@ body {
     color: var(--text-dark);
 }
 
+.uploadAndDeleteToggleButtonHolder{
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    background: var(--secondary);
+    border-top: 2px solid var(--text-light);
+    border-bottom: 2px solid var(--text-light);
+    border-right: 2px solid var(--text-light);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.deleteImageButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--text-light);
+    background: var(--secondary);
+    border-radius:  50%;
+}
+
 @-webkit-keyframes paws-fall {
     0% {
         top: -10%

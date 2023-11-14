@@ -1,25 +1,21 @@
 "use client"
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useEffect} from "react";
 import {useDropzone} from "react-dropzone";
 import {getJWT} from "@/util/JWTDecoder";
 import {AddCircleOutline} from "@mui/icons-material";
-export default function GalleryUploadButton() {
-    const [selectedPictures, setSelectedPictures] = useState<File[]>([]);
+import IconButton from "@mui/material/IconButton";
+
+type GalleryUploadButtonProps = {
+    onUploadSuccess: () => void;
+}
+
+export default function GalleryUploadButton({onUploadSuccess}: GalleryUploadButtonProps) {
     const jwt = getJWT();
 
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        setSelectedPictures([...selectedPictures, ...acceptedFiles]);
-    }, [selectedPictures]);
-
-    const {getRootProps, getInputProps} = useDropzone({
-        onDrop,
-        accept: {'image/*': ['.png', '.jpeg']},
-    });
-
-    const handleUpload = async () => {
+    const onDrop = useCallback(async (acceptedFiles: File[]) => {
         const formData = new FormData();
 
-        selectedPictures.forEach((file) => {
+        acceptedFiles.forEach((file) => {
             formData.append(`images`, file);
         });
 
@@ -33,20 +29,27 @@ export default function GalleryUploadButton() {
             });
 
             if (response.ok) {
-                console.log("Images uploaded successfully");
+                onUploadSuccess();
             } else {
                 console.error("Image upload failed");
             }
-            setSelectedPictures([]);
         } catch (error) {
             console.error("Image upload error:", error);
         }
-    };
+    }, []);
+
+    const {getRootProps, getInputProps} = useDropzone({
+        onDrop,
+        accept: {'image/*': ['.png', '.jpeg']},
+    });
+
 
     return (
-        <div {...getRootProps()} style={{cursor: "pointer"}}>
-            <input {...getInputProps()} />
-            <AddCircleOutline style={{fontSize: 48}}/>
+        <div {...getRootProps()} style={{cursor: 'pointer'}}>
+            <input {...getInputProps()} type='file'/>
+            <IconButton>
+                <AddCircleOutline style={{color: 'lightblue', fontSize: 48}}/>
+            </IconButton>
         </div>
     );
 }

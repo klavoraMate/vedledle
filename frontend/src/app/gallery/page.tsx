@@ -2,13 +2,19 @@
 import Layout from "@/components/design/Layout";
 import Box from "@mui/material/Box";
 import {ImageList, ImageListItem} from "@mui/material";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import GalleryImage from "@/app/gallery/GalleryImage";
 import GalleryUploadButton from "@/app/gallery/GalleryUploadButton";
 import {getRole} from "@/util/JWTDecoder"
+import IconButton from "@mui/material/IconButton";
+import {DeleteOutline} from '@mui/icons-material';
+import {ClearOutlined} from '@mui/icons-material';
+import "@/app/globals.css";
+
 
 export default function Gallery() {
     const [imageNames, setImageNames] = useState<string[]>([]);
+    const [showDeleteIcons, setShowDeleteIcons] = useState(false);
     const role = getRole();
 
     async function fetchNames() {
@@ -25,21 +31,57 @@ export default function Gallery() {
         }
     }
 
+    const handleDeleteImage = async (imageName: string) => {
+        try {
+            const response = await fetch(`/api/image/delete?name=${imageName}`, {
+                method: "DELETE",
+            });
+            if (response.ok) {
+                await fetchNames()
+            }
+        } catch (e) {
+            console.error("Error during image deletion: ", e);
+        }
+    };
+    const toggleDeleteIcons = () => {
+        setShowDeleteIcons(!showDeleteIcons);
+    };
+    const handleImageUploadSuccess = () => {
+        fetchNames();
+    };
+
     useEffect(() => {
         fetchNames();
     }, []);
     return (
         <Layout>
+            <div className='uploadAndDeleteToggleButtonHolder'>
+                <GalleryUploadButton onUploadSuccess={handleImageUploadSuccess}/>
+                <IconButton onClick={() => toggleDeleteIcons()}>
+                    <DeleteOutline style={{fontSize: 48, color: 'black'}}/>
+                </IconButton>
+            </div>
+
             <Box sx={{overflowY: 'scroll'}}>
                 <ImageList variant="masonry" cols={3} gap={8}>
-                    {imageNames && imageNames.map((name, index) => (
-                        <ImageListItem key={index}>
+                    {imageNames && imageNames.map((name: string, index: number) => (
+                        <ImageListItem key={index} style={{position: 'relative'}}>
                             <GalleryImage imageName={name}/>
+                            {showDeleteIcons && (
+                                <IconButton onClick={() => handleDeleteImage(name)} className='deleteImageButton'>
+                                    <ClearOutlined/>
+                                </IconButton>)}
                         </ImageListItem>
                     ))}
                 </ImageList>
-                {role === 'ADMIN' && <GalleryUploadButton/>}
             </Box>
         </Layout>
-    )
+)
 }
+
+/*   <ImageListItem style={{position: 'relative'}}>
+                        <img src='/dog1.jpg'/>
+                            <IconButton  className='deleteImageButton'>
+                                <ClearOutlined/>
+                            </IconButton>)
+                    </ImageListItem>*/
