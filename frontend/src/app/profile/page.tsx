@@ -28,16 +28,18 @@ export default function Profile() {
 
     const fetchUserData = async () => {
         try {
-            const response = await fetch("/api/user/info/" + email, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${jwt}`,
-                },
-            });
+            if (email){
+                const response = await fetch(`/api/user/info?email=${(encodeURIComponent(email.toString()))}` , {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                });
 
-            if (response.ok) {
-                const userData: UserData = await response.json();
-                setUserData(userData);
+                if (response.ok) {
+                    const userData: UserData = await response.json();
+                    setUserData(userData);
+                }
             }
         } catch (error) {
             console.error("Error fetching user data:", error);

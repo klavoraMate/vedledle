@@ -19,8 +19,8 @@ public class ImageController {
         return service.getAllImageNames();
     }
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<byte[]> getImageByName(@PathVariable String name){
+    @GetMapping("/search")
+    public ResponseEntity<byte[]> getImageByName(@RequestParam String name){
         return service.getByName(name);
     }
 
