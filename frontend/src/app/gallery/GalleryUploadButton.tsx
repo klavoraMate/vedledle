@@ -20,7 +20,7 @@ export default function GalleryUploadButton({onUploadSuccess}: GalleryUploadButt
         });
 
         try {
-            const response = await fetch("/api/image/upload", {
+            const response = await fetch("/api/image", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${jwt}`,

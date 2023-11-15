@@ -3,6 +3,7 @@ package vedledle.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +19,8 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .addFilterAfter(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .requestMatchers("/",
+                .requestMatchers(HttpMethod.GET,
+                        "/",
                         "/_next/**",
                         "/*.html",
                         "/*.ico",
@@ -29,12 +31,12 @@ public class SecurityConfiguration {
                         "/register",
                         "/profile",
                         "/gallery",
+                        "/api/image/**").permitAll()
+                .requestMatchers(HttpMethod.POST,
                         "/api/login",
-                        "/api/register",
-                        "/api/image/search/**",
-                        "/api/image/names").permitAll()
-                .requestMatchers("/api/dog/search/**", "/api/user/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/api/image/upload").hasRole("ADMIN")
+                        "/api/register").permitAll()
+                .requestMatchers( "/api/user/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.POST,"/api/image/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         return http.build();
     }

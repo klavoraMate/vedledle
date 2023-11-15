@@ -19,13 +19,14 @@ public class ImageController {
         return service.getAllImageNames();
     }
 
-    @GetMapping("/search")
+    @GetMapping("")
     public ResponseEntity<byte[]> getImageByName(@RequestParam String name){
         return service.getByName(name);
     }
 
-    @PostMapping("/upload")
+    @PostMapping("")
     public ResponseEntity<String> upload(MultipartFile[] images){
         return service.upload(images);
     }
+
 }
