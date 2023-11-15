@@ -5,7 +5,7 @@ import {ImageList, ImageListItem} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import GalleryImage from "@/app/gallery/GalleryImage";
 import GalleryUploadButton from "@/app/gallery/GalleryUploadButton";
-import {getRole} from "@/util/JWTDecoder"
+import {getJWT, getRole} from "@/util/JWTDecoder"
 import IconButton from "@mui/material/IconButton";
 import {DeleteOutline} from '@mui/icons-material';
 import {ClearOutlined} from '@mui/icons-material';
@@ -15,6 +15,7 @@ import "@/app/globals.css";
 export default function Gallery() {
     const [imageNames, setImageNames] = useState<string[]>([]);
     const [showDeleteIcons, setShowDeleteIcons] = useState(false);
+    const jwt = getJWT();
     const role = getRole();
 
     async function fetchNames() {
@@ -33,8 +34,11 @@ export default function Gallery() {
 
     const handleDeleteImage = async (imageName: string) => {
         try {
-            const response = await fetch(`/api/image/delete?name=${imageName}`, {
+            const response = await fetch(`/api/image?name=${imageName}`, {
                 method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
             });
             if (response.ok) {
                 await fetchNames()
@@ -55,12 +59,13 @@ export default function Gallery() {
     }, []);
     return (
         <Layout>
-            <div className='uploadAndDeleteToggleButtonHolder'>
-                <GalleryUploadButton onUploadSuccess={handleImageUploadSuccess}/>
-                <IconButton onClick={() => toggleDeleteIcons()}>
-                    <DeleteOutline style={{fontSize: 48, color: 'black'}}/>
-                </IconButton>
-            </div>
+            {role === "ROLE_ADMIN" &&
+                <div className='uploadAndDeleteToggleButtonHolder'>
+                    <GalleryUploadButton onUploadSuccess={handleImageUploadSuccess}/>
+                    <IconButton onClick={() => toggleDeleteIcons()}>
+                        <DeleteOutline style={{fontSize: 48, color: 'black'}}/>
+                    </IconButton>
+                </div>}
 
             <Box sx={{overflowY: 'scroll'}}>
                 <ImageList variant="masonry" cols={3} gap={8}>
@@ -76,7 +81,7 @@ export default function Gallery() {
                 </ImageList>
             </Box>
         </Layout>
-)
+    )
 }
 
 /*   <ImageListItem style={{position: 'relative'}}>

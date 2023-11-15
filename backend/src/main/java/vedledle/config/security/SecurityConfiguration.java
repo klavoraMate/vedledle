@@ -36,6 +36,7 @@ public class SecurityConfiguration {
                         "/api/login",
                         "/api/register").permitAll()
                 .requestMatchers( "/api/user/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.DELETE,"/api/image/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST,"/api/image/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         return http.build();

@@ -19,7 +19,7 @@ import java.util.Optional;
 public class ImageService {
     private final ImageRepository repository;
 
-    public List<String> getAllImageNames(){
+    public List<String> getAllImageNames() {
         return repository.findNameBy();
     }
 
@@ -34,7 +34,7 @@ public class ImageService {
         }
     }
 
-    public ResponseEntity<String> upload(@RequestParam("images") MultipartFile[] images  ) {
+    public ResponseEntity<String> upload(@RequestParam("images") MultipartFile[] images) {
 
         try {
             for (MultipartFile image : images) {
@@ -51,6 +51,20 @@ public class ImageService {
             return ResponseEntity.ok("Images uploaded successfully");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Image upload failed: " + e.getMessage());
+        }
+    }
+
+    public ResponseEntity<String> delete(String name) {
+        try {
+            Optional<Image> image = repository.findByName(name);
+            if (image.isPresent()) {
+                repository.delete(image.get());
+                return ResponseEntity.ok("Image " + name + " deleted successfully");
+            } else {
+                throw new ImageNotFoundException(name);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Image deletion failed: " + e.getMessage());
         }
     }
 }

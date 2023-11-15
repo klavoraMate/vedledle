@@ -14,19 +14,25 @@ import java.util.List;
 @RequestMapping("/api/image")
 public class ImageController {
     private final ImageService service;
+
     @GetMapping("/names")
-    public List<String> getAllImageNames(){
+    public List<String> getAllImageNames() {
         return service.getAllImageNames();
     }
 
     @GetMapping("")
-    public ResponseEntity<byte[]> getImageByName(@RequestParam String name){
+    public ResponseEntity<byte[]> getImageByName(@RequestParam String name) {
         return service.getByName(name);
     }
 
     @PostMapping("")
-    public ResponseEntity<String> upload(MultipartFile[] images){
+    public ResponseEntity<String> upload(MultipartFile[] images) {
         return service.upload(images);
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity<String> delete(@RequestParam String name) {
+        return service.delete(name);
     }
 
 }
