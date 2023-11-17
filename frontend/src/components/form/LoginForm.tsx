@@ -1,6 +1,7 @@
 import React, {FormEvent} from "react";
 import {FormControl, TextField, Button} from "@mui/material";
-import "../../app/globals.css";
+import {makeStyles} from "@material-ui/core/styles";
+import {TEXT_LIGHT,TEXT_DARK,SECONDARY,PRIMARY} from "@/util/styleConstants";
 
 interface LoginFormProps {
     email: string;
@@ -21,6 +22,8 @@ export default function LoginForm({
                                       setPassword,
                                       handleSubmit,
                                   }: LoginFormProps) {
+    const classes = useStyles();
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -49,7 +52,7 @@ export default function LoginForm({
                 <FormControl fullWidth margin="normal">
                     <Button
                         variant="contained"
-                        className="formButton"
+                        className={classes.formButton}
                         type="submit"
                         disabled={loading}
                     >
@@ -62,3 +65,14 @@ export default function LoginForm({
         </div>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    formButton: {
+        background: SECONDARY,
+        color: TEXT_LIGHT,
+        '&:hover': {
+            background: PRIMARY,
+            color: TEXT_DARK,
+        },
+    },
+}));

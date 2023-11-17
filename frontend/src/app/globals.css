@@ -54,15 +54,7 @@ body {
     color: var(--secondary);
 }
 
-.formButton{
-    background: var(--secondary);
-    color: var(--text-light);
-}
 
-.formButton:hover{
-    background: var(--primary);
-    color: var(--text-dark);
-}
 
 .uploadAndDeleteToggleButtonHolder{
     position: fixed;
