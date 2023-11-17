@@ -11,8 +11,19 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import vedledle.config.security.filter.JWTValidatorFilter;
 
+
+/**
+ * The {@code SecurityConfiguration} class configures security settings for the application.
+ */
 @Configuration
 public class SecurityConfiguration {
+    /**
+     * Configures the security filter chain for the application.
+     *
+     * @param http The {@link HttpSecurity} object to configure.
+     * @return The configured {@link SecurityFilterChain}.
+     * @throws Exception If an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -42,6 +53,11 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    /**
+     * Provides a BCrypt password encoder bean for password hashing.
+     *
+     * @return The BCrypt password encoder bean.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

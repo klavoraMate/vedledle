@@ -16,16 +16,33 @@ import vedledle.dao.model.User;
 import vedledle.service.UserService;
 
 
+/**
+ * The {@code AuthenticationController} class handles HTTP requests related to user authentication.
+ * It is annotated with {@link RestController} to indicate that it provides RESTful services.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class AuthenticationController {
+    /**
+     * The encoder for encoding passwords.
+     */
     private final PasswordEncoder passwordEncoder;
+    /**
+     * The service responsible for handling user-related operations.
+     */
     private final UserService service;
+    /**
+     * The authentication provider for validating username and password.
+     */
     private final UsernamePasswordAuthenticationProvider authenticationProvider;
 
-
-
+    /**
+     * Registers a new user.
+     *
+     * @param userRequest The request body containing user information.
+     * @return The response indicating the success or failure of user registration.
+     */
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User userRequest) {
         ResponseEntity<String> response;
@@ -48,6 +65,12 @@ public class AuthenticationController {
         return response;
     }
 
+    /**
+     * Handles user login and generates a JWT token upon successful authentication.
+     *
+     * @param loginRequest The request body containing login credentials.
+     * @return The response containing the JWT token upon successful authentication.
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
