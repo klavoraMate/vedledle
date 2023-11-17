@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -34,8 +35,11 @@ function ResponsiveAppBar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = (): void => {
+    const handleCloseNavMenu = (page: string | object): void => {
         setAnchorElNav(null);
+        if (typeof page === 'string') {
+            router.push('/' + page.toLowerCase());
+        }
     };
 
     const handleCloseUserMenu = (setting: string | object) => {
@@ -115,7 +119,7 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -147,7 +151,7 @@ function ResponsiveAppBar() {
                         {pages.map((page) => (
                             <Button
                                 key={page}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => handleCloseNavMenu(page)}
                                 sx={{my: 2, color: 'white', display: 'block'}}
                             >
                                 {page}

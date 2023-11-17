@@ -54,15 +54,20 @@ body {
     color: var(--secondary);
 }
 
-.formButton{
+
+
+.uploadAndDeleteToggleButtonHolder{
+    position: fixed;
+    z-index: 2;
+    left: 0;
     background: var(--secondary);
-    color: var(--text-light);
+    border-top: 2px solid var(--text-light);
+    border-bottom: 2px solid var(--text-light);
+    border-right: 2px solid var(--text-light);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
-.formButton:hover{
-    background: var(--primary);
-    color: var(--text-dark);
-}
 
 @-webkit-keyframes paws-fall {
     0% {

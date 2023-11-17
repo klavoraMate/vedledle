@@ -1,9 +1,6 @@
-'use client'
 import React from 'react';
-import AppBar from '@/components/AppBar';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import FloatingShapes from "@/components/design/FloatingShapes";
 import "./globals.css";
 import Logo from "@/components/Logo";
 import {Grid} from "@mui/material";
