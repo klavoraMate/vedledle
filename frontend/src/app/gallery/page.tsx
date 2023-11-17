@@ -9,7 +9,8 @@ import {getJWT, getRole} from "@/util/JWTDecoder"
 import IconButton from "@mui/material/IconButton";
 import {DeleteOutline} from '@mui/icons-material';
 import {ClearOutlined} from '@mui/icons-material';
-import "@/app/globals.css";
+import {makeStyles} from "@material-ui/core/styles";
+import {TEXT_LIGHT,SECONDARY} from "@/util/styleConstants";
 
 
 export default function Gallery() {
@@ -17,6 +18,7 @@ export default function Gallery() {
     const [showDeleteIcons, setShowDeleteIcons] = useState(false);
     const jwt = getJWT();
     const role = getRole();
+    const classes = useStyles();
 
     async function fetchNames() {
         try {
@@ -69,11 +71,12 @@ export default function Gallery() {
 
             <Box sx={{overflowY: 'scroll'}}>
                 <ImageList variant="masonry" cols={3} gap={8}>
+
                     {imageNames && imageNames.map((name: string, index: number) => (
                         <ImageListItem key={index} style={{position: 'relative'}}>
                             <GalleryImage imageName={name}/>
                             {showDeleteIcons && (
-                                <IconButton onClick={() => handleDeleteImage(name)} className='deleteImageButton'>
+                                <IconButton onClick={() => handleDeleteImage(name)} className={classes.deleteImageButton}>
                                     <ClearOutlined/>
                                 </IconButton>)}
                         </ImageListItem>
@@ -83,10 +86,19 @@ export default function Gallery() {
         </Layout>
     )
 }
-
+const useStyles = makeStyles((theme) => ({
+    deleteImageButton: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        color: TEXT_LIGHT,
+        background: SECONDARY,
+        borderRadius: '50%',
+    },
+}));
 /*   <ImageListItem style={{position: 'relative'}}>
                         <img src='/dog1.jpg'/>
-                            <IconButton  className='deleteImageButton'>
-                                <ClearOutlined/>
-                            </IconButton>)
+                        <IconButton  className={styles.deleteImageButton}>
+                            <ClearOutlined/>
+                        </IconButton>)
                     </ImageListItem>*/

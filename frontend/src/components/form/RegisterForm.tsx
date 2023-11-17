@@ -1,7 +1,7 @@
 import React, {FormEvent} from "react";
-import {FormControl, TextField} from "@mui/material";
-import Button from "@mui/material/Button";
-import "../../app/globals.css";
+import {FormControl, TextField,Button} from "@mui/material";
+import {makeStyles} from "@material-ui/core/styles";
+import {PRIMARY, SECONDARY, TEXT_DARK, TEXT_LIGHT} from "@/util/styleConstants";
 
 interface RegisterFormProps {
     firstName: string,
@@ -34,6 +34,9 @@ export default function RegisterForm({
                                          setConfirmPassword,
                                          handleRegister
                                      }: RegisterFormProps) {
+
+    const classes = useStyles();
+
     return (
         <div>
             <form onSubmit={handleRegister}>
@@ -91,7 +94,7 @@ export default function RegisterForm({
                     <Button
                         variant="contained"
                         type="submit"
-                        className="formButton"
+                        className={classes.formButton}
                         disabled={loading}
                     >
                         {loading ? "Sending registration form.." : "Register"}
@@ -103,3 +106,13 @@ export default function RegisterForm({
         </div>
     )
 }
+const useStyles = makeStyles((theme) => ({
+    formButton: {
+        background: SECONDARY,
+        color: TEXT_LIGHT,
+        '&:hover': {
+            background: PRIMARY,
+            color: TEXT_DARK,
+        },
+    },
+}));
