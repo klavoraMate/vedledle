@@ -19,8 +19,22 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
+/**
+ * The {@code JWTValidatorFilter} class extends {@link OncePerRequestFilter} and is responsible for validating and extracting
+ * the JWT token from the Authorization header in the HTTP request.
+ */
 public class JWTValidatorFilter extends OncePerRequestFilter {
 
+
+    /**
+     * Filters the HTTP request to validate and extract the JWT token from the Authorization header.
+     *
+     * @param request     The HTTP request.
+     * @param response    The HTTP response.
+     * @param filterChain The filter chain to continue processing the request.
+     * @throws ServletException If a servlet exception occurs.
+     * @throws IOException      If an I/O exception occurs.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = request.getHeader("Authorization");

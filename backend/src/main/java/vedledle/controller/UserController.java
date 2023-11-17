@@ -7,12 +7,25 @@ import vedledle.controller.dto.mapper.DTOMapper;
 import vedledle.dao.model.User;
 import vedledle.service.UserService;
 
+/**
+ * The {@code UserController} class handles HTTP requests related to user information.
+ * It is annotated with {@link RestController} to indicate that it provides RESTful services.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
 public class UserController {
+    /**
+     * The service responsible for handling user-related operations.
+     */
     private final UserService service;
 
+    /**
+     * Retrieves user information based on the provided email address.
+     *
+     * @param email The email address of the user.
+     * @return The user information, including details about the user and their dogs.
+     */
     @GetMapping("/info")
     public UserInformation info(@RequestParam String email) {
         User user = service.findByEmail(email);

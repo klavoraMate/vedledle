@@ -14,15 +14,34 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * The {@code ImageService} class provides services related to image operations in the application.
+ * It interacts with the {@link ImageRepository} to perform various tasks.
+ */
 @Service
 @RequiredArgsConstructor
 public class ImageService {
+    /**
+     * The repository for accessing and managing image data.
+     */
     private final ImageRepository repository;
 
+    /**
+     * Retrieves the names of all stored images.
+     *
+     * @return The list of image names.
+     */
     public List<String> getAllImageNames() {
         return repository.findNameBy();
     }
 
+    /**
+     * Retrieves an image by its name and returns it as a byte array.
+     *
+     * @param name The name of the image to retrieve.
+     * @return The {@link ResponseEntity} containing the image data and content type.
+     * @throws ImageNotFoundException If no image is found with the given name.
+     */
     public ResponseEntity<byte[]> getByName(String name) {
         Optional<Image> image = repository.findByName(name);
         if (image.isPresent()) {
@@ -34,6 +53,12 @@ public class ImageService {
         }
     }
 
+    /**
+     * Uploads one or more images to the server.
+     *
+     * @param images The array of {@link MultipartFile} representing the images to upload.
+     * @return The {@link ResponseEntity} indicating the success or failure of the upload.
+     */
     public ResponseEntity<String> upload(@RequestParam("images") MultipartFile[] images) {
 
         try {
@@ -54,6 +79,12 @@ public class ImageService {
         }
     }
 
+    /**
+     * Deletes an image by its name.
+     *
+     * @param name The name of the image to delete.
+     * @return The {@link ResponseEntity} indicating the success or failure of the deletion.
+     */
     public ResponseEntity<String> delete(String name) {
         try {
             Optional<Image> image = repository.findByName(name);
