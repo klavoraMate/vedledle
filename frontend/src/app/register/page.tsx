@@ -21,8 +21,7 @@ export default function Register() {
     const [error, setError] = useState("");
     const router = useRouter();
 
-    const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleRegister = async () => {
         try {
             setLoading(true);
             const wholeName = firstName + " " + lastName;
