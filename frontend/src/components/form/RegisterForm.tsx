@@ -1,7 +1,6 @@
-import React, {FormEvent} from "react";
-import {FormControl, TextField,Button} from "@mui/material";
-import {makeStyles} from "@material-ui/core/styles";
-import {PRIMARY, SECONDARY, TEXT_DARK, TEXT_LIGHT} from "@/util/styleConstants";
+import React from "react";
+import {FormControl, TextField} from "@mui/material";
+import SubmitButton from "@/components/form/SubmitButton";
 
 interface RegisterFormProps {
     firstName: string,
@@ -16,7 +15,7 @@ interface RegisterFormProps {
     setEmail: (email: string) => void;
     setPassword: (password: string) => void;
     setConfirmPassword: (confirmPassword: string) => void
-    handleRegister: (e: FormEvent<HTMLFormElement>) => void;
+    handleRegister: () => void;
 }
 
 export default function RegisterForm({
@@ -35,7 +34,6 @@ export default function RegisterForm({
                                          handleRegister
                                      }: RegisterFormProps) {
 
-    const classes = useStyles();
 
     return (
         <div>
@@ -91,28 +89,18 @@ export default function RegisterForm({
                     />
                 </FormControl>
                 <FormControl fullWidth margin="normal">
-                    <Button
-                        variant="contained"
-                        type="submit"
-                        className={classes.formButton}
+                    <SubmitButton
+                        text={loading ? "Sending registration form..." : "Register"}
                         disabled={loading}
-                    >
-                        {loading ? "Sending registration form.." : "Register"}
-                    </Button>
-                </FormControl>
-            </form>
-
-            {error && <p>{error}</p>}
-        </div>
-    )
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleRegister();
+                        }}/>
+            </FormControl>
+        </form>
+    {
+        error && <p>{error}</p>
+    }
+</div>
+)
 }
-const useStyles = makeStyles((theme) => ({
-    formButton: {
-        background: SECONDARY,
-        color: TEXT_LIGHT,
-        '&:hover': {
-            background: PRIMARY,
-            color: TEXT_DARK,
-        },
-    },
-}));

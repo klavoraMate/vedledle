@@ -1,7 +1,6 @@
-import React, {FormEvent} from "react";
-import {FormControl, TextField, Button} from "@mui/material";
-import {makeStyles} from "@material-ui/core/styles";
-import {TEXT_LIGHT,TEXT_DARK,SECONDARY,PRIMARY} from "@/util/styleConstants";
+import React from "react";
+import {FormControl, TextField} from "@mui/material";
+import SubmitButton from "@/components/form/SubmitButton";
 
 interface LoginFormProps {
     email: string;
@@ -10,7 +9,7 @@ interface LoginFormProps {
     error: string;
     setEmail: (email: string) => void;
     setPassword: (password: string) => void;
-    handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+    handleSubmit: () => void;
 }
 
 export default function LoginForm({
@@ -22,8 +21,6 @@ export default function LoginForm({
                                       setPassword,
                                       handleSubmit,
                                   }: LoginFormProps) {
-    const classes = useStyles();
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -50,14 +47,14 @@ export default function LoginForm({
                 </FormControl>
 
                 <FormControl fullWidth margin="normal">
-                    <Button
-                        variant="contained"
-                        className={classes.formButton}
-                        type="submit"
+                    <SubmitButton
+                        text={loading? "Logging in...":"Login"}
                         disabled={loading}
-                    >
-                        {loading ? "Logging in..." : "Login"}
-                    </Button>
+                        onClick={(e)=>{
+                            e.preventDefault()
+                            handleSubmit();
+                        }}
+                    />
                 </FormControl>
             </form>
 
@@ -65,14 +62,3 @@ export default function LoginForm({
         </div>
     );
 }
-
-const useStyles = makeStyles((theme) => ({
-    formButton: {
-        background: SECONDARY,
-        color: TEXT_LIGHT,
-        '&:hover': {
-            background: PRIMARY,
-            color: TEXT_DARK,
-        },
-    },
-}));

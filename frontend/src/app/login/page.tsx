@@ -1,16 +1,9 @@
 'use client'
 
-import AppBar from "@/components/AppBar";
-import {Checkbox, FormControl,  TextField} from "@mui/material";
-import React, {FormEvent, useState} from "react";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import React, { useState} from "react";
 import {useRouter} from "next/navigation"
-import "../globals.css"
 import LoginForm from "@/components/form/LoginForm";
 import FormContainer from "@/components/form/FormContainer";
-import FloatingShapes from "@/components/design/FloatingShapes";
 import Layout from "@/components/design/Layout";
 
 
@@ -22,8 +15,7 @@ export default function Login() {
     const router = useRouter();
 
 
-    const handleLogin = async (e:FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleLogin = async () => {
 
         try {
             setLoading(true);

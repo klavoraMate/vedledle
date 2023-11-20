@@ -1,14 +1,8 @@
 'use client'
-import AppBar from "@/components/AppBar";
-import Box from "@mui/material/Box";
-import {FormControl, TextField} from "@mui/material";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import React, {FormEvent, useState} from "react";
+import React, { useState} from "react";
 import {useRouter} from "next/navigation";
 import FormContainer from "@/components/form/FormContainer";
 import RegisterForm from "@/components/form/RegisterForm";
-import FloatingShapes from "@/components/design/FloatingShapes";
 import Layout from "@/components/design/Layout";
 
 export default function Register() {
@@ -21,8 +15,7 @@ export default function Register() {
     const [error, setError] = useState("");
     const router = useRouter();
 
-    const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleRegister = async () => {
         try {
             setLoading(true);
             const wholeName = firstName + " " + lastName;
