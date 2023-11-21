@@ -1,6 +1,7 @@
 package vedledle.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vedledle.dao.model.Dog;
 import vedledle.service.DogService;
@@ -25,6 +26,7 @@ public class DogController {
      * @return The dog with the specified name.
      */
     @GetMapping("/")
+    @PreAuthorize("@securityService.canAccessDog(#name)")
     public Dog get(@RequestParam String name){
         return service.get(name);
     }

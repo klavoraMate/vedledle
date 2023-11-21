@@ -1,6 +1,7 @@
 package vedledle.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vedledle.controller.dto.UserInformation;
 import vedledle.controller.dto.mapper.DTOMapper;
@@ -27,6 +28,7 @@ public class UserController {
      * @return The user information, including details about the user and their dogs.
      */
     @GetMapping("/info")
+    @PreAuthorize("@securityService.canAccessInfo(#email)")
     public UserInformation info(@RequestParam String email) {
         User user = service.findByEmail(email);
         return DTOMapper.toUserInformation(user, service.getDogsOfUser(user));
