@@ -1,9 +1,13 @@
 package vedledle.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import vedledle.dao.model.Dog;
+import vedledle.exception.DogAlreadyExistException;
 import vedledle.service.DogService;
 
 /**
@@ -25,9 +29,17 @@ public class DogController {
      * @param name The name of the dog to retrieve.
      * @return The dog with the specified name.
      */
-    @GetMapping("/")
+    @GetMapping("")
     @PreAuthorize("@securityService.canAccessDog(#name)")
     public Dog get(@RequestParam String name){
         return service.get(name);
     }
+
+
+    @PostMapping("")
+    @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
+    public void addDog(@RequestParam String email,@RequestBody Dog newDog){
+            service.addDog(email,newDog);
+    }
+
 }

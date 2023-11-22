@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import vedledle.dao.model.animalProperties.DogBreed;
+import vedledle.dao.model.animalProperties.DogSize;
+
 /**
  * The {@code Dog} class represents a dog entity in the application.
  * It is annotated as an {@link Entity} and is used to map to the corresponding database table.
@@ -27,7 +30,11 @@ public class Dog {
     /**
      * The breed of the dog.
      */
-    private String breed;
+    @Enumerated(EnumType.STRING)
+    private DogBreed breed;
+    /** The size of the dog. */
+    @Enumerated(EnumType.STRING)
+    private DogSize size;
     /**
      * The age of the dog.
      */
@@ -40,6 +47,5 @@ public class Dog {
     @JoinColumn(name = "client_id")
     @JsonIgnore
     private User owner;
-
 
 }

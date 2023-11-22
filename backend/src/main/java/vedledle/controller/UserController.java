@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import vedledle.controller.dto.UserInformation;
 import vedledle.controller.dto.mapper.DTOMapper;
 import vedledle.dao.model.User;
+import vedledle.service.DogService;
 import vedledle.service.UserService;
 
 /**
@@ -19,7 +20,8 @@ public class UserController {
     /**
      * The service responsible for handling user-related operations.
      */
-    private final UserService service;
+    private final UserService userService;
+    private final DogService dogService;
 
     /**
      * Retrieves user information based on the provided email address.
@@ -28,9 +30,9 @@ public class UserController {
      * @return The user information, including details about the user and their dogs.
      */
     @GetMapping("/info")
-    @PreAuthorize("@securityService.canAccessInfo(#email)")
+    @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
     public UserInformation info(@RequestParam String email) {
-        User user = service.findByEmail(email);
-        return DTOMapper.toUserInformation(user, service.getDogsOfUser(user));
+        User user = userService.findByEmail(email);
+        return DTOMapper.toUserInformation(user, dogService.getDogsOfUser(user));
     }
 }
