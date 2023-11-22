@@ -56,7 +56,7 @@ public class AuthenticationController {
             service.save(newUser);
             response = ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("User created");
+                    .body("User " + userRequest.getName() + " created");
         } catch (Exception e) {
             response = ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -76,7 +76,7 @@ public class AuthenticationController {
         try {
             Authentication authentication = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
             User user = service.findByName(authentication.getName());
-            String jwt = JWTGenerator.generate(authentication,user.getEmail());
+            String jwt = JWTGenerator.generate(authentication, user.getEmail());
             return ResponseEntity.ok(new LoginResponse(jwt));
         } catch (Exception e) {
             throw new BadCredentialsException(e.getMessage());
