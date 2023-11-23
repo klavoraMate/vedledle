@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vedledle.dao.model.Dog;
 import vedledle.service.DogService;
+import java.util.List;
 
 /**
  * The {@code DogController} class handles HTTP requests related to dog operations.
@@ -32,6 +33,18 @@ public class DogController {
         return service.get(name);
     }
 
+    /**
+     * Fetches all dogs associated with a specific user based on the user's email.
+     * The authenticated user must either be the same as the specified email or have an admin role.
+     *
+     * @param email The email of the user to retrieve dogs for.
+     * @return A list of dogs owned by the user with the specified email.
+     */
+    @GetMapping("/all")
+    @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
+    public List<Dog> getAll(@RequestParam String email){
+        return service.getDogsByEmail(email);
+    }
 
     /**
      * Adds a new dog. The authenticated user must either be the same as the
