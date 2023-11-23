@@ -21,10 +21,6 @@ public class UserService {
      * The repository for accessing and managing user data.
      */
     private final UserRepository repository;
-    /**
-     * The service for handling dog-related operations.
-     */
-    private final DogService dogService;
 
     /**
      * Finds a user by their email address.
@@ -65,14 +61,6 @@ public class UserService {
         repository.save(user);
     }
 
-    /**
-     * Retrieves the list of dogs owned by a specific user.
-     *
-     * @param user The owner of the dogs.
-     * @return The list of dogs owned by the user.
-     */
-    public List<Dog> getDogsOfUser(User user){
-        return dogService.findByOwner(user);
-    }
+
 
 }
