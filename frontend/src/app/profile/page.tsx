@@ -1,13 +1,10 @@
 'use client'
 
-import AppBar from "@/components/AppBar";
 import {Box, Card, CardContent, Container, Grid, Typography} from "@mui/material";
 import {makeStyles} from "@material-ui/core/styles";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
-import "../globals.css"
-import FloatingShapes from "@/components/design/FloatingShapes";
-import Layout from "@/components/design/Layout";
+import Layout from "@/general_component/design/Layout";
 
 type DogData = {
     name: string,
@@ -24,12 +21,14 @@ export default function Profile() {
     const jwt = getJWT();
     const email = getEmail();
     const classes = useStyles();
+    const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState<UserData | null>(null);
 
     const fetchUserData = async () => {
         try {
-            if (email){
-                const response = await fetch(`/api/user/info?email=${(encodeURIComponent(email.toString()))}` , {
+            if (email) {
+                setLoading(true);
+                const response = await fetch(`/api/user/info?email=${(encodeURIComponent(email.toString()))}`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${jwt}`,
@@ -39,10 +38,12 @@ export default function Profile() {
                 if (response.ok) {
                     const userData: UserData = await response.json();
                     setUserData(userData);
+                    setLoading(false);
                 }
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
+            setLoading(false);
         }
     };
 
@@ -51,7 +52,6 @@ export default function Profile() {
             fetchUserData();
         }
     }, [jwt]);
-
 
     return (
         <Layout>
@@ -101,7 +101,7 @@ export default function Profile() {
                 ) :
                 (
                     <Grid container justifyContent="center">
-                        <Typography variant="h1">Please login!</Typography>
+                        <Typography variant="h1">{loading ? "Loading.." : "Please Login!"}</Typography>
                     </Grid>
                 )
             }

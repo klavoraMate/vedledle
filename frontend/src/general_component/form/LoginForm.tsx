@@ -1,6 +1,6 @@
 import React from "react";
 import {FormControl, TextField} from "@mui/material";
-import SubmitButton from "@/components/form/SubmitButton";
+import SubmitButton from "@/general_component/form/SubmitButton";
 
 interface LoginFormProps {
     email: string;

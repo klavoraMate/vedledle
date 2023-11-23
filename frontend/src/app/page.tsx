@@ -2,9 +2,9 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import "./globals.css";
-import Logo from "@/components/Logo";
+import Logo from "@/general_component/Logo";
 import {Grid} from "@mui/material";
-import Layout from "@/components/design/Layout";
+import Layout from "@/general_component/design/Layout";
 import Image from "next/image";
 
 export default function Home() {

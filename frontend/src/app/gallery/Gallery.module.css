@@ -1,8 +1,0 @@
-.deleteImageButton{
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: var(--text-light);
-    background: var(--secondary);
-    border-radius:  50%;
-}
