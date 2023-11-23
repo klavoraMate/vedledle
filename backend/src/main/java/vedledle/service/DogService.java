@@ -52,6 +52,14 @@ public class DogService {
         return repository.findByOwner(user);
     }
 
+    /**
+     * Adds a new dog to the database for the specified user.
+     * If a dog with the same name already exists, a {@link DogAlreadyExistException} is thrown.
+     *
+     * @param email The email of the user adding the dog.
+     * @param dog   The dog to be added.
+     * @throws DogAlreadyExistException If a dog with the same name already exists in the database.
+     */
     public void addDog(String email, Dog dog) {
         User user = userService.findByEmail(email);
         Optional<Dog> savedDog = repository.findByName(dog.getName());

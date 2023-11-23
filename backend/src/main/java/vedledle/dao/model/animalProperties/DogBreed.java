@@ -1,5 +1,11 @@
 package vedledle.dao.model.animalProperties;
 
+import lombok.Getter;
+
+/**
+ * The {@code DogBreed} enum represents different breeds of dogs, each associated with a grooming time.
+ */
+@Getter
 public enum DogBreed {
     LABRADOR_RETRIEVER(30),
     GERMAN_SHEPHERD(45),
@@ -12,16 +18,26 @@ public enum DogBreed {
     SHIH_TZU(25),
     SIBERIAN_HUSKY(50),
     CHIHUAHUA(10);
+
+    /**
+     * The grooming time required for the dog breed, in minutes.
+     */
     private final int groomingTime;
 
+    /**
+     * Constructs a new {@code DogBreed} enum constant with the specified grooming time.
+     *
+     * @param groomingTime The grooming time required for the dog breed, in minutes.
+     */ 
     DogBreed(int groomingTime) {
         this.groomingTime = groomingTime;
     }
 
-    public int getGroomingTime() {
-        return groomingTime;
-    }
-
+    /**
+     * Generates a human-readable string representation of the dog breed's name.
+     *
+     * @return A formatted string representing the dog breed's name.
+     */
     @Override
     public String toString() {
         String[] words = name().toLowerCase().split("_");
