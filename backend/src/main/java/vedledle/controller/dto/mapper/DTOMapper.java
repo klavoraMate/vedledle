@@ -16,8 +16,8 @@ public class DTOMapper {
      * @param ownedDogs The list of dogs owned by the user.
      * @return A {@link UserInformation} DTO representing user information and owned dogs.
      */
-    public static UserInformation toUserInformation(User user, List<Dog> ownedDogs) {
-        return new UserInformation(user.getName(), user.getEmail(), ownedDogs);
+    public static UserInformation toUserInformation(User user) {
+        return new UserInformation(user.getName(), user.getEmail());
     }
 
 }
