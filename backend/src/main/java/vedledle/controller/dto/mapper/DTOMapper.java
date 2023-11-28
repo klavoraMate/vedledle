@@ -13,7 +13,6 @@ public class DTOMapper {
      * Converts a {@link User} and a list of owned {@link Dog}s into a {@link UserInformation} DTO.
      *
      * @param user     The user object containing information such as name and email.
-     * @param ownedDogs The list of dogs owned by the user.
      * @return A {@link UserInformation} DTO representing user information and owned dogs.
      */
     public static UserInformation toUserInformation(User user) {
