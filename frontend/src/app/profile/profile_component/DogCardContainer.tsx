@@ -3,6 +3,7 @@ import {Grid} from "@mui/material";
 import DogCard from "@/app/profile/profile_component/DogCard";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
 import {useEffect, useState} from "react";
+import DogUploadButton from "@/app/profile/profile_component/DogUploadButton";
 
 export default function DogCardContainer() {
     const email = getEmail();
@@ -31,6 +32,9 @@ export default function DogCardContainer() {
             setLoading(false);
         }
     };
+    const handleCloseCallback = () => {
+        fetchDogData();
+    }
 
     useEffect(() => {
         if (email && jwt) {
@@ -44,6 +48,9 @@ export default function DogCardContainer() {
                     <DogCard dog={dog}/>
                 </Grid>
             )): "Loading..."}
+            <Grid item xs={12} sm={6}>
+                <DogUploadButton onCloseCallback={handleCloseCallback}/>
+            </Grid>
         </Grid>
     )
 }

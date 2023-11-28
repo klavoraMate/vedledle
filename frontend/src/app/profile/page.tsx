@@ -6,6 +6,7 @@ import { getJWT} from "@/util/JWTDecoder";
 import Layout from "@/general_component/design/Layout";
 import UserInfoCard from "@/app/profile/profile_component/UserInfoCard";
 import DogCardContainer from "@/app/profile/profile_component/DogCardContainer";
+import DogUploadButton from "@/app/profile/profile_component/DogUploadButton";
 
 export default function Profile() {
     const jwt = getJWT();
