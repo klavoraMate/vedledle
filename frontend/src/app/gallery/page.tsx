@@ -1,10 +1,10 @@
 'use client'
-import Layout from "@/components/design/Layout";
+import Layout from "@/general_component/design/Layout";
 import Box from "@mui/material/Box";
 import {ImageList, ImageListItem} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import GalleryImage from "@/app/gallery/GalleryImage";
-import GalleryUploadButton from "@/app/gallery/GalleryUploadButton";
+import GalleryImage from "@/app/gallery/gallery_component/GalleryImage";
+import GalleryUploadButton from "@/app/gallery/gallery_component/GalleryUploadButton";
 import {getJWT, getRole} from "@/util/JWTDecoder"
 import IconButton from "@mui/material/IconButton";
 import {DeleteOutline} from '@mui/icons-material';

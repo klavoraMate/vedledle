@@ -7,7 +7,6 @@ import vedledle.dao.model.Dog;
 import vedledle.dao.repository.DogRepository;
 import vedledle.exception.DogAlreadyExistException;
 import vedledle.exception.DogNotFoundException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +49,17 @@ public class DogService {
      */
     public List<Dog> getDogsOfUser(User user) {
         return repository.findByOwner(user);
+    }
+
+    /**
+     * Retrieves the list of dogs owned by the user with the specified email.
+     *
+     * @param email The email of the user to retrieve dogs for.
+     * @return The list of dogs owned by the user with the specified email.
+     */
+    public List<Dog> getDogsByEmail(String email) {
+        User user = userService.findByEmail(email);
+        return getDogsOfUser(user);
     }
 
     /**

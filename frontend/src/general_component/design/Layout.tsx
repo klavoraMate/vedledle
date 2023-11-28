@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
-import AppBar from "@/components/AppBar";
+import AppBar from "@/general_component/AppBar";
 import Container from "@mui/material/Container";
-import FloatingShapes from "@/components/design/FloatingShapes";
+import FloatingShapes from "@/general_component/design/FloatingShapes";
 
 interface LayoutProps {
     children: ReactNode;

@@ -36,6 +36,6 @@ public class UserController {
     @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
     public UserInformation info(@RequestParam String email) {
         User user = userService.findByEmail(email);
-        return DTOMapper.toUserInformation(user, dogService.getDogsOfUser(user));
+        return DTOMapper.toUserInformation(user);
     }
 }
