@@ -43,8 +43,7 @@ public class SecurityConfiguration {
                         "/profile",
                         "/gallery",
                         "/api/image/**",
-                        "/api/breed/dog/all",
-                        "/api/size/dog/all").permitAll()
+                        "/api/saloon/**").permitAll()
                 .requestMatchers(HttpMethod.POST,
                         "/api/login",
                         "/api/register").permitAll()

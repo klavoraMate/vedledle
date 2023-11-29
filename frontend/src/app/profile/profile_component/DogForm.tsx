@@ -25,7 +25,7 @@ export default function DogForm({ onClose }:DogFormProps) {
     useEffect(() => {
         const fetchDogBreeds = async () => {
             try {
-                const response = await fetch('/api/breed/dog/all');
+                const response = await fetch('/api/saloon/breed/dog/all');
                 if (response.ok) {
                     const data = await response.json();
                     setBreeds(data);
@@ -37,7 +37,7 @@ export default function DogForm({ onClose }:DogFormProps) {
 
         const fetchDogSizes = async () => {
             try {
-                const  response = await fetch('/api/size/dog/all');
+                const  response = await fetch('/api/saloon/size/dog/all');
                 if (response.ok) {
                     const data = await response.json();
                     setSizes(data);

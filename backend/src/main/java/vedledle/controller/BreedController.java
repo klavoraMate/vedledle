@@ -16,13 +16,5 @@ import java.util.List;
 @RequestMapping("/api/breed")
 public class BreedController {
 
-    /**
-     * Retrieves all the dog breeds in a more readable format.
-     *
-     * @return a list of dog breeds.
-     */
-    @GetMapping("/dog/all")
-    public List<String> getAll() {
-        return Arrays.stream(DogBreed.values()).map(DogBreed::toString).toList();
-    }
+
 }
