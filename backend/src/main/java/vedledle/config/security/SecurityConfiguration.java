@@ -42,6 +42,7 @@ public class SecurityConfiguration {
                         "/register",
                         "/profile",
                         "/gallery",
+                        "/reservation",
                         "/api/image/**",
                         "/api/saloon/**").permitAll()
                 .requestMatchers(HttpMethod.POST,

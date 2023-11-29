@@ -48,4 +48,11 @@ public class FrontendController {
     public String gallery() {
         return "gallery.html";
     }
+    /**
+     * Returns the reservation.html view for the /reservation endpoint.
+     */
+    @GetMapping("/reservation")
+    public String reservation() {
+        return "reservation.html";
+    }
 }
