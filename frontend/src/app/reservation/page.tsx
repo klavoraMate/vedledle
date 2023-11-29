@@ -22,7 +22,10 @@ export default function Reservation() {
                     setIsGroomingFormFilled={setIsGroomingFormFilled}
                 />
             </FormContainer>) : (
-                <Calendar/>
+                <Calendar
+                    dog={dog}
+                    grooming={grooming}
+                />
             )}
 
         </Layout>
