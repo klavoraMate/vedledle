@@ -3,6 +3,9 @@ package vedledle.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vedledle.controller.dto.Breed;
+import vedledle.controller.dto.Size;
+import vedledle.controller.dto.mapper.DTOMapper;
 import vedledle.dao.model.OpeningHours;
 import vedledle.dao.model.animalProperties.DogBreed;
 import vedledle.dao.model.animalProperties.DogSize;
@@ -24,8 +27,8 @@ public class SaloonInformationController {
      * @return a list of dog sizes.
      */
     @GetMapping("/size/dog/all")
-    public List<String> getAllSizes() {
-        return Arrays.stream(DogSize.values()).map(DogSize::toString).toList();
+    public List<Size> getAllSizes() {
+        return Arrays.stream(DogSize.values()).map(DTOMapper::toSize).toList();
     }
 
     /**
@@ -34,8 +37,8 @@ public class SaloonInformationController {
      * @return a list of dog breeds.
      */
     @GetMapping("/breed/dog/all")
-    public List<String> getAllBreeds() {
-        return Arrays.stream(DogBreed.values()).map(DogBreed::toString).toList();
+    public List<Breed> getAllBreeds() {
+        return Arrays.stream(DogBreed.values()).map(DTOMapper::toBreed).toList();
     }
 
     /**
