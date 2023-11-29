@@ -3,17 +3,22 @@ import FormGroup from '@mui/material/FormGroup';
 import {FormControl, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
 import {Info} from "@mui/icons-material";
 import DogSelection from "@/app/reservation/reservation_component/DogSelection";
+import SubmitButton from "@/general_component/form/SubmitButton";
 
 interface GroomingFormProps {
     dog: Dog;
     setDog: (dog: Dog) => void;
     grooming: Grooming;
     setGrooming: (grooming: Grooming) => void;
+    setIsGroomingFormFilled: (isGroomingFormFilled: boolean) => void;
 }
 
-export default function GroomingForm({dog, setDog, grooming, setGrooming}: GroomingFormProps) {
+export default function GroomingForm({dog, setDog, grooming, setGrooming,setIsGroomingFormFilled}: GroomingFormProps) {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setGrooming(event.target.value === "Bath/shower only" ? {showerOnly: true} : {showerOnly: false});
+    }
+    function handleNext() {
+        setIsGroomingFormFilled(true);
     }
 
     return (
@@ -50,6 +55,7 @@ export default function GroomingForm({dog, setDog, grooming, setGrooming}: Groom
                         </RadioGroup>
                     </FormControl>
                 </FormGroup>
+                <SubmitButton text={"Next"} disabled={!(grooming && dog)} onClick={handleNext}/>
             </form>
         </div>
     );
