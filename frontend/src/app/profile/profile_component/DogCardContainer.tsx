@@ -9,7 +9,7 @@ export default function DogCardContainer() {
     const email = getEmail();
     const jwt = getJWT();
     const [loading, setLoading] = useState(true);
-    const [dogData, setDogData] = useState<Dog[] | null>(null);
+    const [dogs, setDogs] = useState<Dog[] | null>(null);
     const fetchDogData = async () => {
         try {
             if (email) {
@@ -23,7 +23,7 @@ export default function DogCardContainer() {
 
                 if (response.ok) {
                     const dogData: Dog[] = await response.json();
-                    setDogData(dogData);
+                    setDogs(dogData);
                     setLoading(false);
                 }
             }
@@ -43,7 +43,7 @@ export default function DogCardContainer() {
     }, [email, jwt]);
     return (
         <Grid container justifyContent="center">
-            {!loading && dogData ? dogData.map((dog, index) => (
+            {!loading && dogs ? dogs.map((dog, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                     <DogCard dog={dog} />
                 </Grid>

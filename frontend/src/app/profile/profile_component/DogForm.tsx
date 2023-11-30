@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
-import {log} from "util";
+import {Breed,Size} from "@/util/types";
 interface DogFormProps {
     onClose: () => void;
 }
@@ -15,10 +15,10 @@ interface DogFormProps {
 export default function DogForm({ onClose }:DogFormProps) {
     const [dogName, setDogName] = useState("");
     const [dogAge, setDogAge] = useState<number | string>("");
-    const [breeds, setBreeds] = useState<string[]>([]);
-    const [selectedBreed, setSelectedBreed] = useState("");
-    const [sizes, setSizes] = useState<string[]>([]);
-    const [selectedSize, setSelectedSize] = useState("");
+    const [breeds, setBreeds] = useState<Breed[]>([]);
+    const [selectedBreed, setSelectedBreed] = useState<Breed>();
+    const [sizes, setSizes] = useState<Size[]>([]);
+    const [selectedSize, setSelectedSize] = useState<Size>();
     const email = getEmail();
     const jwt = getJWT();
 
@@ -100,11 +100,11 @@ export default function DogForm({ onClose }:DogFormProps) {
                 <InputLabel>Breed</InputLabel>
                 <Select
                     value={selectedBreed}
-                    onChange={(e) => setSelectedBreed(e.target.value as string)}
+                    onChange={(e) => setSelectedBreed(e.target.value as Breed)}
                 >
-                    {breeds.map((breed) => (
-                        <MenuItem key={breed} value={breed}>
-                            {breed}
+                    {breeds.map((breed,index) => (
+                        <MenuItem key={index} value={breed.name}>
+                            {breed.name}
                         </MenuItem>
                     ))}
                 </Select>
@@ -113,11 +113,11 @@ export default function DogForm({ onClose }:DogFormProps) {
                 <InputLabel>Size</InputLabel>
                 <Select
                     value={selectedSize}
-                    onChange={(e) => setSelectedSize(e.target.value as string)}
+                    onChange={(e) => setSelectedSize(e.target.value as Size)}
                 >
-                    {sizes.map((size) => (
-                        <MenuItem key={size} value={size}>
-                            {size}
+                    {sizes.map((size,index) => (
+                        <MenuItem key={index} value={size.name}>
+                            {size.name}
                         </MenuItem>
                     ))}
                 </Select>
