@@ -34,16 +34,25 @@ public class ReservationService {
      * Adds a new reservation based on the users email,
      * the dogs name and non JsonIgnore properties of the reservation.
      *
-     * @param email email of the user
-     * @param dogName name of the dog
+     * @param email       email of the user
+     * @param dogName     name of the dog
      * @param reservation reservation object that contains the non JsonIgnore properties
      */
-    public void add(String email, String dogName, Reservation reservation){
+    public void add(String email, String dogName, Reservation reservation) {
         User user = userService.findByEmail(email);
         Dog dog = dogService.getByNameAndOwner(dogName, user);
         reservation.setDog(dog);
         reservation.setUser(user);
         repository.save(reservation);
+    }
+
+    /**
+     * Retrieves all reservations from the database.
+     *
+     * @return The list of reservations.
+     */
+    public List<Reservation> getAll() {
+        return repository.findAll();
     }
 
 }
