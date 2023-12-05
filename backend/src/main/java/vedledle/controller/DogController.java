@@ -56,7 +56,7 @@ public class DogController {
     @PostMapping("")
     @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
     public void addDog(@RequestParam String email, @RequestBody Dog newDog) {
-        service.addDog(email, newDog);
+        service.add(email, newDog);
     }
 
 }

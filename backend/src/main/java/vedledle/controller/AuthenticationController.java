@@ -53,7 +53,7 @@ public class AuthenticationController {
                     .password(passwordEncoder.encode(userRequest.getPassword()))
                     .role("USER")
                     .build();
-            service.save(newUser);
+            service.add(newUser);
             response = ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body("User " + userRequest.getName() + " created");

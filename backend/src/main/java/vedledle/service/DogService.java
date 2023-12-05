@@ -70,7 +70,7 @@ public class DogService {
      * @param dog   The dog to be added.
      * @throws DogAlreadyExistException If a dog with the same name already exists in the database.
      */
-    public void addDog(String email, Dog dog) {
+    public void add(String email, Dog dog) {
         User user = userService.findByEmail(email);
         Optional<Dog> savedDog = repository.findByName(dog.getName());
         if (savedDog.isPresent()) {

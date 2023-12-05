@@ -49,8 +49,8 @@ public class ImageController {
      * @return The result of the image upload operation wrapped in a {@link ResponseEntity}.
      */
     @PostMapping("")
-    public ResponseEntity<String> upload(MultipartFile[] images) {
-        return service.upload(images);
+    public ResponseEntity<String> upload(@RequestParam("images") MultipartFile[] images) {
+        return service.add(images);
     }
 
     /**

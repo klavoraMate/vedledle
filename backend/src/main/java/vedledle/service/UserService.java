@@ -3,11 +3,9 @@ package vedledle.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import vedledle.dao.model.User;
-import vedledle.dao.model.Dog;
 import vedledle.dao.repository.UserRepository;
 import vedledle.exception.UserNotFoundException;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,11 +51,11 @@ public class UserService {
     }
 
     /**
-     * Saves a user to the database.
+     * Adds a new user.
      *
-     * @param user The user to be saved.
+     * @param user The {@link User} object representing the new user to be added.
      */
-    public void save(User user){
+    public void add(User user){
         repository.save(user);
     }
 
