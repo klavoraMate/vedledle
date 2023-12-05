@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
     const router = useRouter();
     let username = getName();
 
-    const pages = ['Gallery', 'Calendar'];
+    const pages = ['Gallery', 'Reservation'];
     const settings = username ? ['Profile', 'Logout'] : ['Login', 'Register'];
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {

@@ -29,8 +29,8 @@ public class DogController {
      */
     @GetMapping("")
     @PreAuthorize("@securityService.canAccessDog(#name)")
-    public Dog get(@RequestParam String name) {
-        return service.get(name);
+    public List<Dog> get(@RequestParam String name) {
+        return service.getByName(name);
     }
 
     /**
@@ -56,7 +56,7 @@ public class DogController {
     @PostMapping("")
     @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
     public void addDog(@RequestParam String email, @RequestBody Dog newDog) {
-        service.addDog(email, newDog);
+        service.add(email, newDog);
     }
 
 }

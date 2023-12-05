@@ -5,8 +5,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import vedledle.dao.model.Dog;
+import vedledle.dao.model.Reservation;
 import vedledle.dao.model.User;
+import vedledle.exception.TimePeriodConflictException;
+import vedledle.exception.UnauthorizedAccessException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -26,6 +30,11 @@ public class SecurityService {
     private final DogService dogService;
 
     /**
+     * The service responsible for handling reservation-related operations.
+     */
+    private final ReservationService reservationService;
+
+    /**
      * Checks whether the authenticated user has access to a dog with the specified name.
      *
      * @param dogName The name of the dog to check access for.
@@ -39,7 +48,10 @@ public class SecurityService {
         User user = userService.findByName(authentication.getName());
         List<Dog> dogs = dogService.getDogsOfUser(user);
 
-        return dogs.stream().anyMatch(dog -> dog.getName().equals(dogName));
+        if (dogs.stream().anyMatch(dog -> dog.getName().equals(dogName)))
+            return true;
+        else
+            throw new UnauthorizedAccessException("Access denied. You do not have permission to access this dog's resource.");
 
     }
 
@@ -59,10 +71,40 @@ public class SecurityService {
             return true;
 
         User user = userService.findByName(authentication.getName());
-        return user.getEmail().equals(email);
+        if (user.getEmail().equals(email))
+            return true;
+        else
+            throw new UnauthorizedAccessException("Access denied. You do not have permission to access this user's resource.");
+    }
+
+    /**
+     * Checks if the provided reservation is reservable.
+     *
+     * @param desiredReservation The reservation to check.
+     * @return {@code true} if the reservation is reservable, {@code false} otherwise.
+     */
+    public boolean isReservable(Reservation desiredReservation) {
+        List<Reservation> reservations = reservationService.getAll();
+        for (Reservation reservation : reservations) {
+            if (dateIsConflicting(desiredReservation.getStartDate(), desiredReservation.getEndDate(), reservation.getStartDate(), reservation.getEndDate()))
+                throw new TimePeriodConflictException();
+        }
+        return true;
     }
 
     private boolean isAdmin(Authentication authentication) {
         return authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
     }
+
+    private boolean dateIsBetween(LocalDate date, LocalDate startDate, LocalDate endDate) {
+        return date.isAfter(startDate) && date.isBefore(endDate);
+    }
+
+    private boolean dateIsConflicting(LocalDate startDate, LocalDate endDate, LocalDate startDate2, LocalDate endDate2) {
+        return dateIsBetween(startDate, startDate2, endDate2) ||
+                dateIsBetween(endDate, startDate2, endDate2) ||
+                startDate.equals(startDate2) ||
+                endDate.equals(endDate2);
+    }
+
 }

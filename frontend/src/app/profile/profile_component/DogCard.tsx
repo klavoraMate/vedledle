@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
-import {DogData} from "@/util/types";
+import {Dog} from "@/util/types";
 
 interface DogCardProps {
-    dog: DogData;
+    dog: Dog;
 }
 
 export default function DogCard({dog}:DogCardProps){
@@ -14,16 +14,16 @@ export default function DogCard({dog}:DogCardProps){
         <Card className={classes.dogCard}>
             <CardContent>
                 <Typography className={classes.title} variant="h6">
-                    {dog.name}
+                    {dog?dog.name:"Loading name..."}
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Breed:</strong> {dog.breed}
+                    <strong>Breed:</strong> {dog?dog.breed:"Loading breed..."}
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Size:</strong> {dog.size}
+                    <strong>Size:</strong> {dog?dog.size:"Loading size..."}
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Age:</strong> {dog.age} years
+                    <strong>Age:</strong> {dog?dog.age+" years":"Loading age..."}
                 </Typography>
             </CardContent>
         </Card>

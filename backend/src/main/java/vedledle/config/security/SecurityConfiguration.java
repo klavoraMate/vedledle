@@ -42,14 +42,15 @@ public class SecurityConfiguration {
                         "/register",
                         "/profile",
                         "/gallery",
+                        "/reservation",
                         "/api/image/**",
-                        "/api/breed/dog/all",
-                        "/api/size/dog/all").permitAll()
+                        "/api/saloon/**").permitAll()
                 .requestMatchers(HttpMethod.POST,
                         "/api/login",
                         "/api/register").permitAll()
                 .requestMatchers( "/api/user/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers( "/api/dog**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers( "/api/reservation**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE,"/api/image/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST,"/api/image/**").hasRole("ADMIN")
                 .anyRequest().authenticated();

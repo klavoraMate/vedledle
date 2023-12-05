@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Card, CardContent, Typography} from '@mui/material';
 import {makeStyles} from '@material-ui/core/styles';
-import {UserData} from "@/util/types";
+import {User} from "@/util/types";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
 
 export default function UserInfoCard() {
@@ -9,7 +9,7 @@ export default function UserInfoCard() {
     const jwt = getJWT();
     const classes = useStyles();
     const [loading, setLoading] = useState(true);
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState<User | null>(null);
 
     const fetchUserData = async () => {
         try {
@@ -23,7 +23,7 @@ export default function UserInfoCard() {
                 });
 
                 if (response.ok) {
-                    const userData: UserData = await response.json();
+                    const userData: User = await response.json();
                     setUserData(userData);
                     setLoading(false);
                 }

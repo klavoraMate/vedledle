@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import vedledle.dao.model.Image;
 import vedledle.dao.repository.ImageRepository;
@@ -54,12 +53,13 @@ public class ImageService {
     }
 
     /**
-     * Uploads one or more images to the server.
+     * Adds one or more images to the server. It only accepts images in PNG or JPEG format.
+     * If an image with the same name already exists, it will be overwritten.
      *
      * @param images The array of {@link MultipartFile} representing the images to upload.
      * @return The {@link ResponseEntity} indicating the success or failure of the upload.
      */
-    public ResponseEntity<String> upload(@RequestParam("images") MultipartFile[] images) {
+   public ResponseEntity<String> add(MultipartFile[] images) {
 
         try {
             for (MultipartFile image : images) {

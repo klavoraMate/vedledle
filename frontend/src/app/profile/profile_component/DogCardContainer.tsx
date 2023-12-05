@@ -1,4 +1,4 @@
-import {DogData} from "@/util/types";
+import {Dog} from "@/util/types";
 import {Grid} from "@mui/material";
 import DogCard from "@/app/profile/profile_component/DogCard";
 import {getEmail, getJWT} from "@/util/JWTDecoder";
@@ -9,7 +9,7 @@ export default function DogCardContainer() {
     const email = getEmail();
     const jwt = getJWT();
     const [loading, setLoading] = useState(true);
-    const [dogData, setDogData] = useState<DogData[] | null>(null);
+    const [dogs, setDogs] = useState<Dog[] | null>(null);
     const fetchDogData = async () => {
         try {
             if (email) {
@@ -22,8 +22,8 @@ export default function DogCardContainer() {
                 });
 
                 if (response.ok) {
-                    const dogData: DogData[] = await response.json();
-                    setDogData(dogData);
+                    const dogData: Dog[] = await response.json();
+                    setDogs(dogData);
                     setLoading(false);
                 }
             }
@@ -43,9 +43,9 @@ export default function DogCardContainer() {
     }, [email, jwt]);
     return (
         <Grid container justifyContent="center">
-            {!loading && dogData ? dogData.map((dog, index) => (
+            {!loading && dogs ? dogs.map((dog, index) => (
                 <Grid item xs={12} sm={6} key={index}>
-                    <DogCard dog={dog}/>
+                    <DogCard dog={dog} />
                 </Grid>
             )): "Loading..."}
             <Grid item xs={12} sm={6}>
