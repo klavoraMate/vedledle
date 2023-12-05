@@ -8,7 +8,6 @@ import vedledle.dao.repository.DogRepository;
 import vedledle.exception.DogAlreadyExistException;
 import vedledle.exception.DogNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The {@code DogService} class provides services related to dog operations in the application.
@@ -33,12 +32,24 @@ public class DogService {
      * @return The list of dogs with the specified name.
      * @throws DogNotFoundException If no dog is found with the given name.
      */
-    public List<Dog> get(String name) {
+    public List<Dog> getByName(String name) {
         List<Dog> dogs = repository.findByName(name);
         if (!dogs.isEmpty()) {
             return dogs;
         } else
             throw new DogNotFoundException(name);
+    }
+
+    /**
+     * Retrieves a dog with the specified name and owner.
+     *
+     * @param name The name of the dog to retrieve.
+     * @param owner The owner of the dog.
+     * @return The dog with the specified name and owner.
+     * @throws DogNotFoundException If no dog is found with the given name and owner.
+     */
+    public Dog getByNameAndOwner(String name, User owner) {
+        return repository.findByNameAndOwner(name, owner).orElseThrow(() -> new DogNotFoundException(name));
     }
 
     /**
