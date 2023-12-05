@@ -24,7 +24,9 @@ CREATE TABLE reservation
     start_date DATE    NOT NULL,
     end_date   DATE    NOT NULL,
     client_id  INTEGER NOT NULL,
+    dog_id     INTEGER NOT NULL,
     FOREIGN KEY (client_id) REFERENCES client (id)
+    FOREIGN KEY (dog_id) REFERENCES dog (id)
 );
 CREATE TABLE image
 (
