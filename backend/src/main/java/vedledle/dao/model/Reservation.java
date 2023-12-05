@@ -2,10 +2,7 @@ package vedledle.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -14,6 +11,7 @@ import java.time.LocalDate;
  * It is annotated as an {@link Entity} and is used to store reservation information in the database.
  */
 @Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor(force = true)

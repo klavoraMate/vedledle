@@ -30,7 +30,7 @@ public class DogController {
     @GetMapping("")
     @PreAuthorize("@securityService.canAccessDog(#name)")
     public List<Dog> get(@RequestParam String name) {
-        return service.get(name);
+        return service.getByName(name);
     }
 
     /**

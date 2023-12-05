@@ -1,8 +1,9 @@
 package vedledle.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import vedledle.dao.model.Reservation;
 import vedledle.service.ReservationService;
 
 /**
@@ -18,4 +19,10 @@ public class ReservationController {
      */
     private final ReservationService service;
 
+    @PostMapping("")
+    @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email) and " +
+            "@securityService.canAccessDog(#dogName)")
+    public void add(@RequestParam String email, @RequestParam String dogName, @RequestBody Reservation reservation) {
+        service.add(email, dogName, reservation);
+    }
 }
