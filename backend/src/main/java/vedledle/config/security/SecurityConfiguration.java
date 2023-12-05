@@ -50,6 +50,7 @@ public class SecurityConfiguration {
                         "/api/register").permitAll()
                 .requestMatchers( "/api/user/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers( "/api/dog**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers( "/api/reservation**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE,"/api/image/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST,"/api/image/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
