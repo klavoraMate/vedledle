@@ -8,6 +8,7 @@ import vedledle.dao.model.Dog;
 import vedledle.dao.model.Reservation;
 import vedledle.dao.model.User;
 import vedledle.exception.TimePeriodConflictException;
+import vedledle.exception.UnauthorizedAccessException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,7 +48,10 @@ public class SecurityService {
         User user = userService.findByName(authentication.getName());
         List<Dog> dogs = dogService.getDogsOfUser(user);
 
-        return dogs.stream().anyMatch(dog -> dog.getName().equals(dogName));
+        if (dogs.stream().anyMatch(dog -> dog.getName().equals(dogName)))
+            return true;
+        else
+            throw new UnauthorizedAccessException("Access denied. You do not have permission to access this dog's resource.");
 
     }
 
@@ -67,18 +71,22 @@ public class SecurityService {
             return true;
 
         User user = userService.findByName(authentication.getName());
-        return user.getEmail().equals(email);
+        if (user.getEmail().equals(email))
+            return true;
+        else
+            throw new UnauthorizedAccessException("Access denied. You do not have permission to access this user's resource.");
     }
 
     /**
      * Checks if the provided reservation is reservable.
+     *
      * @param desiredReservation The reservation to check.
      * @return {@code true} if the reservation is reservable, {@code false} otherwise.
      */
     public boolean isReservable(Reservation desiredReservation) {
         List<Reservation> reservations = reservationService.getAll();
-        for (Reservation reservation : reservations){
-            if(dateIsConflicting(desiredReservation.getStartDate(), desiredReservation.getEndDate(), reservation.getStartDate(), reservation.getEndDate()))
+        for (Reservation reservation : reservations) {
+            if (dateIsConflicting(desiredReservation.getStartDate(), desiredReservation.getEndDate(), reservation.getStartDate(), reservation.getEndDate()))
                 throw new TimePeriodConflictException();
         }
         return true;

@@ -77,6 +77,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * Handles the {@link UnauthorizedAccessException} by returning a custom error response.
+     *
+     * @param ex The {@link UnauthorizedAccessException} instance.
+     * @return A {@link ResponseEntity} containing a custom error response.
+     */
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    protected ResponseEntity<Object> handleUnauthorizedAccessException(UnauthorizedAccessException ex){
+        return defaultErrorResponse(ex);
+    }
+
+    /**
      * Creates a default error response with timestamp and error message.
      *
      * @param ex The exception instance.
