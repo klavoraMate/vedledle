@@ -5,8 +5,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import vedledle.dao.model.Dog;
+import vedledle.dao.model.Reservation;
 import vedledle.dao.model.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -24,6 +26,11 @@ public class SecurityService {
      * The service responsible for handling dog-related operations.
      */
     private final DogService dogService;
+
+    /**
+     * The service responsible for handling reservation-related operations.
+     */
+    private final ReservationService reservationService;
 
     /**
      * Checks whether the authenticated user has access to a dog with the specified name.
@@ -62,7 +69,33 @@ public class SecurityService {
         return user.getEmail().equals(email);
     }
 
+    /**
+     * Checks if the provided reservation is reservable.
+     * @param desiredReservation The reservation to check.
+     * @return {@code true} if the reservation is reservable, {@code false} otherwise.
+     */
+    public boolean isReservable(Reservation desiredReservation) {
+        return reservationService.getAll().stream()
+                .noneMatch(reservation -> dateIsConflicting(
+                        desiredReservation.getStartDate(),
+                        desiredReservation.getEndDate(),
+                        reservation.getStartDate(),
+                        reservation.getEndDate()));
+    }
+
     private boolean isAdmin(Authentication authentication) {
         return authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
     }
+
+    private boolean dateIsBetween(LocalDate date, LocalDate startDate, LocalDate endDate) {
+        return date.isAfter(startDate) && date.isBefore(endDate);
+    }
+
+    private boolean dateIsConflicting(LocalDate startDate, LocalDate endDate, LocalDate startDate2, LocalDate endDate2) {
+        return dateIsBetween(startDate, startDate2, endDate2) ||
+                dateIsBetween(endDate, startDate2, endDate2) ||
+                startDate.equals(startDate2) ||
+                endDate.equals(endDate2);
+    }
+
 }

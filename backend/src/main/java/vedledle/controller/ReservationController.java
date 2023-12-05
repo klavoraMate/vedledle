@@ -21,7 +21,8 @@ public class ReservationController {
 
     @PostMapping("")
     @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email) and " +
-            "@securityService.canAccessDog(#dogName)")
+            "@securityService.canAccessDog(#dogName) and" +
+            "@securityService.isReservable(#reservation)")
     public void add(@RequestParam String email, @RequestParam String dogName, @RequestBody Reservation reservation) {
         service.add(email, dogName, reservation);
     }
