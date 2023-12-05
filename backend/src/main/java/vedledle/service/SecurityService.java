@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import vedledle.dao.model.Dog;
 import vedledle.dao.model.Reservation;
 import vedledle.dao.model.User;
+import vedledle.exception.TimePeriodConflictException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -75,12 +76,12 @@ public class SecurityService {
      * @return {@code true} if the reservation is reservable, {@code false} otherwise.
      */
     public boolean isReservable(Reservation desiredReservation) {
-        return reservationService.getAll().stream()
-                .noneMatch(reservation -> dateIsConflicting(
-                        desiredReservation.getStartDate(),
-                        desiredReservation.getEndDate(),
-                        reservation.getStartDate(),
-                        reservation.getEndDate()));
+        List<Reservation> reservations = reservationService.getAll();
+        for (Reservation reservation : reservations){
+            if(dateIsConflicting(desiredReservation.getStartDate(), desiredReservation.getEndDate(), reservation.getStartDate(), reservation.getEndDate()))
+                throw new TimePeriodConflictException();
+        }
+        return true;
     }
 
     private boolean isAdmin(Authentication authentication) {
