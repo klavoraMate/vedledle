@@ -25,7 +25,7 @@ CREATE TABLE reservation
     end_date   DATE    NOT NULL,
     client_id  INTEGER NOT NULL,
     dog_id     INTEGER NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES client (id)
+    FOREIGN KEY (client_id) REFERENCES client (id),
     FOREIGN KEY (dog_id) REFERENCES dog (id)
 );
 CREATE TABLE image
@@ -45,7 +45,3 @@ INSERT INTO dog (name, breed, size, age, client_id)
 VALUES ('Liza', 'GERMAN_SHEPHERD', 'LARGE', 7, 1),
        ('Vadóc', 'GERMAN_SHEPHERD', 'LARGE', 9, 1),
        ('Daisy', 'GOLDEN_RETRIEVER', 'MEDIUM', 2, 2);
-INSERT INTO reservation (start_date, end_date, client_id)
-VALUES ('2023-04-12', '2023-04-14', 1),
-       ('2023-04-15', '2023-04-17', 2),
-       ('2023-04-18', '2023-04-20', 3);
