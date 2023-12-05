@@ -27,4 +27,13 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
      * @return The list of dogs with the specified name.
      */
     List<Dog> findByName(String name);
+
+    /**
+     * Retrieves a dog with the specified name and owner.
+     *
+     * @param name The name of the dog to retrieve.
+     * @param owner The owner of the dog.
+     * @return The dog with the specified name and owner.
+     */
+    Optional<Dog> findByNameAndOwner(String name, User owner);
 }
