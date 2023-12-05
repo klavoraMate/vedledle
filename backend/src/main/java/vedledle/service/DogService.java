@@ -27,16 +27,16 @@ public class DogService {
     private final UserService userService;
 
     /**
-     * Retrieves a dog by its name.
+     * Retrieve all dogs from the database.
      *
      * @param name The name of the dog to retrieve.
-     * @return The dog with the specified name.
+     * @return The list of dogs with the specified name.
      * @throws DogNotFoundException If no dog is found with the given name.
      */
-    public Dog get(String name) {
-        Optional<Dog> dog = repository.findByName(name);
-        if (dog.isPresent()) {
-            return dog.get();
+    public List<Dog> get(String name) {
+        List<Dog> dogs = repository.findByName(name);
+        if (!dogs.isEmpty()) {
+            return dogs;
         } else
             throw new DogNotFoundException(name);
     }
@@ -64,16 +64,17 @@ public class DogService {
 
     /**
      * Adds a new dog to the database for the specified user.
-     * If a dog with the same name already exists, a {@link DogAlreadyExistException} is thrown.
+     * If the user already owns a dog with the same name, the dog will not be added.
+     * Otherwise, the dog will be added to the database. There could be multiple dogs with the same name.
      *
      * @param email The email of the user adding the dog.
      * @param dog   The dog to be added.
-     * @throws DogAlreadyExistException If a dog with the same name already exists in the database.
+     * @throws DogAlreadyExistException If a dog with the same name already exists for the user.
      */
     public void add(String email, Dog dog) {
         User user = userService.findByEmail(email);
-        Optional<Dog> savedDog = repository.findByName(dog.getName());
-        if (savedDog.isPresent()) {
+        List<Dog> alreadyOwnedDogs = repository.findByOwner(user);
+        if (alreadyOwnedDogs.stream().anyMatch(d -> d.getName().equals(dog.getName()))) {
             throw new DogAlreadyExistException(dog.getName());
         } else {
             dog.setOwner(user);
