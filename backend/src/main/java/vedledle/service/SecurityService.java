@@ -11,6 +11,7 @@ import vedledle.exception.TimePeriodConflictException;
 import vedledle.exception.UnauthorizedAccessException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -96,11 +97,11 @@ public class SecurityService {
         return authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
     }
 
-    private boolean dateIsBetween(LocalDate date, LocalDate startDate, LocalDate endDate) {
+    private boolean dateIsBetween(LocalDateTime date, LocalDateTime startDate, LocalDateTime endDate) {
         return date.isAfter(startDate) && date.isBefore(endDate);
     }
 
-    private boolean dateIsConflicting(LocalDate startDate, LocalDate endDate, LocalDate startDate2, LocalDate endDate2) {
+    private boolean dateIsConflicting(LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startDate2, LocalDateTime endDate2) {
         return dateIsBetween(startDate, startDate2, endDate2) ||
                 dateIsBetween(endDate, startDate2, endDate2) ||
                 startDate.equals(startDate2) ||

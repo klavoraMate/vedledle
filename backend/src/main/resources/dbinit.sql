@@ -21,8 +21,8 @@ CREATE TABLE dog
 CREATE TABLE reservation
 (
     id         SERIAL PRIMARY KEY,
-    start_date DATE    NOT NULL,
-    end_date   DATE    NOT NULL,
+    start_date TIMESTAMP NOT NULL,
+    end_date   TIMESTAMP    NOT NULL,
     client_id  INTEGER NOT NULL,
     dog_id     INTEGER NOT NULL,
     FOREIGN KEY (client_id) REFERENCES client (id),
