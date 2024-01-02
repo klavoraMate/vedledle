@@ -6,8 +6,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import {getEmail, getJWT} from "@/util/JWTDecoder";
-import {Breed,Size} from "@/util/types";
+import {getEmail, getJWT} from "@/app/util/JWTDecoder";
+import {Breed,Size} from "@/app/util/types";
 interface DogFormProps {
     onClose: () => void;
 }

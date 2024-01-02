@@ -1,10 +1,10 @@
 'use client'
-import Layout from "@/general_component/design/Layout";
-import FormContainer from "@/general_component/form/FormContainer";
-import GroomingForm from "@/app/reservation/reservation_component/GroomingForm";
+import Layout from "@/app/components/layout/Layout";
+import FormContainer from "@/app/components/form/FormContainer";
+import GroomingForm from "@/app/components/form/GroomingForm";
 import {useState} from "react";
-import {Dog, Grooming} from "@/util/types";
-import Calendar from "@/app/reservation/reservation_component/Calendar";
+import {Dog, Grooming} from "@/app/util/types";
+import Calendar from "@/app/components/Calendar";
 
 export default function Reservation() {
     const [dog, setDog] = useState<Dog>();

@@ -1,7 +1,7 @@
-import DogCard from "@/app/profile/profile_component/DogCard";
-import {Dog} from "@/util/types";
+import DogCard from "@/app/components/cards/DogCard";
+import {Dog} from "@/app/util/types";
 import {makeStyles} from "@material-ui/core/styles";
-import {SECONDARY, TEXT_LIGHT} from "@/util/styleConstants";
+import {SECONDARY, TEXT_LIGHT} from "@/app/util/styleConstants";
 
 interface ClickableDogCardProps {
     dog: Dog;

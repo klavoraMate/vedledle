@@ -1,16 +1,16 @@
 'use client'
-import Layout from "@/general_component/design/Layout";
+import Layout from "@/app/components/layout/Layout";
 import Box from "@mui/material/Box";
 import {ImageList, ImageListItem} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import GalleryImage from "@/app/gallery/gallery_component/GalleryImage";
-import GalleryUploadButton from "@/app/gallery/gallery_component/GalleryUploadButton";
-import {getJWT, getRole} from "@/util/JWTDecoder"
+import GalleryImage from "@/app/components/images/GalleryImage";
+import GalleryUploadButton from "@/app/components/buttons/GalleryUploadButton";
+import {getJWT, getRole} from "@/app/util/JWTDecoder"
 import IconButton from "@mui/material/IconButton";
 import {DeleteOutline} from '@mui/icons-material';
 import {ClearOutlined} from '@mui/icons-material';
 import {makeStyles} from "@material-ui/core/styles";
-import {TEXT_LIGHT,SECONDARY} from "@/util/styleConstants";
+import {TEXT_LIGHT,SECONDARY} from "@/app/util/styleConstants";
 
 
 export default function Gallery() {

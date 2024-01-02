@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Card, CardContent, Typography} from '@mui/material';
 import {makeStyles} from '@material-ui/core/styles';
-import {User} from "@/util/types";
-import {getEmail, getJWT} from "@/util/JWTDecoder";
+import {User} from "@/app/util/types";
+import {getEmail, getJWT} from "@/app/util/JWTDecoder";
 
 export default function UserInfoCard() {
     const email = getEmail();

@@ -1,4 +1,4 @@
-import {Dog, Grooming} from "@/util/types";
+import {Dog, Grooming} from "@/app/util/types";
 
 interface CalendarProps {
     dog: Dog;

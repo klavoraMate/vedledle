@@ -1,7 +1,7 @@
-import {getEmail, getJWT} from "@/util/JWTDecoder";
+import {getEmail, getJWT} from "@/app/util/JWTDecoder";
 import {useEffect, useState} from "react";
-import {Dog} from "@/util/types";
-import ClickableDogCard from "@/app/reservation/reservation_component/ClickableDogCard";
+import {Dog} from "@/app/util/types";
+import ClickableDogCard from "@/app/components/cards/ClickableDogCard";
 import {Grid} from "@mui/material";
 
 interface DogSelectionProps {

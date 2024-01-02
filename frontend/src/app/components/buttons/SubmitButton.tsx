@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import {makeStyles} from "@material-ui/core/styles";
-import {PRIMARY, SECONDARY, TEXT_DARK, TEXT_LIGHT} from "@/util/styleConstants";
+import {PRIMARY, SECONDARY, TEXT_DARK, TEXT_LIGHT} from "@/app/util/styleConstants";
 import React from "react";
 
 interface SubmitButtonProps {

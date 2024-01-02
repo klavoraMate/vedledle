@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
-import {Dog} from "@/util/types";
+import {Dog} from "@/app/util/types";
 
 interface DogCardProps {
     dog: Dog;

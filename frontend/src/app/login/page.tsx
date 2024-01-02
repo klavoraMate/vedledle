@@ -2,9 +2,9 @@
 
 import React, { useState} from "react";
 import {useRouter} from "next/navigation"
-import LoginForm from "@/general_component/form/LoginForm";
-import FormContainer from "@/general_component/form/FormContainer";
-import Layout from "@/general_component/design/Layout";
+import LoginForm from "@/app/components/form/LoginForm";
+import FormContainer from "@/app/components/form/FormContainer";
+import Layout from "@/app/components/layout/Layout";
 
 
 export default function Login() {

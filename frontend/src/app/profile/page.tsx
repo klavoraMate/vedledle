@@ -2,11 +2,11 @@
 
 import {Box, Container, Grid, Typography} from "@mui/material";
 import {makeStyles} from "@material-ui/core/styles";
-import { getJWT} from "@/util/JWTDecoder";
-import Layout from "@/general_component/design/Layout";
-import UserInfoCard from "@/app/profile/profile_component/UserInfoCard";
-import DogCardContainer from "@/app/profile/profile_component/DogCardContainer";
-import DogUploadButton from "@/app/profile/profile_component/DogUploadButton";
+import { getJWT} from "@/app/util/JWTDecoder";
+import Layout from "@/app/components/layout/Layout";
+import UserInfoCard from "@/app/components/cards/UserInfoCard";
+import DogCardContainer from "@/app/components/cards/DogCardContainer";
+import DogUploadButton from "@/app/components/buttons/DogUploadButton";
 
 export default function Profile() {
     const jwt = getJWT();

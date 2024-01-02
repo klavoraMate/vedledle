@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../app/globals.css';
+import '../../globals.css';
 
 export default function FloatingShapes() {
     const pawnElements = Array.from({length: 10}, (_, index) => index + 1);
