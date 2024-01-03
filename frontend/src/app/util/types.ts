@@ -17,10 +17,13 @@ export type Grooming = undefined | {
 
 export type Breed = {
     name: string;
-    time: number;
 }
 
 export type Size = {
     name: string;
-    time: number;
+}
+
+export type TimeSlot = {
+    start: Date;
+    end: Date;
 }
