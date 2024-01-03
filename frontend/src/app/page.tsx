@@ -6,8 +6,6 @@ import Logo from "@/app/components/images/Logo";
 import {Grid} from "@mui/material";
 import Layout from "@/app/components/layout/Layout";
 import Image from "next/image";
-import Calendar from "@/app/components/Calendar";
-import {Dog,Breed,Size,Grooming} from "@/app/util/types";
 
 export default function Home() {
     return (

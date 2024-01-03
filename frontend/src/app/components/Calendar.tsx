@@ -16,7 +16,7 @@ export default function Calendar({dog, grooming}: CalendarProps) {
     const fetchTimeStamps = async () => {
         if (dog && jwt && email && grooming)
             try {
-                const response = await fetch(`/api/reservation/timestamps?email=${email}&dogName=${dog.name}&isShowerOnly=${grooming.showerOnly}`, {
+                const response = await fetch(`/api/reservation/timeslots?email=${email}&dogName=${dog.name}&isShowerOnly=${grooming.showerOnly}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${jwt}`,

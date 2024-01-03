@@ -30,7 +30,7 @@ public class ReservationController {
         service.add(email, dogName, reservation);
     }
 
-    @GetMapping("/timestamps")
+    @GetMapping("/timeslots")
     @PreAuthorize("@securityService.canAccessDog(#dogName)" + "and @securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
     public List<GroomingTimeSlot> availableTimeSlots(@RequestParam String email,@RequestParam String dogName, @RequestParam boolean isShowerOnly){
         return service.getAvailableTimeSlots(email,dogName,isShowerOnly);
