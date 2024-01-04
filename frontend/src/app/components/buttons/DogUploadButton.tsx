@@ -1,3 +1,4 @@
+'use client'
 import React, { useState} from "react";
 import IconButton from "@mui/material/IconButton";
 import { AddCircleOutline } from "@mui/icons-material";

@@ -9,7 +9,6 @@ import {getJWT, getRole} from "@/app/util/JWTDecoder"
 import IconButton from "@mui/material/IconButton";
 import {DeleteOutline} from '@mui/icons-material';
 import {ClearOutlined} from '@mui/icons-material';
-import {makeStyles} from "@material-ui/core/styles";
 import {TEXT_LIGHT,SECONDARY} from "@/app/util/styleConstants";
 
 
@@ -18,7 +17,6 @@ export default function Gallery() {
     const [showDeleteIcons, setShowDeleteIcons] = useState(false);
     const jwt = getJWT();
     const role = getRole();
-    const classes = useStyles();
 
     async function fetchNames() {
         try {
@@ -76,7 +74,7 @@ export default function Gallery() {
                         <ImageListItem key={index} style={{position: 'relative'}}>
                             <GalleryImage imageName={name}/>
                             {showDeleteIcons && (
-                                <IconButton onClick={() => handleDeleteImage(name)} className={classes.deleteImageButton}>
+                                <IconButton onClick={() => handleDeleteImage(name)} sx={deleteImageButtonStyle}>
                                     <ClearOutlined/>
                                 </IconButton>)}
                         </ImageListItem>
@@ -86,19 +84,11 @@ export default function Gallery() {
         </Layout>
     )
 }
-const useStyles = makeStyles((theme) => ({
-    deleteImageButton: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        color: TEXT_LIGHT,
-        background: SECONDARY,
-        borderRadius: '50%',
-    },
-}));
-/*   <ImageListItem style={{position: 'relative'}}>
-                        <img src='/dog1.jpg'/>
-                        <IconButton  className={styles.deleteImageButton}>
-                            <ClearOutlined/>
-                        </IconButton>)
-                    </ImageListItem>*/
+const deleteImageButtonStyle = {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    color: TEXT_LIGHT,
+    background: SECONDARY,
+    borderRadius: '50%',
+}

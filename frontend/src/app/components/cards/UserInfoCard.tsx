@@ -1,13 +1,12 @@
+'use client'
 import React, {useEffect, useState} from 'react';
 import {Card, CardContent, Typography} from '@mui/material';
-import {makeStyles} from '@material-ui/core/styles';
 import {User} from "@/app/util/types";
 import {getEmail, getJWT} from "@/app/util/JWTDecoder";
 
 export default function UserInfoCard() {
     const email = getEmail();
     const jwt = getJWT();
-    const classes = useStyles();
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState<User | null>(null);
 
@@ -43,9 +42,9 @@ export default function UserInfoCard() {
     return (
         <>
             {!loading ?
-                (<Card className={classes.card}>
+                (<Card sx={cardStyle}>
                     <CardContent>
-                        <Typography className={classes.title} gutterBottom>
+                        <Typography sx={titleStyle} gutterBottom>
                             User Information
                         </Typography>
                         <Typography variant="body1">
@@ -56,9 +55,9 @@ export default function UserInfoCard() {
                         </Typography>
                     </CardContent>
                 </Card>) :
-                (<Card className={classes.card}>
+                (<Card sx={cardStyle}>
                     <CardContent>
-                        <Typography className={classes.title} gutterBottom>
+                        <Typography sx={titleStyle} gutterBottom>
                             Loading ..
                         </Typography>
                     </CardContent>
@@ -68,12 +67,11 @@ export default function UserInfoCard() {
     );
 };
 
-const useStyles = makeStyles((theme) => ({
-    card: {
-        minWidth: 275,
-        marginBottom: theme.spacing(2),
-    },
-    title: {
-        fontSize: 20,
-    },
-}));
+const cardStyle = {
+    minWidth: 275,
+    marginBottom: 2,
+}
+
+const titleStyle = {
+    fontSize: 20,
+}

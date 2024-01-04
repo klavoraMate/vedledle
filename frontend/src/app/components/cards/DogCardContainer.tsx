@@ -1,3 +1,4 @@
+'use client'
 import {Dog} from "@/app/util/types";
 import {Grid} from "@mui/material";
 import DogCard from "@/app/components/cards/DogCard";
