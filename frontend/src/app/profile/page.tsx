@@ -1,3 +1,4 @@
+'use client'
 import {Box, Container, Grid, Typography} from "@mui/material";
 import { getJWT} from "@/app/util/JWTDecoder";
 import Layout from "@/app/components/layout/Layout";
