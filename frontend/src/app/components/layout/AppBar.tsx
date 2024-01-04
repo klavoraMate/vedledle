@@ -13,9 +13,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useRouter} from 'next/navigation';
-import "../app/globals.css"
+import "../../globals.css"
 import {useState} from "react";
-import {getName} from "@/util/JWTDecoder";
+import {getName} from "@/app/util/JWTDecoder";
 
 
 function ResponsiveAppBar() {

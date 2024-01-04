@@ -1,7 +1,7 @@
 "use client"
 import React, {useState, useCallback, useEffect} from "react";
 import {useDropzone} from "react-dropzone";
-import {getJWT} from "@/util/JWTDecoder";
+import {getJWT} from "@/app/util/JWTDecoder";
 import {AddCircleOutline} from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 

@@ -32,7 +32,9 @@ public class Dog {
      */
     @Enumerated(EnumType.STRING)
     private DogBreed breed;
-    /** The size of the dog. */
+    /**
+     * The size of the dog.
+     */
     @Enumerated(EnumType.STRING)
     private DogSize size;
     /**
@@ -48,4 +50,7 @@ public class Dog {
     @JsonIgnore
     private User owner;
 
+    public int groomingTime() {
+        return breed.getGroomingTime() + size.getGroomingTime();
+    }
 }

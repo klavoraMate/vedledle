@@ -1,11 +1,12 @@
+'use client'
 import React, { useState} from "react";
 import IconButton from "@mui/material/IconButton";
 import { AddCircleOutline } from "@mui/icons-material";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import DogForm from "@/app/profile/profile_component/DogForm";
-import {SECONDARY} from "@/util/styleConstants";
+import DogForm from "@/app/components/form/DogForm";
+import {SECONDARY} from "@/app/util/styleConstants";
 import {makeStyles} from "@material-ui/core/styles";
 
 interface DogUploadButtonProps {

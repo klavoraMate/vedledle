@@ -1,9 +1,9 @@
 'use client'
 import React, { useState} from "react";
 import {useRouter} from "next/navigation";
-import FormContainer from "@/general_component/form/FormContainer";
-import RegisterForm from "@/general_component/form/RegisterForm";
-import Layout from "@/general_component/design/Layout";
+import FormContainer from "@/app/components/form/FormContainer";
+import RegisterForm from "@/app/components/form/RegisterForm";
+import Layout from "@/app/components/layout/Layout";
 
 export default function Register() {
     const [firstName, setFirstName] = useState("");

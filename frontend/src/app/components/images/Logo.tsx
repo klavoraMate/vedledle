@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import "../app/globals.css";
+import "../../globals.css";
 import Typography from "@mui/material/Typography";
 
 export default function Logo () {

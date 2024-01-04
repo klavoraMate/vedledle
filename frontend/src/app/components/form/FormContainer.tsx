@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import {Container, Box, Grid, Hidden} from "@mui/material";
-import Logo from "@/general_component/Logo";
+import Logo from "@/app/components/images/Logo";
 
 interface FormContainerProps {
     children: ReactNode;

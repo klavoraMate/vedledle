@@ -1,9 +1,10 @@
-import {Dog} from "@/util/types";
+'use client'
+import {Dog} from "@/app/util/types";
 import {Grid} from "@mui/material";
-import DogCard from "@/app/profile/profile_component/DogCard";
-import {getEmail, getJWT} from "@/util/JWTDecoder";
+import DogCard from "@/app/components/cards/DogCard";
+import {getEmail, getJWT} from "@/app/util/JWTDecoder";
 import {useEffect, useState} from "react";
-import DogUploadButton from "@/app/profile/profile_component/DogUploadButton";
+import DogUploadButton from "@/app/components/buttons/DogUploadButton";
 
 export default function DogCardContainer() {
     const email = getEmail();

@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
-import {makeStyles} from "@material-ui/core/styles";
-import {PRIMARY, SECONDARY, TEXT_DARK, TEXT_LIGHT} from "@/util/styleConstants";
+import {PRIMARY, SECONDARY, TEXT_DARK, TEXT_LIGHT} from "@/app/util/styleConstants";
 import React from "react";
 
 interface SubmitButtonProps {
@@ -10,13 +9,12 @@ interface SubmitButtonProps {
 }
 
 export default function SubmitButton({text,disabled,onClick}: SubmitButtonProps) {
-    const classes = useStyles();
 
 
     return (
         <Button
             variant="contained"
-            className={classes.formButton}
+            sx={fromButtonStyle}
             type="submit"
             disabled={disabled}
             onClick={onClick}
@@ -25,13 +23,13 @@ export default function SubmitButton({text,disabled,onClick}: SubmitButtonProps)
         </Button>
     )
 }
-const useStyles = makeStyles(() => ({
-    formButton: {
-        background: SECONDARY,
-        color: TEXT_LIGHT,
-        '&:hover': {
-            background: PRIMARY,
-            color: TEXT_DARK,
-        },
+
+const fromButtonStyle = {
+    background: SECONDARY,
+    color: TEXT_LIGHT,
+    '&:hover': {
+        background: PRIMARY,
+        color: TEXT_DARK,
     },
-}));
+
+}

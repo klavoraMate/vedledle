@@ -1,28 +1,24 @@
 'use client'
-
 import {Box, Container, Grid, Typography} from "@mui/material";
-import {makeStyles} from "@material-ui/core/styles";
-import { getJWT} from "@/util/JWTDecoder";
-import Layout from "@/general_component/design/Layout";
-import UserInfoCard from "@/app/profile/profile_component/UserInfoCard";
-import DogCardContainer from "@/app/profile/profile_component/DogCardContainer";
-import DogUploadButton from "@/app/profile/profile_component/DogUploadButton";
+import { getJWT} from "@/app/util/JWTDecoder";
+import Layout from "@/app/components/layout/Layout";
+import UserInfoCard from "@/app/components/cards/UserInfoCard";
+import DogCardContainer from "@/app/components/cards/DogCardContainer";
 
 export default function Profile() {
     const jwt = getJWT();
-    const classes = useStyles();
 
     return (
         <Layout>
             {jwt ? (
-                <Container className={classes.container} maxWidth="md">
+                <Container sx={containerStyle} maxWidth="md">
                     <Grid container justifyContent="center">
                         <Grid item xs={12} sm={6}>
                             <UserInfoCard/>
                         </Grid>
                     </Grid>
                     <Box textAlign="center">
-                        <Typography className={classes.dogsOwnedTitle} variant="h4">
+                        <Typography sx={dogsOwnedStyle} variant="h4">
                             Dogs Owned
                         </Typography>
                     </Box>
@@ -37,24 +33,12 @@ export default function Profile() {
     )
 }
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4),
-    },
-    card: {
-        minWidth: 275,
-        marginBottom: theme.spacing(2)
-    },
-    title: {
-        fontSize: 20,
-    },
-    dogCard: {
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-    },
-    dogsOwnedTitle: {
-        marginBottom: theme.spacing(2),
-        textAlign: "center",
-    },
-}));
+const containerStyle = {
+    marginTop: 20,
+    marginBottom: 20,
+}
+const dogsOwnedStyle = {
+    marginBottom: 20,
+    textAlign: "center",
+}
+

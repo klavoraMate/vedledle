@@ -1,9 +1,9 @@
-import {Dog, Grooming} from "@/util/types";
+import {Dog, Grooming} from "@/app/util/types";
 import FormGroup from '@mui/material/FormGroup';
 import {FormControl, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
 import {Info} from "@mui/icons-material";
-import DogSelection from "@/app/reservation/reservation_component/DogSelection";
-import SubmitButton from "@/general_component/form/SubmitButton";
+import DogSelection from "@/app/components/form/DogSelection";
+import SubmitButton from "@/app/components/buttons/SubmitButton";
 
 interface GroomingFormProps {
     dog: Dog;

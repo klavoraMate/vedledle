@@ -26,7 +26,7 @@ public class DogService {
     private final UserService userService;
 
     /**
-     * Retrieve all dogs from the database.
+     * Retrieve all dogs with the given name from the database.
      *
      * @param name The name of the dog to retrieve.
      * @return The list of dogs with the specified name.

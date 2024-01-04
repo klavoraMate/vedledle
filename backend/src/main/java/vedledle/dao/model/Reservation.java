@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * The {@code Reservation} class represents a reservation entity in the application.
@@ -28,12 +28,12 @@ public class Reservation {
     /**
      * The start date of the reservation.
      */
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     /**
      * The end date of the reservation.
      */
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     /**
      * The user who made the reservation. It is mapped as a Many-to-One relationship with the {@link User} entity.

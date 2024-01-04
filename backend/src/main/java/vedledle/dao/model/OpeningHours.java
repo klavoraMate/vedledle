@@ -1,10 +1,14 @@
 package vedledle.dao.model;
 
+import lombok.Getter;
+
 import java.util.Calendar;
 
 /**
  * Enum representing the opening hours for each day of the week.
  */
+
+@Getter
 public enum OpeningHours {
     MONDAY(Calendar.MONDAY, -1, -1, -1, -1),
     TUESDAY(Calendar.TUESDAY, 9, 30, 17, 0),
