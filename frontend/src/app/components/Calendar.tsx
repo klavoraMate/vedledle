@@ -2,6 +2,7 @@
 import {Dog, Grooming, TimeSlot} from "@/app/util/types";
 import {useEffect, useState} from "react";
 import {getEmail, getJWT} from "@/app/util/JWTDecoder";
+import TimeSlotButton from "@/app/components/buttons/TimeSlotButton";
 
 interface CalendarProps {
     dog: Dog;
@@ -13,6 +14,7 @@ export default function Calendar({dog, grooming}: CalendarProps) {
     const jwt = getJWT();
     const [timeSlots, setTimeSlots] = useState<TimeSlot[] | null>(null);
     const [loading, setLoading] = useState(true);
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot | null>(null);
     const fetchTimeStamps = async () => {
         if (dog && jwt && email && grooming)
             try {
@@ -40,11 +42,9 @@ export default function Calendar({dog, grooming}: CalendarProps) {
 
     return (
         <div>
-            <h1>Calendar</h1>
             {timeSlots ? timeSlots.map((timeSlot, index) => (
                 <div key={index}>
-                    {timeSlot.start}
-                    {timeSlot.end}
+                    <TimeSlotButton timeSlot={timeSlot} setSelectedTimeSlot={setSelectedTimeSlot}/>
                 </div>
             )) : "Loading..."}
         </div>
