@@ -73,7 +73,7 @@ public class ReservationService {
         DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
         List<GroomingTimeSlot> availableTimeSlots = new LinkedList<>();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 1; i < 8; i++) {
             OpeningHours openingHours = OpeningHours.valueOf(dayOfWeek.toString());
             if (openingHours.getOpenHour() != -1) {
                 LocalDateTime start = LocalDateTime.now().withHour(openingHours.getOpenHour()).withMinute(openingHours.getOpenMinute()).plusDays(i);
@@ -85,13 +85,12 @@ public class ReservationService {
                                 (reservation.getStartDate().isEqual(tempEnd) || reservation.getEndDate().isEqual(start))) {
                             start = reservation.getEndDate();
                         }
-                        else {
-                            availableTimeSlots.add(new GroomingTimeSlot(start, tempEnd));
-                            start = tempEnd;
-                        }
-                        tempEnd = start.plusMinutes(duration);
-                    }
 
+                    }
+                    if (start.isBefore(end)){
+                        availableTimeSlots.add(new GroomingTimeSlot(start, tempEnd));
+                        start = tempEnd;
+                    }
                 }
             }
             dayOfWeek = dayOfWeek.plus(1);
