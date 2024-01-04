@@ -11,6 +11,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - JWT_KEY=ghlEQeXHuPq8SdbyYFNkDNdudQ53YUn4
+      - RUN_MOD=docker
     depends_on:
       - db
     networks:
