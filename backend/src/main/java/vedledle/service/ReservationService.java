@@ -78,7 +78,7 @@ public class ReservationService {
             OpeningHours openingHours = OpeningHours.valueOf(dayOfWeek.toString());
             if (openingHours.getOpenHour() != -1) {
                 LocalDateTime start = LocalDateTime.now().withHour(openingHours.getOpenHour()).withMinute(openingHours.getOpenMinute()).plusDays(i).truncatedTo(ChronoUnit.MINUTES);
-                LocalDateTime end = LocalDateTime.now().withHour(openingHours.getCloseHour()).withMinute(openingHours.getCloseMinute()).plusDays(i).truncatedTo(ChronoUnit.MINUTES);
+                LocalDateTime end = LocalDateTime.now().withHour(openingHours.getCloseHour()).withMinute(openingHours.getCloseMinute()).plusDays(i). truncatedTo(ChronoUnit.MINUTES);
                 while (start.isBefore(end)) {
                     LocalDateTime tempEnd = start.plusMinutes(duration);
                     for (Reservation reservation : reservations) {
