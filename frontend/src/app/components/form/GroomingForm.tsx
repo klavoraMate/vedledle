@@ -1,9 +1,13 @@
 import {Dog, Grooming} from "@/app/util/types";
 import FormGroup from '@mui/material/FormGroup';
-import {FormControl, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
+import {FormControl, FormControlLabel, Grid, Radio, RadioGroup, Tooltip} from "@mui/material";
 import {Info} from "@mui/icons-material";
 import DogSelection from "@/app/components/form/DogSelection";
 import SubmitButton from "@/app/components/buttons/SubmitButton";
+import Typography from "@mui/material/Typography";
+import {PRIMARY, SECONDARY, TEXT_LIGHT} from "@/app/util/styleConstants";
+import {Stack} from "@mui/system";
+import {alignments} from "@floating-ui/utils";
 
 interface GroomingFormProps {
     dog: Dog;
@@ -13,19 +17,20 @@ interface GroomingFormProps {
     setIsGroomingFormFilled: (isGroomingFormFilled: boolean) => void;
 }
 
-export default function GroomingForm({dog, setDog, grooming, setGrooming,setIsGroomingFormFilled}: GroomingFormProps) {
+export default function GroomingForm({dog, setDog, grooming, setGrooming, setIsGroomingFormFilled}: GroomingFormProps) {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setGrooming(event.target.value === "Bath/shower only" ? {showerOnly: true} : {showerOnly: false});
     }
+
     function handleNext() {
         setIsGroomingFormFilled(true);
     }
 
     return (
         <div>
-            <h2>Select your dog: </h2>
+            <Typography sx={formTextStyle}>Select your dog: </Typography>
             <DogSelection setSelectedDog={setDog}/>
-            <h2>Select grooming type: </h2>
+            <Typography sx={formTextStyle}>Select grooming type: </Typography>
             <form>
                 <FormGroup>
                     <FormControl component="fieldset">
@@ -37,26 +42,52 @@ export default function GroomingForm({dog, setDog, grooming, setGrooming,setIsGr
                         >
                             <FormControlLabel
                                 value="Bath/shower only"
-                                control={<Radio/>}
-                                label="Bath/shower only"
+                                control={<Radio sx={radioStyle}/>}
+                                label={
+                                    <Typography sx={radioTextStyle}>
+                                        Bath/shower only
+                                    </Typography>
+                                }
                             />
                             <FormControlLabel
                                 value="Full grooming"
-                                control={<Radio/>}
+                                control={<Radio sx={radioStyle}/>}
                                 label={
-                                    <div>
+                                    <Typography sx={radioTextStyle}>
                                         Full grooming
                                         <Tooltip title="Bath/shower, whole body trimming, nail trimming">
                                             <Info style={{marginLeft: 5, verticalAlign: "middle"}}/>
                                         </Tooltip>
-                                    </div>
+                                    </Typography>
                                 }
                             />
                         </RadioGroup>
                     </FormControl>
                 </FormGroup>
-                <SubmitButton text={"Next"} disabled={!(grooming && dog)} onClick={handleNext}/>
+                <div style={{textAlign: 'right'}}>
+                    <SubmitButton text={"Next"} disabled={!(grooming && dog)} onClick={handleNext}/>
+                </div>
             </form>
         </div>
     );
 }
+
+const formTextStyle = {
+    textAlign: 'center',
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+};
+
+const radioStyle = {
+    color: TEXT_LIGHT,
+    '&.Mui-checked': {
+        color: SECONDARY,
+    },
+};
+
+const radioTextStyle = {
+    fontSize: '1rem',
+    fontWeight: 'bold',
+};
+
