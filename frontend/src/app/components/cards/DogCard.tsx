@@ -9,7 +9,7 @@ interface DogCardProps {
 export default function DogCard({dog}:DogCardProps){
 
     return (
-        <Card sx={dogCardStyle}>
+        <Card >
             <CardContent>
                 <Typography sx={titleStyle} variant="h6">
                     {dog?dog.name:"Loading name..."}
@@ -28,10 +28,6 @@ export default function DogCard({dog}:DogCardProps){
     );
 };
 
-const dogCardStyle = {
-    marginTop: 10,
-    marginBottom: 10
-};
 
 const titleStyle = {
     fontSize: 20,
