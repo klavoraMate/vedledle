@@ -12,6 +12,7 @@ import vedledle.dao.repository.ReservationRepository;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -76,14 +77,15 @@ public class ReservationService {
         for (int i = 1; i < 8; i++) {
             OpeningHours openingHours = OpeningHours.valueOf(dayOfWeek.toString());
             if (openingHours.getOpenHour() != -1) {
-                LocalDateTime start = LocalDateTime.now().withHour(openingHours.getOpenHour()).withMinute(openingHours.getOpenMinute()).plusDays(i);
-                LocalDateTime end = LocalDateTime.now().withHour(openingHours.getCloseHour()).withMinute(openingHours.getCloseMinute()).plusDays(i);
+                LocalDateTime start = LocalDateTime.now().withHour(openingHours.getOpenHour()).withMinute(openingHours.getOpenMinute()).plusDays(i).truncatedTo(ChronoUnit.MINUTES);
+                LocalDateTime end = LocalDateTime.now().withHour(openingHours.getCloseHour()).withMinute(openingHours.getCloseMinute()).plusDays(i).truncatedTo(ChronoUnit.MINUTES);
                 while (start.isBefore(end)) {
                     LocalDateTime tempEnd = start.plusMinutes(duration);
                     for (Reservation reservation : reservations) {
                         if ((reservation.getStartDate().isBefore(tempEnd) && reservation.getEndDate().isAfter(start)) ||
                                 (reservation.getStartDate().isEqual(tempEnd) || reservation.getEndDate().isEqual(start))) {
                             start = reservation.getEndDate();
+                            tempEnd = start.plusMinutes(duration);
                         }
 
                     }
