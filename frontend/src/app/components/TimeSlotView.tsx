@@ -6,6 +6,7 @@ import TimeSlotButton from "@/app/components/buttons/TimeSlotButton";
 import {Dog, Grooming, TimeSlot} from "@/app/util/types";
 import {useEffect, useState} from "react";
 import {getEmail, getJWT} from "@/app/util/JWTDecoder";
+import DayCard from "@/app/components/cards/DayCard";
 
 interface TimeSlotViewProps {
     dog: Dog;
@@ -58,18 +59,7 @@ export default function TimeSlotView({dog, grooming, onTimeSlotSelect}: TimeSlot
     return (
         <Grid container spacing={2}>
             {Object.entries(groupedTimeSlots).map(([day, timeSlots]) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={day}>
-                    <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-                        <Typography variant="h6">{day}</Typography>
-                    </Box>
-                    <Grid container direction="column" justifyContent="center" alignItems="center">
-                        {timeSlots.map((timeSlot, index) => (
-                            <Grid item key={index}>
-                                <TimeSlotButton timeSlot={timeSlot} onTimeSlotSelect={onTimeSlotSelect}/>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Grid>
+               <DayCard day={day} timeSlots={timeSlots} onTimeSlotSelect={onTimeSlotSelect}/>
             ))}
         </Grid>
     )

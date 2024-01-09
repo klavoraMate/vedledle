@@ -1,13 +1,11 @@
 import {Dog, Grooming} from "@/app/util/types";
 import FormGroup from '@mui/material/FormGroup';
-import {FormControl, FormControlLabel, Grid, Radio, RadioGroup, Tooltip} from "@mui/material";
+import {FormControl, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
 import {Info} from "@mui/icons-material";
 import DogSelection from "@/app/components/form/DogSelection";
 import SubmitButton from "@/app/components/buttons/SubmitButton";
 import Typography from "@mui/material/Typography";
-import {PRIMARY, SECONDARY, TEXT_LIGHT} from "@/app/util/styleConstants";
-import {Stack} from "@mui/system";
-import {alignments} from "@floating-ui/utils";
+import {SECONDARY, TEXT_LIGHT} from "@/app/util/styleConstants";
 
 interface GroomingFormProps {
     dog: Dog;
