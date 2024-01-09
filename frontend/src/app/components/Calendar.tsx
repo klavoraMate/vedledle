@@ -1,17 +1,16 @@
 "use client"
 import {Dog, Grooming, TimeSlot} from "@/app/util/types";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {getEmail, getJWT} from "@/app/util/JWTDecoder";
-import TimeSlotButton from "@/app/components/buttons/TimeSlotButton";
 import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import GroomingFinalizationViewCard from "@/app/components/cards/GroomingFinalizationViewCard";
 import SubmitButton from "@/app/components/buttons/SubmitButton";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import TimeSlotView from "@/app/components/TimeSlotView";
+import {PRIMARY, SECONDARY, TEXT_DARK} from "@/app/util/styleConstants";
 
 interface CalendarProps {
     dog: Dog;
@@ -65,21 +64,27 @@ export default function Calendar({dog, grooming}: CalendarProps) {
     return (
         <>
             <TimeSlotView dog={dog} grooming={grooming} onTimeSlotSelect={onTimeSlotSelect}/>
-            <Dialog open={open}>
-                <DialogTitle>Finalize Your Booking</DialogTitle>
+            <Dialog open={open} sx={dialogStyle}>
+                <DialogTitle sx={dialogTitleStyle}>Finalize Your Booking</DialogTitle>
                 <DialogContent>
                     {response === "" ?
                         <>
                             <GroomingFinalizationViewCard timeSlot={selectedTimeSlot} dog={dog} grooming={grooming}/>
-                            <Grid container justifyContent="center" direction="row">
-                                <SubmitButton text={"Accept"} disabled={false} onClick={handleAccept()}/>
-                                <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
+                            <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                    <SubmitButton text={"Accept"} disabled={false} onClick={handleAccept()}/>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
+                                </Grid>
                             </Grid>
                         </>
                         : <>
                             <Typography variant="h6">{response}</Typography>
-                            <Grid container justifyContent="right">
-                                <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
+                            <Grid container >
+                                <Grid item xs={12} sm={6}>
+                                    <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
+                                </Grid>
                             </Grid>
                         </>
                     }
@@ -88,3 +93,21 @@ export default function Calendar({dog, grooming}: CalendarProps) {
         </>
     )
 }
+
+const dialogStyle = {
+    '& .MuiDialog-container': {
+        '& .MuiPaper-root': {
+            background: PRIMARY,
+            border: `0.7rem solid ${SECONDARY}`,
+            borderRadius: "2rem",
+        },
+    },
+}
+
+const dialogTitleStyle = {
+    textAlign: 'center',
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    fontFamily: 'Ubuntu',
+    color: TEXT_DARK,
+};
