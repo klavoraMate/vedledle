@@ -18,7 +18,7 @@ export default function ClickableDogCard({dog, onClick, isSelected}: ClickableDo
         <div style={divStyle} onClick={handleClick}>
             <Card sx={isSelected ? selectedStyle : notSelectedStyle}>
                 <CardContent>
-                    <Typography sx={isSelected? selectedTitleStyle:notSelectedTitleStyle} variant="h6">
+                    <Typography sx={isSelected ? selectedTitleStyle : notSelectedTitleStyle} variant="h6">
                         {dog ? dog.name : "Loading name..."}
                     </Typography>
                     <Typography variant="body1">
@@ -38,7 +38,6 @@ export default function ClickableDogCard({dog, onClick, isSelected}: ClickableDo
 const cardStyle = {
     cursor: 'pointer',
     borderRadius: 10,
-    height: '100%',
 }
 
 const selectedStyle = {
@@ -67,6 +66,5 @@ const notSelectedTitleStyle = {
 }
 
 const divStyle = {
-    height: '100%',
     padding: '1rem',
 }

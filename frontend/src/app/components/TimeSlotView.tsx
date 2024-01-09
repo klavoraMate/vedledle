@@ -59,7 +59,7 @@ export default function TimeSlotView({dog, grooming, onTimeSlotSelect}: TimeSlot
     return (
         <Grid container spacing={2}>
             {Object.entries(groupedTimeSlots).map(([day, timeSlots]) => (
-               <DayCard day={day} timeSlots={timeSlots} onTimeSlotSelect={onTimeSlotSelect}/>
+               <DayCard key={day} day={day} timeSlots={timeSlots} onTimeSlotSelect={onTimeSlotSelect}/>
             ))}
         </Grid>
     )

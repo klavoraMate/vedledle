@@ -51,9 +51,9 @@ export default function DogSelection({setSelectedDog}: DogSelectionProps) {
 
     return (
         <div>
-            <Grid container justifyContent="center">
+            <Grid container justifyContent="center" >
                 {dogs ? (dogs.map((dog, index) => (
-                    <Grid item xs={12} sm={6} key={index}>
+                    <Grid item xs={12} sm={6} key={index} >
                         <ClickableDogCard
                             dog={dog} key={index}
                             onClick={() => handleDogCardClick(dog)}
