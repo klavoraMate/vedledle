@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import vedledle.dao.model.Dog;
+import vedledle.dao.model.User;
 import vedledle.service.DogService;
+import vedledle.service.ReservationService;
+import vedledle.service.UserService;
+
 import java.util.List;
 
 /**
@@ -18,7 +22,9 @@ public class DogController {
     /**
      * The service responsible for handling dog-related operations.
      */
-    private final DogService service;
+    private final DogService dogService;
+    private final ReservationService reservationService;
+    private final UserService userService;
 
     /**
      * Fetches information about a dog based on its name. To execute this operation,
@@ -30,7 +36,7 @@ public class DogController {
     @GetMapping("")
     @PreAuthorize("@securityService.canAccessDog(#name)")
     public List<Dog> get(@RequestParam String name) {
-        return service.getByName(name);
+        return dogService.getByName(name);
     }
 
     /**
@@ -43,7 +49,7 @@ public class DogController {
     @GetMapping("/all")
     @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
     public List<Dog> getAll(@RequestParam String email){
-        return service.getDogsByEmail(email);
+        return dogService.getDogsByEmail(email);
     }
 
     /**
@@ -56,7 +62,16 @@ public class DogController {
     @PostMapping("")
     @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
     public void addDog(@RequestParam String email, @RequestBody Dog newDog) {
-        service.add(email, newDog);
+        dogService.add(email, newDog);
+    }
+
+
+    @GetMapping("/hasReservation")
+    @PreAuthorize("@securityService.sameAsAuthenticatedUserOrHasAdminRole(#email)")
+    public boolean dogHasReservation(@RequestParam String email,@RequestParam String dogName){
+        User user = userService.findByEmail(email);
+        Dog dog = dogService.getByNameAndOwner(dogName, user);
+        return reservationService.hasReservation(dog);
     }
 
 }
