@@ -9,6 +9,7 @@ import vedledle.dao.model.OpeningHours;
 import vedledle.dao.model.Reservation;
 import vedledle.dao.model.User;
 import vedledle.dao.repository.ReservationRepository;
+import vedledle.exception.DogAlreadyHasReservationException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -49,9 +50,15 @@ public class ReservationService {
     public void add(String email, String dogName, Reservation reservation) {
         User user = userService.findByEmail(email);
         Dog dog = dogService.getByNameAndOwner(dogName, user);
-        reservation.setDog(dog);
-        reservation.setUser(user);
-        repository.save(reservation);
+        if (!hasUpcomingReservation(dog)) {
+            reservation.setDog(dog);
+            reservation.setUser(user);
+            repository.save(reservation);
+        }
+        else {
+            throw new DogAlreadyHasReservationException(dogName);
+        }
+
     }
 
     /**
