@@ -71,7 +71,7 @@ public class DogController {
     public boolean dogHasUpcomingReservation(@RequestParam String email, @RequestParam String dogName){
         User user = userService.findByEmail(email);
         Dog dog = dogService.getByNameAndOwner(dogName, user);
-        return reservationService.hasUpcomingReservation(dog);
+        return reservationService.hasUpcomingReservation(dog,user);
     }
 
 }

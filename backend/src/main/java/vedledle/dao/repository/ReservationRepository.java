@@ -4,6 +4,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import vedledle.dao.model.Dog;
 import vedledle.dao.model.Reservation;
+import vedledle.dao.model.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,5 +16,5 @@ import java.util.Optional;
  */
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findAllByStartDateBetween(LocalDateTime startDate, LocalDateTime endDate, Sort sort);
-    Optional<Reservation> findByDog(Dog dog);
+    List<Reservation> findAllByDogAndUser(Dog dog, User user);
 }

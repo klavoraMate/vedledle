@@ -50,7 +50,7 @@ public class ReservationService {
     public void add(String email, String dogName, Reservation reservation) {
         User user = userService.findByEmail(email);
         Dog dog = dogService.getByNameAndOwner(dogName, user);
-        if (!hasUpcomingReservation(dog)) {
+        if (!hasUpcomingReservation(dog,user)) {
             reservation.setDog(dog);
             reservation.setUser(user);
             repository.save(reservation);
@@ -113,13 +113,13 @@ public class ReservationService {
         return dog.groomingTime() + (isShowerOnly ? 30 : 60);
     }
 
-    public boolean hasUpcomingReservation(Dog dog){
-        Optional<Reservation> reservation = findByDog(dog);
-        return reservation.isPresent() && reservation.get().getStartDate().isAfter(LocalDateTime.now());
-    }
-
-    public Optional<Reservation> findByDog(Dog dog) {
-        return repository.findByDog(dog);
+    public boolean hasUpcomingReservation(Dog dog, User user) {
+        List<Reservation> reservations = repository.findAllByDogAndUser(dog, user);
+        if (reservations.isEmpty()) {
+            return false;
+        }else{
+            return reservations.stream().anyMatch(reservation -> reservation.getStartDate().isAfter(LocalDateTime.now()));
+        }
     }
 
 }

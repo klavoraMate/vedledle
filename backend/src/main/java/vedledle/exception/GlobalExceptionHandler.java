@@ -88,6 +88,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * Handles the {@link DogAlreadyHasReservationException} by returning a custom error response.
+     *
+     * @param ex The {@link DogAlreadyHasReservationException} instance.
+     * @return A {@link ResponseEntity} containing a custom error response.
+     */
+    @ExceptionHandler(DogAlreadyHasReservationException.class)
+    protected ResponseEntity<Object> handleDogAlreadyHasReservationException(DogAlreadyHasReservationException ex){
+        return defaultErrorResponse(ex);
+    }
+
+    /**
      * Creates a default error response with timestamp and error message.
      *
      * @param ex The exception instance.
