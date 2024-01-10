@@ -16,6 +16,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The {@code ReservationService} class provides services related to reservation operations in the application.
@@ -104,4 +105,14 @@ public class ReservationService {
     private int calculateDuration(Dog dog, boolean isShowerOnly) {
         return dog.groomingTime() + (isShowerOnly ? 30 : 60);
     }
+
+    public boolean hasUpcomingReservation(Dog dog){
+        Optional<Reservation> reservation = findByDog(dog);
+        return reservation.isPresent() && reservation.get().getStartDate().isAfter(LocalDateTime.now());
+    }
+
+    public Optional<Reservation> findByDog(Dog dog) {
+        return repository.findByDog(dog);
+    }
+
 }
