@@ -13,8 +13,8 @@ import TimeSlotView from "@/app/components/TimeSlotView";
 import {PRIMARY, SECONDARY, TEXT_DARK} from "@/app/util/styleConstants";
 
 interface CalendarProps {
-    dog: Dog;
-    grooming: Grooming;
+    dog: Dog | null;
+    grooming: Grooming | null;
 }
 
 export default function Calendar({dog, grooming}: CalendarProps) {
@@ -26,7 +26,7 @@ export default function Calendar({dog, grooming}: CalendarProps) {
 
     const handleAccept = () => async () => {
         try {
-            if (email && jwt && selectedTimeSlot && dog && grooming !== undefined) {
+            if (email && jwt && selectedTimeSlot && dog && grooming !== null) {
                 const response = await fetch(`/api/reservation?email=${email}&dogName=${dog.name}`, {
                     method: 'POST',
                     headers: {
@@ -70,15 +70,15 @@ export default function Calendar({dog, grooming}: CalendarProps) {
                     {response === "" ?
                         <>
                             <GroomingFinalizationViewCard timeSlot={selectedTimeSlot} dog={dog} grooming={grooming}/>
-                            <Grid container justifyContent='space-evenly' >
-                                    <SubmitButton text={"Accept"} disabled={false} onClick={handleAccept()}/>
-                                    <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
+                            <Grid container justifyContent='space-evenly'>
+                                <SubmitButton text={"Accept"} disabled={false} onClick={handleAccept()}/>
+                                <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
                             </Grid>
                         </>
                         : <>
                             <Typography variant="h6">{response}</Typography>
                             <Grid container justifyContent='right'>
-                                    <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
+                                <SubmitButton text={"Cancel"} disabled={false} onClick={() => setOpen(false)}/>
                             </Grid>
                         </>
                     }

@@ -6,12 +6,12 @@ import durationInMinutes from "@/app/util/calculation";
 
 interface GroomingFinalizationViewProps {
     timeSlot: TimeSlot | null;
-    dog: Dog;
-    grooming: Grooming;
+    dog: Dog | null;
+    grooming: Grooming | null;
 }
 
 export default function GroomingFinalizationViewCard({timeSlot, dog, grooming}: GroomingFinalizationViewProps) {
-    if (!timeSlot || !dog || grooming === undefined) return null;
+    if (!timeSlot || !dog || grooming === null) return null;
 
     const start = new Date(timeSlot.start);
     const end = new Date(timeSlot.end);

@@ -9,8 +9,8 @@ import {getEmail, getJWT} from "@/app/util/JWTDecoder";
 import DayCard from "@/app/components/cards/DayCard";
 
 interface TimeSlotViewProps {
-    dog: Dog;
-    grooming: Grooming;
+    dog: Dog | null;
+    grooming: Grooming|null;
     onTimeSlotSelect: (timeSlot: TimeSlot) => void;
 }
 export default function TimeSlotView({dog, grooming, onTimeSlotSelect}: TimeSlotViewProps) {

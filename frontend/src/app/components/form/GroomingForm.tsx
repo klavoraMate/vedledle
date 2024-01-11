@@ -8,9 +8,9 @@ import Typography from "@mui/material/Typography";
 import {SECONDARY, TEXT_LIGHT} from "@/app/util/styleConstants";
 
 interface GroomingFormProps {
-    dog: Dog;
+    dog: Dog | null;
     setDog: (dog: Dog) => void;
-    grooming: Grooming;
+    grooming: Grooming|null;
     setGrooming: (grooming: Grooming) => void;
     setIsGroomingFormFilled: (isGroomingFormFilled: boolean) => void;
 }

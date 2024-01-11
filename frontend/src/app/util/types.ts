@@ -16,7 +16,7 @@ export type User = {
     email: string;
 };
 
-export type Grooming = undefined | {
+export type Grooming =  {
     showerOnly: boolean;
 }
 
