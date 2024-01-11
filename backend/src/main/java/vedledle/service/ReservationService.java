@@ -122,4 +122,14 @@ public class ReservationService {
         }
     }
 
+    public Reservation getUpcomingReservation(Dog dog, User user){
+        List<Reservation> reservations = repository.findAllByDogAndUser(dog, user);
+        if (reservations.isEmpty()) {
+            return null;
+        }else{
+            Optional<Reservation> optionalReservation = reservations.stream().filter(reservation -> reservation.getStartDate().isAfter(LocalDateTime.now())).findFirst();
+            return optionalReservation.orElse(null);
+        }
+    }
+
 }
