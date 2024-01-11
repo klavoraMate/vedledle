@@ -11,6 +11,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import TimeSlotView from "@/app/components/TimeSlotView";
 import {PRIMARY, SECONDARY, TEXT_DARK} from "@/app/util/styleConstants";
+import {useRouter} from "next/navigation";
 
 interface CalendarProps {
     dog: Dog | null;
@@ -23,6 +24,8 @@ export default function Calendar({dog, grooming}: CalendarProps) {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot | null>(null);
     const [open, setOpen] = useState(false);
     const [response, setResponse] = useState<string>("");
+    const router = useRouter();
+    const [rerender, setRerender] = useState<boolean>(false);
 
     const handleAccept = () => async () => {
         try {
@@ -41,8 +44,10 @@ export default function Calendar({dog, grooming}: CalendarProps) {
 
                 if (response.ok) {
                     setResponse("Reservation successful!");
+                    router.push("/profile");
                 } else {
                     setResponse("Reservation failed! Try again.");
+                    setRerender(!rerender)
                 }
             }
         } catch (error) {
@@ -63,7 +68,7 @@ export default function Calendar({dog, grooming}: CalendarProps) {
 
     return (
         <>
-            <TimeSlotView dog={dog} grooming={grooming} onTimeSlotSelect={onTimeSlotSelect}/>
+            <TimeSlotView dog={dog} grooming={grooming} onTimeSlotSelect={onTimeSlotSelect} rerender={rerender}/>
             <Dialog open={open} sx={dialogStyle}>
                 <DialogTitle sx={dialogTitleStyle}>Finalize Your Booking</DialogTitle>
                 <DialogContent>

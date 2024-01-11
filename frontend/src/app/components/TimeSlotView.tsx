@@ -12,8 +12,9 @@ interface TimeSlotViewProps {
     dog: Dog | null;
     grooming: Grooming|null;
     onTimeSlotSelect: (timeSlot: TimeSlot) => void;
+    rerender: boolean;
 }
-export default function TimeSlotView({dog, grooming, onTimeSlotSelect}: TimeSlotViewProps) {
+export default function TimeSlotView({dog, grooming, onTimeSlotSelect,rerender}: TimeSlotViewProps) {
     const email = getEmail();
     const jwt = getJWT();
     const [timeSlots, setTimeSlots] = useState<TimeSlot[] | null>(null);
@@ -53,7 +54,7 @@ export default function TimeSlotView({dog, grooming, onTimeSlotSelect}: TimeSlot
 
     useEffect(() => {
         fetchTimeStamps();
-    }, []);
+    }, [rerender]);
 
 
     return (
