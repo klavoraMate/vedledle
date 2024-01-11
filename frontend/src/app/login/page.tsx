@@ -38,7 +38,7 @@ export default function Login() {
             if (response.status === 200) {
                 const data = await response.json();
                 localStorage.setItem("jwt",data.token)
-                router.push("/profile")
+                router.push("/dogs")
             } else {
                 setError("Login failed. Please check your credentials.");
             }
