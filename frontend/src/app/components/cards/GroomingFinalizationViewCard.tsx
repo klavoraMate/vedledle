@@ -1,7 +1,8 @@
 import {Dog, Grooming, TimeSlot} from "@/app/util/types";
 import Typography from "@mui/material/Typography";
-import {Paper} from "@mui/material";
 import {SECONDARY, TEXT_BACKGROUND_SELECTED, TEXT_DARK, TEXT_LIGHT} from "@/app/util/styleConstants";
+import toDateAndTime from "@/app/util/parser";
+import durationInMinutes from "@/app/util/calculation";
 
 interface GroomingFinalizationViewProps {
     timeSlot: TimeSlot | null;
@@ -14,7 +15,7 @@ export default function GroomingFinalizationViewCard({timeSlot, dog, grooming}: 
 
     const start = new Date(timeSlot.start);
     const end = new Date(timeSlot.end);
-    const duration = Math.abs(end.getTime() - start.getTime()) / 60000;
+    const duration =  durationInMinutes(start, end);
     return (
         <div style={divStyle}>
             <table>
@@ -26,7 +27,7 @@ export default function GroomingFinalizationViewCard({timeSlot, dog, grooming}: 
                     </td>
                     <td>
                         <Typography sx={valueStyle} variant="body1">
-                            {start.toLocaleDateString()} {start.toLocaleTimeString().slice(0, -3)}
+                            {toDateAndTime(start)}
                         </Typography>
                     </td>
                 </tr>

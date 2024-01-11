@@ -1,28 +1,43 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
-import {Dog} from "@/app/util/types";
+import {Card, CardContent, Typography} from '@mui/material';
+import {Dog, DogWithUpcomingReservation} from "@/app/util/types";
+import toDateAndTime from "@/app/util/parser";
+import durationInMinutes from "@/app/util/calculation";
 
 interface DogCardProps {
-    dog: Dog;
+    dogWithReservation: DogWithUpcomingReservation;
 }
 
-export default function DogCard({dog}:DogCardProps){
+export default function DogCard({dogWithReservation}: DogCardProps) {
+    const start = dogWithReservation.start ? new Date(dogWithReservation.start) : null;
+    const end = dogWithReservation.end ? new Date(dogWithReservation.end) : null;
 
     return (
-        <Card >
+        <Card>
             <CardContent>
                 <Typography sx={titleStyle} variant="h6">
-                    {dog?dog.name:"Loading name..."}
+                    {dogWithReservation ? dogWithReservation.dog.name : "Loading name..."}
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Breed:</strong> {dog?dog.breed:"Loading breed..."}
+                    <strong>Breed:</strong> {dogWithReservation ? dogWithReservation.dog.breed : "Loading breed..."}
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Size:</strong> {dog?dog.size:"Loading size..."}
+                    <strong>Size:</strong> {dogWithReservation ? dogWithReservation.dog.size : "Loading size..."}
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Age:</strong> {dog?dog.age+" years":"Loading age..."}
+                    <strong>Age:</strong> {dogWithReservation ? dogWithReservation.dog.age + " years" : "Loading age..."}
                 </Typography>
+                {dogWithReservation && start != null && end != null ? (
+                    <>
+                        <Typography variant="body1">
+                            <strong>Upcoming reservation:</strong> {toDateAndTime(start)}
+                        </Typography>
+                        <Typography>
+                            <strong>Duration:</strong>{durationInMinutes(start, end)}
+                        </Typography>
+                    </>
+                ) : null
+                }
             </CardContent>
         </Card>
     );
