@@ -5,7 +5,7 @@ import Layout from "@/app/components/layout/Layout";
 import UserInfoCard from "@/app/components/cards/UserInfoCard";
 import DogCardContainer from "@/app/components/cards/DogCardContainer";
 
-export default function Profile() {
+export default function Dogs() {
     const jwt = getJWT();
 
     return (
@@ -16,7 +16,7 @@ export default function Profile() {
                 </Container>
             ) : (
                 <Grid container justifyContent="center">
-                    <Typography variant="h1">Loading...</Typography>
+                    <Typography variant="h1">Please log in!</Typography>
                 </Grid>
             )}
         </Layout>

@@ -44,7 +44,7 @@ export default function Calendar({dog, grooming}: CalendarProps) {
 
                 if (response.ok) {
                     setResponse("Reservation successful!");
-                    router.push("/profile");
+                    router.push("/dogs");
                 } else {
                     setResponse("Reservation failed! Try again.");
                     setRerender(!rerender)
