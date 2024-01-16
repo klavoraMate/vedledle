@@ -34,7 +34,7 @@ export default function GroomingForm({dog, setDog, grooming, setGrooming, setIsG
             <form>
                 <FormGroup>
                     <FormControl component="fieldset">
-                        <Grid container  alignItems='center'spacing={2}>
+                        <Grid container  alignItems='center' spacing={2}>
                             <Grid item xs={1}>
                                 <Radio checked={grooming?grooming.showerOnly:false} value='shower' onChange={handleChange} sx={radioStyle}/>
                             </Grid>
