@@ -26,11 +26,11 @@ public class FrontendController {
     }
 
     /**
-     * Returns the profile.html view for the /profile endpoint.
+     * Returns the dogs.html view for the /dogs endpoint.
      */
-    @GetMapping("/profile")
+    @GetMapping("/dogs")
     public String user() {
-        return "profile.html";
+        return "dogs.html";
     }
 
     /**
