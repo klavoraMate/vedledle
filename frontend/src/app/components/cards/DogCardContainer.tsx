@@ -43,7 +43,7 @@ export default function DogCardContainer() {
         }
     }, [email, jwt]);
     return (
-        <Grid container justifyContent="center">
+        <Grid container justifyContent="center" spacing={2}>
             {!loading && dogs ? dogs.map((dog, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                     <DogCard dogWithReservation={dog} />
