@@ -1,23 +1,25 @@
 import {Dog, Grooming} from "@/app/util/types";
 import FormGroup from '@mui/material/FormGroup';
-import {FormControl, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
+import {FormControl, FormControlLabel, Grid, Radio, RadioGroup, Tooltip} from "@mui/material";
 import {Info} from "@mui/icons-material";
 import DogSelection from "@/app/components/form/DogSelection";
 import SubmitButton from "@/app/components/buttons/SubmitButton";
 import Typography from "@mui/material/Typography";
 import {SECONDARY, TEXT_LIGHT} from "@/app/util/styleConstants";
+import {useState} from "react";
 
 interface GroomingFormProps {
     dog: Dog | null;
     setDog: (dog: Dog) => void;
-    grooming: Grooming|null;
+    grooming: Grooming | null;
     setGrooming: (grooming: Grooming) => void;
     setIsGroomingFormFilled: (isGroomingFormFilled: boolean) => void;
 }
 
 export default function GroomingForm({dog, setDog, grooming, setGrooming, setIsGroomingFormFilled}: GroomingFormProps) {
+
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-        setGrooming(event.target.value === "Bath/shower only" ? {showerOnly: true} : {showerOnly: false});
+        setGrooming(event.target.value === "shower" ? {showerOnly: true} : {showerOnly: false});
     }
 
     function handleNext() {
@@ -32,34 +34,27 @@ export default function GroomingForm({dog, setDog, grooming, setGrooming, setIsG
             <form>
                 <FormGroup>
                     <FormControl component="fieldset">
-                        <RadioGroup
-                            aria-label="grooming"
-                            name="grooming"
-                            value={grooming}
-                            onChange={handleChange}
-                        >
-                            <FormControlLabel
-                                value="Bath/shower only"
-                                control={<Radio sx={radioStyle}/>}
-                                label={
-                                    <Typography sx={radioTextStyle}>
-                                        Bath/shower only
-                                    </Typography>
-                                }
-                            />
-                            <FormControlLabel
-                                value="Full grooming"
-                                control={<Radio sx={radioStyle}/>}
-                                label={
-                                    <Typography sx={radioTextStyle}>
-                                        Full grooming
-                                        <Tooltip title="Bath/shower, whole body trimming, nail trimming">
-                                            <Info style={{marginLeft: 5, verticalAlign: "middle"}}/>
-                                        </Tooltip>
-                                    </Typography>
-                                }
-                            />
-                        </RadioGroup>
+                        <Grid container  alignItems='center'spacing={2}>
+                            <Grid item xs={1}>
+                                <Radio checked={grooming?grooming.showerOnly:false} value='shower' onChange={handleChange} sx={radioStyle}/>
+                            </Grid>
+                            <Grid item xs={11}>
+                                <Typography sx={radioTextStyle}>
+                                    Bath/shower only
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <Radio checked={grooming?!grooming.showerOnly:false} value='full' onChange={handleChange} sx={radioStyle}/>
+                            </Grid>
+                            <Grid item xs={11}>
+                                <Typography sx={radioTextStyle}>
+                                    Full grooming
+                                    <Tooltip title="Bath/shower, whole body trimming, nail trimming">
+                                        <Info style={{marginLeft: 5, verticalAlign: "middle"}}/>
+                                    </Tooltip>
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </FormControl>
                 </FormGroup>
                 <div style={{textAlign: 'right'}}>
@@ -67,7 +62,8 @@ export default function GroomingForm({dog, setDog, grooming, setGrooming, setIsG
                 </div>
             </form>
         </div>
-    );
+    )
+        ;
 }
 
 const formTextStyle = {
