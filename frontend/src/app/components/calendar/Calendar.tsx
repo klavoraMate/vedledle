@@ -9,9 +9,10 @@ import GroomingFinalizationViewCard from "@/app/components/cards/GroomingFinaliz
 import SubmitButton from "@/app/components/buttons/SubmitButton";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import TimeSlotView from "@/app/components/TimeSlotView";
+import TimeSlotView from "@/app/components/calendar/TimeSlotView";
 import {PRIMARY, SECONDARY, TEXT_DARK} from "@/app/util/styleConstants";
 import {useRouter} from "next/navigation";
+import DialogContainer from "@/app/components/container/DialogContainer";
 
 interface CalendarProps {
     dog: Dog | null;
@@ -69,8 +70,7 @@ export default function Calendar({dog, grooming}: CalendarProps) {
     return (
         <>
             <TimeSlotView dog={dog} grooming={grooming} onTimeSlotSelect={onTimeSlotSelect} rerender={rerender}/>
-            <Dialog open={open} sx={dialogStyle}>
-                <DialogTitle sx={dialogTitleStyle}>Finalize Your Booking</DialogTitle>
+            <DialogContainer open={open} title='Finalize Your Booking'>
                 <DialogContent>
                     {response === "" ?
                         <>
@@ -88,25 +88,8 @@ export default function Calendar({dog, grooming}: CalendarProps) {
                         </>
                     }
                 </DialogContent>
-            </Dialog>
+            </DialogContainer>
         </>
     )
 }
 
-const dialogStyle = {
-    '& .MuiDialog-container': {
-        '& .MuiPaper-root': {
-            background: PRIMARY,
-            border: `0.7rem solid ${SECONDARY}`,
-            borderRadius: "2rem",
-        },
-    },
-}
-
-const dialogTitleStyle = {
-    textAlign: 'center',
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    fontFamily: 'Ubuntu',
-    color: TEXT_DARK,
-};

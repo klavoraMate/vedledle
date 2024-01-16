@@ -2,18 +2,15 @@
 import React, { useState} from "react";
 import IconButton from "@mui/material/IconButton";
 import { AddCircleOutline } from "@mui/icons-material";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DogForm from "@/app/components/form/DogForm";
+import DialogContainer from "@/app/components/container/DialogContainer";
 import {SECONDARY} from "@/app/util/styleConstants";
-import {makeStyles} from "@material-ui/core/styles";
 
 interface DogUploadButtonProps {
     onCloseCallback: () => void;
 }
 export default function DogUploadButton({ onCloseCallback }:DogUploadButtonProps) {
-    const classes = useStyles();
     const [open, setOpen] = useState(false);
 
     const handleClick = () => {
@@ -28,22 +25,19 @@ export default function DogUploadButton({ onCloseCallback }:DogUploadButtonProps
     return (
         <>
             <IconButton onClick={handleClick}>
-                <AddCircleOutline className={classes.button} />
+                <AddCircleOutline sx={buttonStyle} />
             </IconButton>
-
-            <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-                <DialogTitle>Upload Dog</DialogTitle>
+            <DialogContainer open={open} title='Upload dog'>
                 <DialogContent>
                     <DogForm onClose={handleClose} />
                 </DialogContent>
-            </Dialog>
+            </DialogContainer>
         </>
     );
 }
 
-const useStyles = makeStyles((theme) => ({
-    button: {
-        fontSize:42,
-        color: SECONDARY,
-    },
-}));
+
+const buttonStyle = {
+    fontSize:42,
+    color: SECONDARY,
+}

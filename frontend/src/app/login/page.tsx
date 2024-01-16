@@ -3,7 +3,7 @@
 import React, { useState} from "react";
 import {useRouter} from "next/navigation"
 import LoginForm from "@/app/components/form/LoginForm";
-import FormContainer from "@/app/components/form/FormContainer";
+import FormContainer from "@/app/components/container/FormContainer";
 import Layout from "@/app/components/layout/Layout";
 
 
