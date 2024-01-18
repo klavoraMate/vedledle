@@ -10,7 +10,7 @@ import {
     SECONDARY,
     SECONDARY_TRANSPARENT,
     TEXT_DARK,
-    TEXT_LIGHT, DogAttributeValueStyle, YINMN_BLUE, DogAttributeNameStyle
+    TEXT_LIGHT, DOG_ATTRIBUTE_VALUE_STYLE, YINMN_BLUE, DOG_ATTRIBUTE_NAME_STYLE
 } from "@/app/util/styleConstants";
 
 interface DogCardProps {
@@ -31,36 +31,36 @@ export default function DogCard({dogWithReservation}: DogCardProps) {
                     <table style={tableStyle}>
                         <tr>
                             <td style={tableColumnStyle}>
-                                <Typography sx={DogAttributeNameStyle} variant="body1">
+                                <Typography sx={DOG_ATTRIBUTE_NAME_STYLE} variant="body1">
                                     <strong>Breed: </strong>
                                 </Typography>
                             </td>
                             <td>
-                                <Typography sx={DogAttributeValueStyle} variant="body1">
+                                <Typography sx={DOG_ATTRIBUTE_VALUE_STYLE} variant="body1">
                                     {dogWithReservation ? dogWithReservation.dog.breed : "Loading breed..."}
                                 </Typography>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <Typography sx={DogAttributeNameStyle} variant="body1">
+                                <Typography sx={DOG_ATTRIBUTE_NAME_STYLE} variant="body1">
                                     <strong>Size: </strong>
                                 </Typography>
                             </td>
                             <td>
-                                <Typography sx={DogAttributeValueStyle} variant="body1">
+                                <Typography sx={DOG_ATTRIBUTE_VALUE_STYLE} variant="body1">
                                     {dogWithReservation ? dogWithReservation.dog.size : "Loading size..."}
                                 </Typography>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <Typography sx={DogAttributeNameStyle} variant="body1">
+                                <Typography sx={DOG_ATTRIBUTE_NAME_STYLE} variant="body1">
                                     <strong>Age: </strong>
                                 </Typography>
                             </td>
                             <td>
-                                <Typography sx={DogAttributeValueStyle} variant="body1">
+                                <Typography sx={DOG_ATTRIBUTE_VALUE_STYLE} variant="body1">
                                     {dogWithReservation ? dogWithReservation.dog.age + " years" : "Loading age..."}
                                 </Typography>
                             </td>

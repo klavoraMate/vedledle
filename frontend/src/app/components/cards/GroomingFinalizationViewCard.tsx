@@ -1,6 +1,6 @@
 import {Dog, Grooming, TimeSlot} from "@/app/util/types";
 import Typography from "@mui/material/Typography";
-import {DogAttributeNameStyle, DogAttributeValueStyle} from "@/app/util/styleConstants";
+import {DOG_ATTRIBUTE_NAME_STYLE, DOG_ATTRIBUTE_VALUE_STYLE} from "@/app/util/styleConstants";
 import toDateAndTime from "@/app/util/parser";
 import durationInMinutes from "@/app/util/calculation";
 
@@ -21,48 +21,48 @@ export default function GroomingFinalizationViewCard({timeSlot, dog, grooming}: 
             <table>
                 <tr>
                     <td>
-                        <Typography sx={DogAttributeNameStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_NAME_STYLE} variant="body1">
                             Date:
                         </Typography>
                     </td>
                     <td>
-                        <Typography sx={DogAttributeValueStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_VALUE_STYLE} variant="body1">
                             {toDateAndTime(start)}
                         </Typography>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <Typography sx={DogAttributeNameStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_NAME_STYLE} variant="body1">
                             Dog name:
                         </Typography>
                     </td>
                     <td>
-                        <Typography sx={DogAttributeValueStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_VALUE_STYLE} variant="body1">
                             {dog.name}
                         </Typography>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <Typography sx={DogAttributeNameStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_NAME_STYLE} variant="body1">
                             Grooming:
                         </Typography>
                     </td>
                     <td>
-                        <Typography sx={DogAttributeValueStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_VALUE_STYLE} variant="body1">
                             {grooming.showerOnly ? "Bath/shower only" : "Full grooming"}
                         </Typography>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <Typography sx={DogAttributeNameStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_NAME_STYLE} variant="body1">
                             Duration:
                         </Typography>
                     </td>
                     <td>
-                        <Typography sx={DogAttributeValueStyle} variant="body1">
+                        <Typography sx={DOG_ATTRIBUTE_VALUE_STYLE} variant="body1">
                             {duration} minutes
                         </Typography>
                     </td>

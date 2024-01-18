@@ -14,7 +14,7 @@ export const YINMN_BLUE: string = '#355070 ';
 
 
 
-export const DogAttributeNameStyle = {
+export const DOG_ATTRIBUTE_NAME_STYLE = {
     textAlign:'left',
     fontSize:'1.5rem',
     fontWeight: 'bold',
@@ -26,7 +26,7 @@ export const DogAttributeNameStyle = {
     width:'100%',
 }
 
-export const DogAttributeValueStyle = {
+export const DOG_ATTRIBUTE_VALUE_STYLE = {
     textAlign:'right',
     fontSize:'1.5rem',
     fontWeight: 'bold',
@@ -36,3 +36,10 @@ export const DogAttributeValueStyle = {
     padding: '0.5rem',
 }
 
+export const MENU_STYLE = {
+    '& .MuiPaper-root': {
+        background: SECONDARY,
+        border: `0.3rem solid ${TEXT_LIGHT}`,
+        borderRadius: '1rem',
+    },
+}
