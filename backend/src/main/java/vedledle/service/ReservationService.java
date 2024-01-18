@@ -9,12 +9,15 @@ import vedledle.dao.model.OpeningHours;
 import vedledle.dao.model.Reservation;
 import vedledle.dao.model.User;
 import vedledle.dao.repository.ReservationRepository;
+import vedledle.exception.DogAlreadyHasReservationException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The {@code ReservationService} class provides services related to reservation operations in the application.
@@ -47,9 +50,15 @@ public class ReservationService {
     public void add(String email, String dogName, Reservation reservation) {
         User user = userService.findByEmail(email);
         Dog dog = dogService.getByNameAndOwner(dogName, user);
-        reservation.setDog(dog);
-        reservation.setUser(user);
-        repository.save(reservation);
+        if (!hasUpcomingReservation(dog,user)) {
+            reservation.setDog(dog);
+            reservation.setUser(user);
+            repository.save(reservation);
+        }
+        else {
+            throw new DogAlreadyHasReservationException(dogName);
+        }
+
     }
 
     /**
@@ -76,14 +85,15 @@ public class ReservationService {
         for (int i = 1; i < 8; i++) {
             OpeningHours openingHours = OpeningHours.valueOf(dayOfWeek.toString());
             if (openingHours.getOpenHour() != -1) {
-                LocalDateTime start = LocalDateTime.now().withHour(openingHours.getOpenHour()).withMinute(openingHours.getOpenMinute()).plusDays(i);
-                LocalDateTime end = LocalDateTime.now().withHour(openingHours.getCloseHour()).withMinute(openingHours.getCloseMinute()).plusDays(i);
+                LocalDateTime start = LocalDateTime.now().withHour(openingHours.getOpenHour()).withMinute(openingHours.getOpenMinute()).plusDays(i).truncatedTo(ChronoUnit.MINUTES);
+                LocalDateTime end = LocalDateTime.now().withHour(openingHours.getCloseHour()).withMinute(openingHours.getCloseMinute()).plusDays(i). truncatedTo(ChronoUnit.MINUTES);
                 while (start.isBefore(end)) {
                     LocalDateTime tempEnd = start.plusMinutes(duration);
                     for (Reservation reservation : reservations) {
                         if ((reservation.getStartDate().isBefore(tempEnd) && reservation.getEndDate().isAfter(start)) ||
                                 (reservation.getStartDate().isEqual(tempEnd) || reservation.getEndDate().isEqual(start))) {
                             start = reservation.getEndDate();
+                            tempEnd = start.plusMinutes(duration);
                         }
 
                     }
@@ -102,4 +112,24 @@ public class ReservationService {
     private int calculateDuration(Dog dog, boolean isShowerOnly) {
         return dog.groomingTime() + (isShowerOnly ? 30 : 60);
     }
+
+    public boolean hasUpcomingReservation(Dog dog, User user) {
+        List<Reservation> reservations = repository.findAllByDogAndUser(dog, user);
+        if (reservations.isEmpty()) {
+            return false;
+        }else{
+            return reservations.stream().anyMatch(reservation -> reservation.getStartDate().isAfter(LocalDateTime.now()));
+        }
+    }
+
+    public Reservation getUpcomingReservation(Dog dog, User user){
+        List<Reservation> reservations = repository.findAllByDogAndUser(dog, user);
+        if (reservations.isEmpty()) {
+            return null;
+        }else{
+            Optional<Reservation> optionalReservation = reservations.stream().filter(reservation -> reservation.getStartDate().isAfter(LocalDateTime.now())).findFirst();
+            return optionalReservation.orElse(null);
+        }
+    }
+
 }

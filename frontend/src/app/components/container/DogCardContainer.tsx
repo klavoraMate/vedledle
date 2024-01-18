@@ -1,5 +1,5 @@
 'use client'
-import {Dog} from "@/app/util/types";
+import {Dog, DogWithUpcomingReservation} from "@/app/util/types";
 import {Grid} from "@mui/material";
 import DogCard from "@/app/components/cards/DogCard";
 import {getEmail, getJWT} from "@/app/util/JWTDecoder";
@@ -10,12 +10,12 @@ export default function DogCardContainer() {
     const email = getEmail();
     const jwt = getJWT();
     const [loading, setLoading] = useState(true);
-    const [dogs, setDogs] = useState<Dog[] | null>(null);
+    const [dogs, setDogs] = useState<DogWithUpcomingReservation[] | null>(null);
     const fetchDogData = async () => {
         try {
             if (email) {
                 setLoading(true);
-                const response = await fetch(`/api/dog/all?email=${encodeURIComponent(email.toString())}`, {
+                const response = await fetch(`/api/dog/all/withReservations?email=${encodeURIComponent(email.toString())}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${jwt}`,
@@ -23,7 +23,7 @@ export default function DogCardContainer() {
                 });
 
                 if (response.ok) {
-                    const dogData: Dog[] = await response.json();
+                    const dogData: DogWithUpcomingReservation[] = await response.json();
                     setDogs(dogData);
                     setLoading(false);
                 }
@@ -43,10 +43,10 @@ export default function DogCardContainer() {
         }
     }, [email, jwt]);
     return (
-        <Grid container justifyContent="center">
+        <Grid container justifyContent="center" spacing={2}>
             {!loading && dogs ? dogs.map((dog, index) => (
                 <Grid item xs={12} sm={6} key={index}>
-                    <DogCard dog={dog} />
+                    <DogCard dogWithReservation={dog} />
                 </Grid>
             )): "Loading..."}
             <Grid item xs={12} sm={6}>

@@ -21,10 +21,6 @@ public class UserController {
      * The service responsible for handling user-related operations.
      */
     private final UserService userService;
-    /**
-     * The service responsible for handling dog-related operations.
-     */
-    private final DogService dogService;
 
     /**
      * Retrieves user information based on the provided email address.

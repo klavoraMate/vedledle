@@ -1,7 +1,7 @@
 'use client'
 import React, { useState} from "react";
 import {useRouter} from "next/navigation";
-import FormContainer from "@/app/components/form/FormContainer";
+import FormContainer from "@/app/components/container/FormContainer";
 import RegisterForm from "@/app/components/form/RegisterForm";
 import Layout from "@/app/components/layout/Layout";
 

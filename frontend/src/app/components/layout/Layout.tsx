@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import AppBar from "@/app/components/layout/AppBar";
+import AppBar from "@/app/components/layout/AppBar/AppBar";
 import Container from "@mui/material/Container";
 import FloatingShapes from "@/app/components/layout/FloatingShapes";
 

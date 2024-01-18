@@ -1,9 +1,11 @@
 package vedledle.controller.dto.mapper;
 
 import vedledle.controller.dto.Breed;
+import vedledle.controller.dto.DogWithReservation;
 import vedledle.controller.dto.Size;
 import vedledle.controller.dto.UserInformation;
 import vedledle.dao.model.Dog;
+import vedledle.dao.model.Reservation;
 import vedledle.dao.model.User;
 import vedledle.dao.model.animalProperties.AnimalProperty;
 
@@ -37,6 +39,13 @@ public class DTOMapper {
      */
     public static Size toSize(AnimalProperty size) {
         return new Size(size.toString(), size.getGroomingTime());
+    }
+
+    public static DogWithReservation toDogWithReservation(Dog dog, Reservation reservation){
+        if (reservation == null)
+            return new DogWithReservation(dog,null,null);
+        else
+            return new DogWithReservation(dog,reservation.getStartDate(),reservation.getEndDate());
     }
 
 }

@@ -3,7 +3,7 @@
 import React, { useState} from "react";
 import {useRouter} from "next/navigation"
 import LoginForm from "@/app/components/form/LoginForm";
-import FormContainer from "@/app/components/form/FormContainer";
+import FormContainer from "@/app/components/container/FormContainer";
 import Layout from "@/app/components/layout/Layout";
 
 
@@ -38,7 +38,7 @@ export default function Login() {
             if (response.status === 200) {
                 const data = await response.json();
                 localStorage.setItem("jwt",data.token)
-                await router.push("/profile")
+                router.push("/dogs")
             } else {
                 setError("Login failed. Please check your credentials.");
             }

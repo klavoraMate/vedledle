@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                         "/*.jpg",
                         "/login",
                         "/register",
-                        "/profile",
+                        "/dogs",
                         "/gallery",
                         "/reservation",
                         "/api/image/**",
